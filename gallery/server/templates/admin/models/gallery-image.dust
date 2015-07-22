@@ -1,0 +1,9 @@
+<article class='news-article' vocab="http://schema.org" typeof="ImageObject" data-published="{?datePublished}true{:else}false{/datePublished}">
+	<figure typeof="ImageObject">
+		<img property="thumbUrlPath" src="{thumbUrlPath}" />
+		<figcaption property="caption">{caption}</figcaption>
+	</figure>
+	<time pubdate property="datePublished">{datePublished|d_datetime}</time>
+
+	{>"admin/partials/model-view-controls"/}
+</article>

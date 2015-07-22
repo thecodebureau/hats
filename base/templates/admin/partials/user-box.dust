@@ -1,0 +1,4 @@
+<div {?user}data-id="{user._id}" {/user}class="user-box" id="user-box">
+	<p>Du är inloggad som {user.email}</p>
+	<p><a class="nav settings" href="/admin/user-settings">Settings</a> | <a class="logout" href="">Logga ut</a></p>
+</div>

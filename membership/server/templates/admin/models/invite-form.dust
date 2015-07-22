@@ -1,0 +1,15 @@
+{>"layouts/form" model="Invite" /}
+{<form}
+<form>
+	<div class="server error"></div>
+	<div>
+		<label>Email</label>
+		<input type="email" name="email" required />
+	</div>
+	<div>
+		{#roles}
+			<input type="checkbox" property="roles" value="{name}" />{name}
+		{/roles}
+	</div>
+</form>
+{/form}

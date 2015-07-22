@@ -1,0 +1,17 @@
+{
+  "name": "hats/contact",
+  "description": "",
+  "main": "server.js",
+  "browser": "browser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "The Code Bureau <info@thecodebureau.com> (https://thecodebureau.com)",
+  "contributors": [
+    "Robin Hagg <robin.hagg@thecodebureau.com>"
+  ],
+  "dependencies": {
+    "nodemailer": "^1.3.4",
+    "spytext": "^0.4.1"
+  }
+}

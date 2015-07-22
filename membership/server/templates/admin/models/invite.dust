@@ -1,0 +1,13 @@
+<div class="item" id="<%- @invite._id %>">
+    <div class="email"><%- @invite.email %></div>
+    <div class="inviter"><%- @invite.inviter.email %></div>
+    <div class="roles">
+		<% for role in @invite.roles : %>
+			<%- role %>,
+		<% end %>
+	</div>
+	<div class="consumed">
+		<%- if @invite.consumed then 'CONSUMED' else 'NOT CONSUMED' %>
+	</div>
+    <% include 'admin/models/item_controls.ect', { delete: true, edit: false, path: '/api/invite', item: @invite } %>
+</div>

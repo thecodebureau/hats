@@ -1,0 +1,4 @@
+<section class="collection users">{#users}
+	<h1>Users</h1>
+	{>"admin/models/user"/}
+{/users}</section>

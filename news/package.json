@@ -1,0 +1,16 @@
+{
+  "name": "hats/news",
+  "description": "News module for Hatter.",
+  "main": "server.js",
+  "browser": "browser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "The Code Bureau <info@thecodebureau.com> (https://thecodebureau.com)",
+  "contributors": [
+    "Linus Miller <linus.miller@thecodebureau.com>"
+  ],
+  "dependencies": {
+    "spytext": "^0.4.1"
+  }
+}

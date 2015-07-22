@@ -1,0 +1,4 @@
+<section data-view="Crud" data-page="gallery" class="page crud gallery" data-collection="GalleryImages">
+	{>"admin/models/gallery-image-form"/}
+	{>"admin/models/gallery-images"/}
+</section>

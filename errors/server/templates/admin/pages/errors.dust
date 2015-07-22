@@ -1,0 +1,15 @@
+<section class="page errors">
+	<h1>Errors</h1>
+	<div data-view="Errors" class="collection">
+		<select data-command="filter">
+			<option value="">All</option>
+			<option value="server">Server</option>
+			<option value="client">Client</option>
+		</select>
+		<div class="count">Found <span class="value">0</span> errors.<div>
+		<button data-command="clear">Clear</button>
+		{#errors}
+			{>"admin/models/error"/}
+		{/errors}
+	</div>
+</section>

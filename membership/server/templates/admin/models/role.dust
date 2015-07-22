@@ -1,0 +1,6 @@
+<article class="role" id="{_id}">
+	<div class="name">{name}</div>
+	<div class="controls">
+		<button data-command="delete" class="delete">Delete</button>
+	</div>
+</article>

@@ -1,0 +1,4 @@
+<section data-view="Crud" data-page="news-articles" class="page crud news-articles" data-collection="NewsArticles">
+	{>"admin/models/news-article-form"/}
+	{>"admin/models/news-articles"/}
+</section>

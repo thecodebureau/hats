@@ -1,0 +1,53 @@
+<section class="page users">
+	<div data-view="Users" class="pos-rel">
+		<form class="filter">
+			<div class="row">
+				<div>
+					<input name="givenName" placeholder="Given Name" />
+				</div>
+				<div>
+					<input name="familyName" placeholder="Family Name" />
+				</div>
+				<div>
+					<input name="email" placeholder="Email" />
+				</div>
+				<div>
+					<input name="telephone" placeholder="Telephone" />
+				</div>
+			</div>
+			<select name="_sort">
+				<option value="dateCreated">dateCreated</option>
+				<option value="-dateCreated" selected>-dateCreated</option>
+				<option value="lastLogin">lastLogin</option>
+				<option value="-lastLogin">-lastLogin</option>
+				<option value="email">email</option>
+				<option value="-email">-email</option>
+				<option value="phone">phone</option>
+				<option value="-phone">-phone</option>
+				<option value="givenName">givenName</option>
+				<option value="-givenName">-givenName</option>
+				<option value="familyName">familyName</option>
+				<option value="-familyName">-familyName</option>
+			</select>
+
+			<select name="_limit">
+				<option value="10">10</option>
+				<option value="25">25</option>
+				<option value="50" selected>50</option>
+				<option value="100">100</option>
+				<option value="200">200</option>
+			</select>
+
+	
+			<button type="reset">Reset</button>
+			<button>Submit</button>
+		</form>
+		{>"partials/pagination"/}
+		<div class="collection">
+			{#users}
+				{>"admin/models/user"/}
+			{/users}
+		</div>
+		{>"partials/pagination"/}
+	</div>
+</section>

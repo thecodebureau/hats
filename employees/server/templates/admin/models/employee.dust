@@ -1,0 +1,31 @@
+<article class='event' vocab="http://schema.org" typeof="Event" data-published="{?datePublished}true{:else}false{/datePublished}">
+	<header>
+		<h1 ><span property="givenName">{givenName}</span> <span property="familyName">{familyName}</span></h1>
+		<ul>
+			<li><strong>Created:</strong> <time property="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
+			<li><strong>Modified:</strong> <time property="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
+			<li><strong>Published:</strong> <time pubdate property="datePublished" datetime="{datePublished}">{?datePublished}{datePublished|d_datetime}{:else}N/A{/datePublished}</time></li>
+		</ul>
+	</header>
+
+	<div class="content">
+		<ul>
+			<li><strong>Given Name:</strong> <span>{givenName}</span></li>
+			<li><strong>Family Name:</strong> <span>{familyName}</span></li>
+			<li><strong>Telephone:</strong> <span>{telephone}</span></li>
+			<li><strong>Email:</strong> <span>{email}</span></li>
+			<li><strong>Address:</strong>
+				<ul>
+					<li><strong>Street Address:</strong> {address.streetAddress}</li>
+					<li><strong>Postal Code:</strong> {address.postalCode}</li>
+					<li><strong>Locality:</strong> {address.addressLocality}</li>
+					<li><strong>Region:</strong> {address.addressRegion}</li>
+					<li><strong>Country:</strong> {address.addressCountry}</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	{>"admin/partials/model-view-controls"/}
+
+</article>

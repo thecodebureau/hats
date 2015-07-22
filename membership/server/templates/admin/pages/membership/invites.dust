@@ -1,0 +1,6 @@
+<section data-view="Crud" data-page="invites" class="page crud invites" data-collection="Invites">
+	{>"admin/models/invite-form"/}
+	{>"admin/models/invites"/}
+</section>
+		
+

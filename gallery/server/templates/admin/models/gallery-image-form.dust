@@ -1,0 +1,6 @@
+{>"layouts/form"/}
+{<form}
+<form>
+	{>"admin/partials/image-upload":image type="gallery" maxWidth="1024" mediumWidth="600" thumbWidth="300" ratio="1.333" /}
+</form>
+{/form}

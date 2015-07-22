@@ -1,0 +1,14 @@
+{
+  "name": "hats/errors",
+  "version": "0.1.0-pre",
+  "description": "",
+  "main": "server.js",
+  "browser": "admin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "The Code Bureau <info@thecodebureau.com> (https://thecodebureau.com)",
+  "contributors": [
+    "Linus Miller <linus.miller@thecodebureau.com>"
+  ]
+}

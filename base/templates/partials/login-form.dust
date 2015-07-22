@@ -1,0 +1,18 @@
+<div data-view="LoginForm" class="login-form">
+	<!--<h2>Logga in med Facebook</h2>
+	<button data-href="/auth/facebook" class="social facebook">Logga in med Facebook</button>-->
+	<h2>Logga in med lösenord</h2>
+	<form action="/auth/local" method="POST">
+		<div>
+			<input type="email" placeholder="Epostadress" name="email" required />
+		</div>
+		<div>
+			<input type="password" placeholder="Lösenord" name="password" required />
+		</div>
+		<div>
+			<button type="submit">Logga in</button>
+		</div>
+	</form>
+	<p><a class="nav" href="/forgot">Glömt ditt lösenord?</a></p>
+	<div class="close"></div>
+</div>

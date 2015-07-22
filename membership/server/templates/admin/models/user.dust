@@ -1,0 +1,15 @@
+<article class="user" id="{_id}">
+	<header>
+		<h1 class="name">{givenName} {familyName}:</h1>
+		<div class="email">{email}</div>
+		<div class="phone">{telephone}</div>
+	</header>
+	<ul>
+		<li class="dateCreated"><span class="label">Date Created:</span> <time>{dateCreated|d_datetime}</time></li>
+		<li class="lastLogin"><span class="label">Last Login:</span> <time>{lastLogin|d_datetime}</time></li>
+	</ul>
+	<div class="controls">
+		<button data-command="block" class="block">Block</button>
+		<button data-command="delete" class="delete">Delete</button>
+	</div>
+</article>

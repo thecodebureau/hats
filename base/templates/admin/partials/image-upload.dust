@@ -1,0 +1,32 @@
+<section class="image-upload" typeof="ImageObject"{?property} property="{property}"{/property} data-options="type={type},max={maxWidth},medium={mediumWidth},thumb={thumbWidth},ratio={ratio}">
+	<h1>Image</h1>
+	<div class="current">
+		<figure><img property="thumbUrlPath" src="{thumbUrlPath}" /></figure>
+		<ul>
+			<li><strong>Basename:</strong> <span property="basename">{basename}</li>
+			<!--<li><strong>Path:</strong> <span property="path">{path}</li>-->
+			<li><strong>Ext:</strong> <span property="ext">{ext}</li>
+			<li><strong>Mime:</strong> <span property="mime">{mime}</li>
+			<li><strong>Content Size:</strong> <span property="contentSize">{contentSize}</li>
+			<li><strong>Upload Date:</strong> <span property="uploadDate">{uploadDate}</li>
+			<li><strong>Dimensions:</strong> <span property="width">{width}</span> x <span property="height">{height}</span></li>
+			{?thumbnail}
+			<li>Thumbnail
+				<ul>
+					<li><strong>Content Size:</strong> <span property="contentSize">{contentSize}</li>
+					<li><strong>Width:</strong> <span property="width">{width}</li>
+					<li><strong>Height:</strong> <span property="height">{height}</li>
+				</ul>
+			</li>
+			{/thumbnail}
+		</ul>
+		<label for="caption">Caption</label>
+		<input type="text" property="caption" {^filename}disabled {/filename}value="{caption}"/>
+	</div>
+	<div class="upload">
+		<h2>Upload new image</h2>
+		<figure></figure>
+		<input type="file" />
+		<button type="button" data-command="upload" disabled>Upload</button>
+	</div>
+</section>
