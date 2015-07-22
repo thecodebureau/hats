@@ -1,0 +1,9 @@
+<div class="col" id="user-box">
+	{?user}
+		<p>You are not logged in as {user.email}.</p>
+		<a class="logout" href="/auth/logout">Log out</a>
+	{:else}
+		<p>You are not logged in.</p>
+		<a class="login" data-redirect="true" href="/login">Login</a>
+	{/user}
+</div>

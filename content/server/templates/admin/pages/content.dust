@@ -1,0 +1,4 @@
+<section class="content crud page" data-view="Crud" data-collection="Fields">
+	{>"admin/models/field-form"/}
+	{>"admin/models/fields"/}
+</section>

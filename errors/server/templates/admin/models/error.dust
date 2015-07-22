@@ -1,0 +1,23 @@
+<article class='model error {status}'>
+	<div class="summary">
+		<div class="date-created">{dateCreated|d_datetime}</div>
+		<div class="name">{name}</div>
+		<div class="status">{status}</div>
+		<div class="_message">{?message}{message}{:else}Status: {statusText}{/message}</div>
+		<div class="controls">
+			<button data-command="delete">Delete</button>
+		</div>
+	</div>
+	<div class="info">
+		{?ip}<div class="ip"><span class="label">IP:</span> <span class="value">{ip}</span></div>{/ip}
+		{?user}<div class="user"><span class="label">User:</span> <span class="value">{user}</span></div>{/user}
+		{?method}<div class="method"><span class="label">Method:</span> <span class="value">{method}</span></div>{/method}
+		{?path}<div class="path"><span class="label">Path:</span> <span class="value">{path}</span></div>{/path}
+		{?query}<div class="query"><span class="label">Query:</span> <span class="value">{query}</span></div>{/query}
+		{?body}<div class="body"><span class="label">Body:</span> <span class="value">{body}</span></div>{/body}
+		{?details}<div class="details"><span class="label">Details:</span><br/> <pre class="value">{details|jsp}</pre></div>{/details}
+		{?fileName}<div class="fileName">{fileName}, line {lineNumber}, column {columnNumber}</div>{/fileName}
+		{?description}<p class="description">{description}</p>{/description}
+		{?stack}<pre class="stack">{stack}</pre>{/stack}
+	</div>
+</article>

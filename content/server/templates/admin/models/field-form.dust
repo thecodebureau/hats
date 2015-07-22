@@ -1,0 +1,23 @@
+{>"layouts/form" model="Field"/}
+
+{<form}
+<form class="row">
+	<div>
+		<label for='name'>Name</label>
+		<input type='text' property='name' value="{name}" required />
+	</div>
+	<div>
+		<label for='description'>Path</label>
+		<select property="path">
+			<option>Choose a path</option>
+			{#paths}
+			<option value="{.}">{.}</option>
+			{/paths}
+		</select>
+	</div>
+	<div>
+		<label for='description'>Spytext</label>
+		<div type='text' data-spytext property="content">{spytext}</div>
+	</div>
+</form>
+{/form}

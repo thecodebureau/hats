@@ -1,0 +1,42 @@
+<section class="fields collection">
+	<form class="filter">
+		<div class="row collapse">
+			<div class="m-4">
+				<label>Sort By</label>
+				<select name="_sort">
+					<option value="name" selected>Name</option>
+					<option value="-name">-Name</option>
+				</select>
+			</div>
+
+			<div class="m-2">
+				<label># of results</label>
+				<select name="_limit">
+					<option value="10">10</option>
+					<option value="25">25</option>
+					<option value="50" selected>50</option>
+					<option value="100">100</option>
+					<option value="200">200</option>
+				</select>
+			</div>
+			<div class="m-3">
+				<label>
+					<input type="checkbox" name="datePublished" value='{"$ne":null}' /> Published
+				</label>
+			</div>
+		</div>
+		<div>
+			<input type="text" data-regex data-flags='i' name="name" />
+		</div>
+
+		<div class="buttons">
+			<button type="reset">Reset</button>
+			<button>Search</button>
+		</div>
+	</form>
+	<div class="models">
+	{#fields}
+		{>"admin/models/field"/}
+	{/fields}
+	</div>
+</section>

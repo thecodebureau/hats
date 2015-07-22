@@ -1,0 +1,4 @@
+<section data-view="Crud" data-page="employees" class="page crud employees" data-collection="Employees">
+	{>"admin/models/employee-form"/}
+	{>"admin/models/employees"/}
+</section>

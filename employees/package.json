@@ -1,0 +1,16 @@
+{
+  "name": "hats/employees",
+  "description": "Employee module for Hatter.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "The Code Bureau <info@thecodebureau> (https://thecodebureau.com)",
+  "contributors": [
+    "Linus Miller <linus.miller@thecodebureau.com>"
+  ],
+  "dependencies": {
+    "spytext": "^0.4.1"
+  }
+}

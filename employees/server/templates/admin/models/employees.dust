@@ -1,0 +1,3 @@
+<section data-view="Employees" class="collection employees">{#employees}
+	{>"admin/models/employee"/}
+{/employees}</section>

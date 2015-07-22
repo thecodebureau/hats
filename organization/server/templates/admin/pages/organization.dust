@@ -1,0 +1,3 @@
+<section data-view="Organization" class="page organization">
+	{>"admin/models/organization-form"/}
+</section>

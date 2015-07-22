@@ -1,0 +1,8 @@
+{>"layouts/form" model="Role" /}
+{<form}
+<form>
+	<div>
+		<input type="text" property="name" />
+	</div>
+</form>
+{/form}

@@ -1,0 +1,50 @@
+{>"layouts/form" model="Organization" /}
+{<form}
+<form>
+	<div class="row">
+		<div class="m-6">
+			<div>
+				<label for='name'>Name</label>
+				<input type='text' property="name" value="{name}" required />
+			</div>
+			<div>
+				<label for='legalName'>Legal Name</label>
+				<input type='text' property="legalName" value="{legalName}" required />
+			</div>
+			<div>
+				<label for='email'>Email</label>
+				<input type='text' property="email" value="{email}" required />
+			</div>
+			<div>
+				<label for='telephone'>Telephone</label>
+				<input type='text' property="telephone" value="{telephone}" required />
+			</div>
+		</div>
+		<div class="m-6">
+			<fieldset property="address" typeof="PostalAddress">
+				<legend>Address</legend>
+				<div>
+					<label>streetAddress</label>
+					<input type="text" property="streetAddress" value="{address.streetAddress}" />
+				</div>
+				<div>
+					<label>postalCode</label>
+					<input type="text" property="postalCode" value="{address.postalCode}" />
+				</div>
+				<div>
+					<label>Locality</label>
+					<input type="text" property="addressLocality" value="{address.addressLocality}" />
+				</div>
+				<div>
+					<label>Region</label>
+					<input type="text" property="addressRegion" value="{address.addressRegion}" />
+				</div>
+				<div>
+					<label>Country</label>
+					<input type="text" property="addressCountry" value="{address.addressCountry}" />
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</form>
+{/form}

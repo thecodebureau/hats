@@ -1,0 +1,20 @@
+<article class='model news-article' data-published="{?datePublished}true{:else}false{/datePublished}" vocab="http://schema.org" typeof="NewsArticle">
+	<header>
+		<h1 property="headline">{headline}</h1>
+		<ul>
+			<li><strong>Created:</strong> <time property="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
+			<li><strong>Modified:</strong> <time property="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
+			<li><strong>Published:</strong> <time pubdate property="datePublished" datetime="{datePublished}">{?datePublished}{datePublished|d_datetime}{:else}N/A{/datePublished}</time></li>
+		</ul>
+	</header>
+
+	<div class="content">
+		<figure property="image" typeof="ImageObject">
+			<img property="contentUrl" src="{image.thumbUrlPath}" />
+			<figcaption property="caption">{image.caption}</figcaption>
+		</figure>
+		<div property="articleBody">{articleBody|s}</div>
+	</div>
+
+	{>"admin/partials/model-view-controls"/}
+</article>

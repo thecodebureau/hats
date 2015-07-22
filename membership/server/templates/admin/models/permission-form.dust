@@ -1,0 +1,15 @@
+{>"layouts/form" model="Permission" /}
+{<form}
+<form class="add permission">
+	<div class="server error"></div>
+	<div>
+		<label>Regex</label>
+		<input type="text" property="regex" />
+	</div>
+	<div>
+		{#roles}
+			<input type="checkbox" property="roles" value="{name}" />{name}
+		{/roles}
+	</div>
+</form>
+{/form}

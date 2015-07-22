@@ -1,0 +1,10 @@
+<article class='field model'>
+	<header>
+		<h1><span property="path">{path}</span>: <span property="name">{name}</span></h1>
+		<ul>
+			<li><strong>Created:</strong> <time property="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
+			<li><strong>Modified:</strong> <time property="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
+		</ul>
+		{>"admin/partials/model-view-controls"/}
+	</header>
+</article>

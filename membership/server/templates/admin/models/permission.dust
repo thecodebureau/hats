@@ -1,0 +1,11 @@
+<article class="item" id="{_id}">
+	<div class="regex">{regex}</div>
+		<div class="roles">
+		{#roles}
+			{.}
+		{/roles}
+	</div>
+	<div class="controls">
+		<button data-command="delete" class="delete">Delete</button>
+	</div>
+</article>

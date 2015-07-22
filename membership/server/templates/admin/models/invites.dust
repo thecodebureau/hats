@@ -1,0 +1,3 @@
+<section class="collection invites">{#invites}
+	{>"admin/models/invite"/}
+{/invites}</section>

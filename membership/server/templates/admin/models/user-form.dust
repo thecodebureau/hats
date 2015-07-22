@@ -1,0 +1,88 @@
+<div class="add">
+	<h3>Register a New User</h3>
+	<form class="register">
+		<div class="server error"></div>
+		<div class="row">
+			<div class="cell">
+				<fieldset>
+					<legend>Account</legend>
+					<div class="c r">
+						<label>Email:</label>
+						<input value="linus.k.miller@gmail.com" name="email" type="email" required />
+					</div>
+					<div class="c r">
+						<label>Username:</label>
+						<input name="username" type="text" />
+					</div>
+				</fieldset>
+			</div>
+			<div class="cell">
+				<fieldset>
+					<legend>Password</legend>
+					<div>
+                        <label>Password:</label>
+                        <input value="rasmus" id="password" name="password" type="password" required />
+                    </div>
+					<div>
+						<label for="passwordConfirm">Password (Confirm):</label>
+						<input value="rasmus" name="passwordConfirm" type="password" equalTo="input[name=password]" required />
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div class="row">
+			<div class="cell">
+				<fieldset>
+					<legend>Name</legend>
+					<div>
+						<label>Given Name:</label>
+						<input name="givenName" type="text" />
+					</div>
+					<div>
+						<label>Middle Name:</label>
+						<input name="middleName" type="text" />
+					</div>
+					<div>
+						<label>Family Name:</label>
+						<input name="familyName" type="text" />
+					</div>
+				</fieldset>
+			</div>
+			<div class="cell">
+				<fieldset>
+					<legend>Address:</legend>
+					<div>
+						<label>CO</label>
+						<input name="co" type="text" />
+					</div>
+					<div>
+						<label>Street</label>
+						<input name="street" type="text" />
+					</div>
+					<div>
+						<label>PostCode</label>
+						<input name="postCode" type="text" />
+					</div>
+					<div>
+						<label>City</label>
+						<input name="city" type="text" />
+					</div>
+					<div>
+						<label>Country</label>
+						<input name="country" type="text" />
+					</div>
+				</fieldset>
+			</div>
+		</div>
+        <div>
+            <% if @roles?.length : %>
+                <% for role in @roles : %>
+                <input type="checkbox" name="roles" value="<%- role.name %>" /><%- role.name %>
+                <% end %>
+            <% end: %>
+        </div>
+		<div>
+			<input type="submit" value="Register" />
+		</div>
+	</form>
+</div>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+		
+		<title>{title} Admin</title>
+		<base href="/admin/" />
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="/css/admin/main.css" />
+
+	<link rel="shortcut icon" href="/favicon.png">
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone.js"></script>
+	<script>
+		if(navigator.userAgent.match(/Trident.*rv:11\./)) {
+			document.documentElement.className = 'IE11';
+		}
+	</script>
+	<script src="/js/common.js"></script>
+	<script src="/js/admin.js"></script>
+	
+</head>
+
+<header>
+	<div class="company">
+		<h1>{title} Admin : <span class="page">{page}</span></h1>
+	</div>
+	{>"admin/partials/user-box"/}
+</header>
+
+<div class="container">
+	{>"partials/navigation":navigation page=page root="/admin" /}
+
+	<main>
+
+	{?error}
+		{>"error"/}
+	{:else}
+		{?template}
+			{>"{template}"/}
+		{/template}
+	{/error}
+
+	</main>
+</div>
+
+<footer>
+	<a href="/">Main page</a>
+</footer>
+
+</body>
+</html>

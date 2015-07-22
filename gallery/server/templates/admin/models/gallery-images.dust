@@ -1,0 +1,3 @@
+<section data-view="GalleryImages" class="collection gallery-images">{#galleryImages}
+	{>"admin/models/gallery-image"/}
+{/galleryImages}</section>

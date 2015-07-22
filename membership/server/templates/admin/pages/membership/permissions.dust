@@ -1,0 +1,4 @@
+<section data-view="Crud" data-page="permissions" class="page crud permissions" data-collection="Permissions">
+	{>"admin/models/permission-form"/}
+	{>"admin/models/permissions"/}
+</section>

@@ -1,0 +1,3 @@
+<section class="collection roles">{#permissions}
+	{>"admin/models/permission"/}
+{/permissions}</section>

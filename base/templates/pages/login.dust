@@ -1,0 +1,5 @@
+<div class="page login row">
+	<div class="col">
+		{>"partials/login-form"/}
+	</div>
+</div>
