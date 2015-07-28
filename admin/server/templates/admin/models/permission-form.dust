@@ -1,4 +1,4 @@
-{>"layouts/form" model="Permission" /}
+{>"admin/layouts/form" model="Permission" /}
 {<form}
 <form class="add permission">
 	<div class="server error"></div>
