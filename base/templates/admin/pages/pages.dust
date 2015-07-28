@@ -1,9 +1,0 @@
-<section class="page pages-page flex col">
-	<h1>Pages</h1>
-	{#fields}
-		{>"admin/partials/spytext-field"/}
-	{/fields}
-	<div id="test">
-		<main><p><b><i></i></b></p><p></p></main><section><p></p><p></p></section>
-	</div>
-</section>

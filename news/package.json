@@ -1,5 +1,4 @@
 {
-  "name": "hats/news",
   "description": "News module for Hatter.",
   "main": "server.js",
   "browser": "browser.js",
@@ -11,6 +10,7 @@
     "Linus Miller <linus.miller@thecodebureau.com>"
   ],
   "dependencies": {
+    "query-constructor": "^0.1.0",
     "spytext": "^0.4.1"
   }
 }
