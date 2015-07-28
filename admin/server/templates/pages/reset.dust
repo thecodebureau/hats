@@ -1,0 +1,16 @@
+<section class="row reset page">
+	<header class="col"><h1>Återställning av lösenord</h1></header>
+	<div class="col" data-view="Reset">
+		<form>
+			<div>
+				<input type="password" name="password" placeholder="Lösenord" required />
+			</div>
+			<div>
+				<input type="password" name="confirm.password" equalTo="[name='password']" placeholder="Upprepa lösenord" required />
+			</div>
+			<div>
+				<button>Uppdatera lösenord</button>
+			</div>
+		</form>
+	</div>
+</section>

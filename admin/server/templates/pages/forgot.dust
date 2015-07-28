@@ -1,0 +1,17 @@
+<section class="row forgot page">
+	<header class="col"><h1>Ibland är det svårt att hålla reda på allt...</h1></header>
+	<div class="col">
+		<p>Som tur var är det bara att fylla i din epostadress här nedan så fixar vi en länk till
+		dig där du kan byta till ett nytt lösenord.</p>
+	</div>
+	<div class="form col" data-view="Forgot">
+		<form>
+			<div>
+				<input type="email" name="email" required placeholder="Ange din epostadress" />
+			</div>
+			<div>
+				<button>Återställ</button>
+			</div>
+		</form>
+	</div>
+</section>

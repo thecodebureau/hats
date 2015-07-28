@@ -26,7 +26,7 @@ module.exports = function(config, mongoose) {
 			};
 		},
 
-		findAll: function(req, res, next) {
+		findAll: function ljasdflkajsdf(req, res, next) {
 			var query = {};
 
 			if(!req.user) 

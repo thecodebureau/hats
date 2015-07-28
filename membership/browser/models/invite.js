@@ -1,4 +1,0 @@
-// role model
-module.exports = {
-	
-};

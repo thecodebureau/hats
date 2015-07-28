@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 module.exports = function(mongoose, schemas, plugins) {
-	var GalleryImageSchema = new mongoose.Schema(schemas.ImageObject.objectify());
+	var GalleryImageSchema = new mongoose.Schema(schemas.imageObject);
 
 	GalleryImageSchema.plugin(plugins.base);
 

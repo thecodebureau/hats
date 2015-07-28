@@ -6,7 +6,7 @@ module.exports = function(mongoose, schemas, plugins) {
 		toJSON: { virtuals: true }
 	};
 
-	var EmployeeSchema = new mongoose.Schema(_.defaults({}, schemas.Person.objectify()), schemaOptions);
+	var EmployeeSchema = new mongoose.Schema(_.defaults({}, schemas.person), schemaOptions);
 
 	EmployeeSchema.plugin(plugins.base);
 
