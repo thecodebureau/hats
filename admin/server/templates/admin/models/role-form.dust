@@ -1,4 +1,4 @@
-{>"layouts/form" model="Role" /}
+{>"admin/layouts/form" model="Role" /}
 {<form}
 <form>
 	<div>

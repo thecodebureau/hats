@@ -1,4 +1,4 @@
-{>"layouts/form" model="News Article" /}
+{>"admin/layouts/form" model="News Article" /}
 {<form}
 <form enctype="multipart/form-data" class="col flex">
 	<div>

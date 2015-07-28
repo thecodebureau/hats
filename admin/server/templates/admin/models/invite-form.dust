@@ -1,4 +1,4 @@
-{>"layouts/form" model="Invite" /}
+{>"admin/layouts/form" model="Invite" /}
 {<form}
 <form>
 	<div class="server error"></div>

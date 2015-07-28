@@ -1,4 +1,4 @@
-{>"layouts/form"/}
+{>"admin/layouts/form"/}
 {<form}
 <form>
 	<div class="row">
