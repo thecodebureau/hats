@@ -11,7 +11,7 @@
     "Robin Hagg <robin.hagg@thecodebureau.com>"
   ],
   "dependencies": {
-    "nodemailer": "^1.3.4",
+    "nodemailer": "^1.4.0",
     "spytext": "^0.4.1"
   }
 }
