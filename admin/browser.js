@@ -1,16 +1,16 @@
 module.exports = {
 	collections: {
-		Invites: require('./collections/invites.js'),
-		Permissions: require('./collections/permissions.js'),
-		Roles: require('./collections/roles.js'),
-		Users: require('./collections/users.js'),
+		Invites: require('./browser/collections/invites.js'),
+		Permissions: require('./browser/collections/permissions.js'),
+		Roles: require('./browser/collections/roles.js'),
+		Users: require('./browser/collections/users.js'),
 	},
 	views: {
-		ModelControls: require('./views/model-controls'),
-		ImageUpload: require('./views/image-upload'),
-		Form: require('./views/form'),
-		Crud: require('./views/crud'),
-		CrudModel: require('./views/crud-model'),
-		CrudCollection: require('./views/crud-collection'),
+		ModelControls: require('./browser/views/model-controls'),
+		ImageUpload: require('./browser/views/image-upload'),
+		Form: require('./browser/views/form'),
+		Crud: require('./browser/views/crud'),
+		CrudModel: require('./browser/views/crud-model'),
+		CrudCollection: require('./browser/views/crud-collection'),
 	}
 };
