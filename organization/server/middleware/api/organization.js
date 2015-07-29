@@ -4,14 +4,10 @@ module.exports = function(config, mongoose) {
 
 	return {
 		get: function(req, res, next) {
-			if(res.data.organization) return next();
-
-			Organization.findOne({}).lean().exec(function(err, organization) {
-				if (err) return next(err);
-				if (organization) res.data.organization = organization;
-				next();
-			});
+			res.data.organization = res.app.locals.organization;
+			next();
 		},
+
 		update: function(req, res, next) {
 			Organization.findOne({}, function(err, organization) {
 				delete req.body._id;
@@ -21,6 +17,8 @@ module.exports = function(config, mongoose) {
 
 				return organization.save(function(err) {
 					if(err) return next(err);
+
+					if (organization) res.app.locals.organization = organization;
 
 					return res.status(200).json(organization);
 				});
