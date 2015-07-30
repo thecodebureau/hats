@@ -3,7 +3,6 @@
 <head>
 		
 		<title>{title} Admin</title>
-		<base href="/admin/" />
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="/css/admin/main.css" />
 
