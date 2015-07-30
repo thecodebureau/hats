@@ -12,12 +12,14 @@ var isAuthenticated = function(req, res, next) {
 	}
 };
 
-var isNotAuthenticated = function(req, res, next) {
-	if(req.isAuthenticated()) {
-		return returnError(req, res, next);
-	} else {
-		next();
-	}
+var redirectAuthenticated = function(path) {
+	return function redirectAuthenticated(req, res, next) {
+		if(req.isAuthenticated()) {
+			res.redirect(path);
+		} else {
+			next();
+		}
+	};
 };
 
 var isCurrent = function(req, res, next) {
@@ -42,7 +44,7 @@ module.exports = function(config, mongoose) {
 	return {
 		isAuthenticated: isAuthenticated,
 		isCurrent: isCurrent,
-		isNotAuthenticated: isNotAuthenticated,
+		redirectAuthenticated: redirectAuthenticated,
 		hasRole: hasRole,
 		isAdmin: isAdmin
 	};
