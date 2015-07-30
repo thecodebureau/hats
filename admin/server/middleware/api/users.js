@@ -69,10 +69,8 @@ module.exports = function(config, mongoose) {
 								if(err) return next(err);
 
 								res.status(201);
-								newUser = newUser.toObject();
-								delete newUser.local;
 
-								res.data.user = newUser;
+								res.data.user = _.omit(newUser.toJSON(), [ 'local', 'facebook' ]);
 								next();
 							});
 						});
@@ -119,13 +117,13 @@ module.exports = function(config, mongoose) {
 
 		findOne: function (req, res, next) {
 			if(req.user && (req.params.id === req.user._id.toString())) {
-				res.data.user = req.user;
+				res.data.user = _.omit(req.user.toJSON(), [ 'local', 'facebook' ]);
 				return next();
 			} else {
 				User.findById(req.params.id).lean().exec(function(err, user) {
 					if(err) return next(err);
 
-					res.data.user = user;
+					res.data.user = _.omit(user, [ 'local', 'facebook' ]);
 					next();
 				});
 			}
@@ -237,14 +235,11 @@ module.exports = function(config, mongoose) {
 
 		update: function (req, res, next) {
 			User.findById(req.params.id, function(err, user) {
-				delete req.body._id;
-				delete req.body.__v;
-
 				if(req.body.email) {
 					req.body.email = req.body.email.toLowerCase().trim();
 				}
 
-				_.extend(user, req.body);
+				_.extend(user, _.omit(req.body, [ '_id', '__v', 'local', 'facebook' ]));
 
 				user.save(function (err) {
 					if (err) {
@@ -252,7 +247,7 @@ module.exports = function(config, mongoose) {
 					}
 
 					res.status(201);
-					res.data.user = req.user;
+					res.data.user = _.omit(req.user.toJSON(), [ 'local', 'facebook' ]);
 
 					return next();
 				});
