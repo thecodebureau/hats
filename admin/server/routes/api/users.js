@@ -12,8 +12,8 @@ module.exports = function(mw, config) {
 		[ 'patch', '/:id', [ isCurrent, mw.update ] ],
 		[ 'delete', '/:id', [ isAdmin, mw.remove ]],
 
-		[ 'post', '/reset-password', [ isCurrent, mw.resetPassword ] ],
-		[ 'post', '/update-password', [ isCurrent, mw.updatePassword ] ]
+		[ 'post', '/reset-password', [ mw.resetPassword ] ],
+		[ 'post', '/update-password', [ mw.updatePassword ] ]
 	];
 
 };
