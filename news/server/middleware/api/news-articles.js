@@ -1,5 +1,3 @@
-// load 3rd party modules
-
 var queryConstructor = require('query-constructor');
 
 module.exports = function(config, mongoose) {
@@ -25,7 +23,7 @@ module.exports = function(config, mongoose) {
 			};
 		},
 
-		findAll: function ljasdflkajsdf(req, res, next) {
+		findAll: function(req, res, next) {
 			var query = {};
 
 			if(!req.user) 
