@@ -1,5 +1,4 @@
 // load 3rd party modules
-var _ = require('lodash');
 
 module.exports = function(config, mongoose) {
 	var GalleryImage = mongoose.model('GalleryImage');

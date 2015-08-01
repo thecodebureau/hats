@@ -1,5 +1,4 @@
 // load 3rd party modules
-var _ = require('lodash');
 
 var queryConstructor = require('query-constructor');
 
