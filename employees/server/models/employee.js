@@ -1,4 +1,3 @@
-var _ = require('lodash');
 
 module.exports = function(mongoose, schemas, plugins) {
 	var schemaOptions = {

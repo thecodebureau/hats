@@ -1,4 +1,3 @@
-var _ = require('lodash');
 
 module.exports = function(config, mongoose) {
 	var Employee = mongoose.model('Employee');
