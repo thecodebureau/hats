@@ -43,7 +43,7 @@ module.exports = function(mongoose, schemas, plugins) {
 		var that = this;
 
 		if(this.isNew || this.isModified('headline')) {
-			var newId = this.headline.toSpinalCase();
+			var newId = this.headline.toSpinalCase().split(/åä/).join('a').split('ö').join('o');
 
 			(function findUniqueId(index) {
 				var hid = newId + (index ? '-' + index : '');
