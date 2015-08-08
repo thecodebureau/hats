@@ -8,16 +8,12 @@ function _401(str) {
 
 function local(req, res, next) {
 	return function (err, user, info) {
-		if (!user) {
-			return next(_401(info ? info.message : null));
-		}
-
-		if (user.isBanned) {
-			return next(_401('This user has been banned.'));
-		}
-
-		if (user.isBlocked) {
-			return next(_401('The user is blocked due to too many incorrect login attemps.'));
+		// info will only be set if local passport strategy has encountered login
+		// error (not a coding error).
+		if (info) {
+			err = new Error(info && info.message ? info.message : 'No message');
+			err.status = 401;
+			return next(err);
 		}
 
 		req.login(user, function (err) {

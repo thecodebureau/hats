@@ -32,19 +32,29 @@ module.exports = function(epiphany) {
 			if(err) 
 				return done(err);
 
-			if(user && (!user.local || !user.local.password)) {
-				err = new Error('No local password on user');
-				err.status = 500;
-				err.details = {
-					email: user.email
-				};
-				return done(err);
+			if(user) {
+				if (user.isBanned) {
+					user = null;
+					message = config.messages.banned;
+				}
+
+				if (user.isBlocked) {
+					user = null;
+					message = config.messages.blocked;
+				}
+
+				if(!user.local || !user.local.password) {
+					user = null;
+					message = config.messages.notLocal;
+				} else if(!user.authenticate(password)) {
+					user = null;
+					message = config.messages.wrongPassword;
+				}
+			} else {
+				message = config.messages.noUser;
 			}
 			
-			if(!user || !user.authenticate(password)) 
-				return done(null, false, { message: 'Fel användarnamn eller lösenord.' });
-			
-			done(null, user, { message: 'Inloggingen lyckades.' });
+			done(null, user, { message: message });
 		});
 	}));
 
