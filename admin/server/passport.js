@@ -32,6 +32,8 @@ module.exports = function(epiphany) {
 			if(err) 
 				return done(err);
 
+			var message;
+
 			if(user) {
 				if (user.isBanned) {
 					user = null;
