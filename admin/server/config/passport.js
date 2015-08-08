@@ -7,6 +7,13 @@ module.exports = function(config) {
 		local: {
 			usernameField: 'email'
 		},
+		messages: {
+			notLocal: 'Account requires social login.',
+			wrongPassword: 'Wrong password.',
+			noUser: 'No user found.',
+			banned: 'User is banned.',
+			blocked: 'User is blocked due to too many login attempts.'
+		},
 		facebook: {
 			clientID: 'changeThisFool',
 			clientSecret: 'changeThisFool',
