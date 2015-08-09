@@ -21,8 +21,10 @@ function local(req, res, next) {
 
 			user = user.toObject();
 			delete user.local;
+			//res.data.user = user;
 
 			res.status(200);
+
 			
 			res.format({
 				html: function() {
@@ -31,7 +33,7 @@ function local(req, res, next) {
 				json: function () {
 					if(req.session.lastPath) res.set('Location', req.session.lastPath);
 
-					res.json(user.toJSON());
+					res.json(user);
 				}
 			});
 		});
