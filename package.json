@@ -1,6 +1,6 @@
 {
   "name": "hats",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Hats for hatter. Or epiphany. Or ridge. Or whatever. We just don't know yet. But hats they are.",
   "main": "./no-main.js",
   "scripts": {
