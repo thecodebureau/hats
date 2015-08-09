@@ -7,11 +7,11 @@ function _401(str) {
 }
 
 function local(req, res, next) {
-	return function (err, user, info) {
-		// info will only be set if local passport strategy has encountered login
+	return function (err, user, message) {
+		// message will only be set if local passport strategy has encountered login
 		// error (not a coding error).
-		if (info) {
-			err = new Error(info && info.message ? info.message : 'No message');
+		if (message) {
+			err = new Error(message);
 			err.status = 401;
 			return next(err);
 		}
@@ -21,10 +21,8 @@ function local(req, res, next) {
 
 			user = user.toObject();
 			delete user.local;
-			//res.data.user = user;
 
 			res.status(200);
-
 			
 			res.format({
 				html: function() {
@@ -33,7 +31,7 @@ function local(req, res, next) {
 				json: function () {
 					if(req.session.lastPath) res.set('Location', req.session.lastPath);
 
-					res.json(user);
+					res.json(user.toJSON());
 				}
 			});
 		});

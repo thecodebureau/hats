@@ -56,7 +56,7 @@ module.exports = function(epiphany) {
 				message = config.messages.noUser;
 			}
 			
-			done(null, user, { message: message });
+			done(null, user, message);
 		});
 	}));
 
