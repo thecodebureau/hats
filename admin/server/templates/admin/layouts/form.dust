@@ -1,6 +1,6 @@
 <section class="{model|sc} form">
 	<header>
-		<h1>Create {model|SC}</h1>
+		<h1>{model|SC}</h1>
 		{>"admin/partials/form-controls"/}
 	</header>
 	{+form/}
