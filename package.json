@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/thecodebureau/hats",
   "peerDependencies": {
-    "epiphany": "0.6.1",
-    "ridge": "0.5.3"
+    "epiphany": "^0.6.1",
+    "ridge": "^0.5.3"
   }
 }
