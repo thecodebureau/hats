@@ -1,5 +1,5 @@
 module.exports = {
 	views: {
-		ContactUs: require('./browser/views/contact-us.js')
+		ContactForm: require('./browser/views/contact-form.js')
 	}
 };
