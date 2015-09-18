@@ -8,23 +8,21 @@ function _401(str) {
 
 function local(req, res, next) {
 	return function (err, user, message) {
-		// message will only be set if local passport strategy has encountered login
+		// message will only be set if passport strategy has encountered login
 		// error (not a coding error).
-		if (message) {
-			err = new Error(message);
-			err.status = 401;
+		if (message) 
+			err = _401(err);
+
+		if(err)
 			return next(err);
-		}
 
 		req.login(user, function (err) {
 			if (err) return next(err); 
 
 			user = user.toObject();
 			delete user.local;
-			//res.data.user = user;
 
 			res.status(200);
-
 			
 			res.format({
 				html: function() {
@@ -41,88 +39,62 @@ function local(req, res, next) {
 }
 
 function social(req, res, next) {
-	return function (err, user, info) {
-		function done(err) {
+	return function (err, user, message) {
+		function respond(err, user) {
 			
 			if(err)
 				err = _.pick(err, 'status', 'message');
 
-			res.locals.script = 'if(window.opener) {' +
-				'window.opener.broadcast.trigger("authenticate", ' + JSON.stringify(err) + ', ' + JSON.stringify(user) + ');' +
-				'window.close();' +
-				'} else {' +
-					'window.history.back();' +
-				'}';
+			if(req.session.loginWindow) {
 
-			res.status(err ? err.status || 500 : 200);
+				res.status(err ? err.status || 500 : 200);
 
-			return res.render('util/script');
+				_.extend(res.locals, {
+					error: err,
+					user: user,
+					newUser: req.session.newUser,
+					redirect: req.session.lastPath
+				});
+
+				res.render('social-callback-script');
+			} else {
+				res.redirect(req.session.lastPath || '/');
+			}
+
+			delete req.session.lastPath;
+			delete req.session.loginWindow;
 		}
 
-		if (err) { 
-			return done(err);
-		}
+		// message will only be set if passport strategy has encountered login
+		// error (not a coding error).
+		if (message) 
+			err = _401(message);
+
+		if (err)  
+			return respond(err);
 
 		// NOTE: passport does not seem to return an error if permission's are not granted, but user === false
-		if(!user && info) {
-			var message;
-			if(info.message === 'Permissions error') {
-				message = 'Den externa inloggningen misslyckades.';
-			}
-			err = new Error(message || 'Den externa inloggningen misslyckades.');
-			err.status = 401;
-			return done(err);
-		}
-
-		if(req.session.newUser) {
-			user = req.session.newUser;
-
-			delete req.session.newUser;
-
-			done();
-		} else {
-			// if(!user) should not be needed... authentication/permission error should have been called if no user
-
-			if(!user) {
-				err = new Error('Kontot är inte kopplat till doggy.');
-				err.status = 401;
-				return done(err);
+		if(!user) {
+			if(!req.session.newUser) {
+				err = new Error(config.messages.externalLoginFailed);
+				err.status = 400;
 			}
 
-			req.login(user, function (err) {
-				if (err) {
-					return done(err); 
-				}
-				done();
-			});
+			return respond(err);
 		}
+
+		req.login(user, function (err) {
+			respond(err, _.omit(user.toObject(), passport.providers));
+		});
 	};
 }
 
 module.exports = function(config) {
-	return {
+	config = config.passport;
+
+	var mw = {
 		local: function (req, res, next) {
 			passport.authenticate('local', local(req, res, next))(req, res, next);
-		},
-		instagram: {
-			login: passport.authenticate('instagram'),
-			callback: function (req, res, next) {
-				passport.authenticate('instagram', social(req, res, next))(req, res, next);
-			},
-			verify: function(req, res, next) {
-				req.session.verifying = true;
-				passport.authenticate('instagram')(req, res, next);
-			}
-		},
-		facebook: {
-			login: passport.authenticate('facebook', { scope : [ 'email'] }),
-			callback: function (req, res, next) {
-				passport.authenticate('facebook', social(req, res, next))(req, res, next);
-			},
-			verify: function(req, res, next) {
-				req.session.verifying = true;
-				passport.authenticate('facebook', { scope : [ 'email'] })(req, res, next);
-			}
 		},
 		logout: function(req, res, next) {
 			req.logout();
@@ -131,4 +103,30 @@ module.exports = function(config) {
 			next();
 		}
 	};
+
+	// TODO place this in server/passport.js instead... it is currently placed
+	// here because of Epiphany's loader sequence (server/passport.js needs to be
+	// loaded after (User) model.
+	passport.providers = [];
+
+	_.each(config.providers, function(strategyConfig, key) {
+		passport.providers.push(key);
+
+		mw[key] = {
+			login: function(req, res, next) {
+				delete req.session.newUser;
+				req.session.loginWindow = !!req.query.loginWindow;
+				passport.authenticate(key, { scope: strategyConfig.scope || config.scope })(req,res,next);
+			},
+			callback: function (req, res, next) {
+				passport.authenticate(key, social(req, res, next))(req, res, next);
+			},
+			verify: function(req, res, next) {
+				req.session.verifying = true;
+				passport.authenticate(key)(req, res, next);
+			}
+		};
+	});
+
+	return mw;
 };

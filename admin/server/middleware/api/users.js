@@ -1,4 +1,5 @@
 var nodemailer = require('nodemailer');
+var passport = require('passport');
 
 module.exports = function(config, mongoose) {
 	function getPermissions(req, email, callback) {
@@ -46,8 +47,17 @@ module.exports = function(config, mongoose) {
 					err.status = 409;
 					next(err);
 				} else {
-
 					req.body.email = req.body.email.toLowerCase();
+
+					var provider = _.pick(req.body, passport.providers);
+
+					if(!_.isEmpty(provider) && (!req.session.newUser || !_.matches(provider)(_.pick(req.session.newUser, passport.providers)))) {
+						err = new Error('The supplied user credentials does not match those retrieved from ' + _.keys(provider)[0] + '.');
+						err.status = 400;
+						return next(err);
+					}
+
+					delete req.session.newUser;
 
 					newUser = new User(req.body);
 

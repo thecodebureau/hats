@@ -1,0 +1,6 @@
+<script>
+if(window.opener) {
+	window.opener.broadcast.trigger('authenticate', {?error}{error|js|s}{:else}null{/error}, {?user}{user|js|s}{:else}null{/user}, {?newUser}{newUser|js|s}{:else}null{/newUser}, "{redirect}");
+}
+window.close();
+</script>

@@ -1,14 +1,18 @@
-module.exports = function(mw, config) {
+var passport = require('passport');
+
+module.exports = function(mw, epiphany) {
 	mw = mw.passport;
 
-	return [
+	var routes = [
 		[ 'post', '/local', mw.local ],
-		[ 'get', '/instagram', mw.instagram.login ],
-		[ 'get', '/instagram/callback', mw.instagram.callback ],
-		[ 'get', '/instagram/verify', mw.instagram.verify ],
-		[ 'get', '/facebook', mw.facebook.login ],
-		[ 'get', '/facebook/callback', mw.facebook.callback ],
-		[ 'get', '/facebook/verify', mw.facebook.verify ],
 		[ 'get', '/logout', mw.logout ]
 	];
+
+	passport.providers.forEach(function(provider) {
+		routes.push([ 'get', '/' + provider, mw[provider].login ]);
+		routes.push([ 'get', '/' + provider + '/callback', mw[provider].callback ]);
+		routes.push([ 'get', '/' + provider + '/verify', mw[provider].verify ]);
+	});
+
+	return routes;
 };

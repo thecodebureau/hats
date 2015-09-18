@@ -5,6 +5,7 @@ module.exports = {
 		Roles: require('./browser/collections/roles.js'),
 		Users: require('./browser/collections/users.js'),
 	},
+
 	views: {
 		ModelControls: require('./browser/views/model-controls'),
 		ImageUpload: require('./browser/views/image-upload'),
@@ -12,5 +13,7 @@ module.exports = {
 		Crud: require('./browser/views/crud'),
 		CrudModel: require('./browser/views/crud-model'),
 		CrudCollection: require('./browser/views/crud-collection'),
+		User: require('./browser/views/user'),
+		Users: require('./browser/views/users')
 	}
 };

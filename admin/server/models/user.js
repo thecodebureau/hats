@@ -11,15 +11,21 @@ module.exports = function(mongoose, schemas) {
 				date: Date,
 				code: String
 			},
-			verificationCode: { type: String, default: null },
+			verificationCode: { type: String },
 		},
-		facebook       : {
-			id           : String,
-			token        : String,
-			email        : String,
-			name         : String
+		facebook: {
+			id: String,
+			token: String,
+			email: String
 		},
-		//roles: { type: [ { type: String } ], required: true, default: [ 'member' ] }
+		google: {
+			id: String,
+			token: String,
+			email: String
+		},
+		givenName: String,
+		familyName: String,
+		roles: { type: [ { type: String } ], required: true, default: [ 'member' ] },
 		lastActivity: { type: Date, default: new Date() },
 		lastLogin: { type: Date, default: new Date() },
 		loginAttempts: { type: Number, default: 0 },

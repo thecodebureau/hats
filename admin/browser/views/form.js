@@ -25,9 +25,7 @@ module.exports = {
 
 		_view.$('[data-spytext]').each(function(i, el) {
 			// TODO clear previous spytext fields
-			if(!_view.spytext) _view.spytext = new Spytext();
-
-			_view.spytext.addField(el);
+			new _view.app.views.SpytextField({ el: el });
 		});
 
 		_view.$('.image-upload').each(function() {

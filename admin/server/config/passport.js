@@ -8,9 +8,11 @@ module.exports = function(config) {
 			usernameField: 'email'
 		},
 		messages: {
-			notLocal: 'Account requires social login.',
+			notLocal: 'Account requires external login.',
 			wrongPassword: 'Wrong password.',
-			noUser: 'No user found.',
+			noLocalUser: 'No user registered with that email.',
+			noExternalUser: 'The account is not connected to this website.',
+			externalLoginFailed: 'External login failed.',
 			banned: 'User is banned.',
 			blocked: 'User is blocked due to too many login attempts.'
 		},
