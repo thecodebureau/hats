@@ -13,6 +13,7 @@ module.exports = function(config) {
 			noLocalUser: 'No user registered with that email.',
 			noExternalUser: 'The account is not connected to this website.',
 			externalLoginFailed: 'External login failed.',
+			unverified: 'This account has not been verified.',
 			banned: 'User is banned.',
 			blocked: 'User is blocked due to too many login attempts.'
 		},

@@ -11,7 +11,7 @@ function local(req, res, next) {
 		// message will only be set if passport strategy has encountered login
 		// error (not a coding error).
 		if (message) 
-			err = _401(err);
+			err = _401(message);
 
 		if(err)
 			return next(err);

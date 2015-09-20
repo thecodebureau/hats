@@ -2,6 +2,8 @@ var nodemailer = require('nodemailer');
 var passport = require('passport');
 
 module.exports = function(config, mongoose) {
+	var transport = nodemailer.createTransport(config.mail);
+
 	function getPermissions(req, email, callback) {
 		if (! req.body.roles) {
 			Invite.findOne({ email: email }, function (err, invite) {
@@ -39,6 +41,7 @@ module.exports = function(config, mongoose) {
 					return next(new Error('Incomplete body'));
 			}
 
+
 			User.findOne({ email: req.body.email }, function(err, user) {
 				if(err) next(err);
 
@@ -47,6 +50,7 @@ module.exports = function(config, mongoose) {
 					err.status = 409;
 					next(err);
 				} else {
+
 					req.body.email = req.body.email.toLowerCase();
 
 					var provider = _.pick(req.body, passport.providers);
@@ -73,16 +77,38 @@ module.exports = function(config, mongoose) {
 						newUser.roles = roles;
 
 						newUser.save(function(err) {
+							function respond() {
+								if(req.xhr) {
+									res.json(_.isEmpty(provider) ? null : _.omit(newUser.toJSON(), [ 'local' ].concat(passport.providers) ));
+								} else {
+									res.redirect('/registered');
+								}
+							}
+						
 							if(err) return next(err);
 
-							req.login(newUser, function(err) {
-								if(err) return next(err);
+							res.status(201);
 
-								res.status(201);
+							if(!_.isEmpty(provider)) {
+								newUser.isVerified = true;
+								req.login(newUser, respond);
+							} else {
+								res.data.ok = true;
+								newUser.generateVerificationCode();
+								res.render('emails/verify-email', { user: newUser }, function (err, html) {
+									transport.sendMail({
+										from: config.details.title + ' <' + config.mail.emails.robot + '>',
+										to: newUser.email,
+										subject: 'Verify ' + config.details.title + ' account',
+										html: html
+									}, function (err) {
+									 // TODO handle error... should not be sent
+									 if(err) return next(err);
 
-								res.data.user = _.omit(newUser.toJSON(), [ 'local', 'facebook' ]);
-								next();
-							});
+									 respond();
+									});
+								});
+							}
 						});
 					});
 				}
@@ -168,6 +194,34 @@ module.exports = function(config, mongoose) {
 		},
 
 		// middleware that checks if an email and reset code are valid
+		verify: function(req, res, next) {
+			User.findOne({ email: req.query.email, 'local.verificationCode': req.query.code }, function(err, user) {
+				if(err) return next(err);
+
+				if(!user) {
+					err = new Error('Verification code not found for user.');
+					err.status = 404;
+					err.details = req.query;
+					return next(err);
+				}
+
+				if(user.dateCreated.getTime() + 24 * 60 * 60 * 1000 < Date.now()) {
+					err = new Error('Verification code has expired.');
+					err.status = 410;
+					err.details = req.query;
+					return next(err);
+				}
+
+				user.isVerified = true;
+				delete user.local.verificationCode;
+				user.save(function() {
+					req.login(user, function() {
+						res.redirect('/registered');
+					});
+				});
+			});
+		},
+		// middleware that checks if an email and reset code are valid
 		checkReset: function(req, res, next) {
 			User.findOne({ email: req.query.email, 'local.reset.code': req.query.code }, function(err, user) {
 				if(err) return next(err);
@@ -208,10 +262,10 @@ module.exports = function(config, mongoose) {
 				res.render('emails/reset-password', { link: link }, function (err, html) {
 					if(err) next(err);
 
-					nodemailer.createTransport(config.mail).sendMail({
-						from: 'Doggy <' + config.mail.emails.robot + '>',
+					transport.sendMail({
+						from: config.details.title + ' <' + config.mail.emails.robot + '>',
 						to: user.email,
-						subject: 'Återställning av ditt Doggy Testpilot lösenord',
+						subject: 'Reset ' + config.details.title + ' password',
 						html: html
 					}, function (err) {
 					 // TODO handle error... should not be sent

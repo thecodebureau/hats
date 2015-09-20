@@ -26,8 +26,9 @@ module.exports = function(mongoose, schemas) {
 		givenName: String,
 		familyName: String,
 		roles: { type: [ { type: String } ], required: true, default: [ 'member' ] },
-		lastActivity: { type: Date, default: new Date() },
-		lastLogin: { type: Date, default: new Date() },
+		lastActivity: { type: Date },
+		lastLogin: { type: Date },
+		dateCreated: { type: Date, default: Date.now },
 		loginAttempts: { type: Number, default: 0 },
 		isActive: { type: Boolean, default: true },
 		isBanned: { type: Boolean, default: false },
@@ -44,6 +45,15 @@ module.exports = function(mongoose, schemas) {
 		this.save(function(err) {
 			// TODO send error to error handler
 			if(err) console.log(err);
+		});
+	};
+
+	UserSchema.methods.generateVerificationCode = function() {
+		this.local.verificationCode = crypto.createHash('sha512').update(Date.now() + this.email).digest('hex');
+
+		this.save(function(err) {
+			// TODO ensure response doesnt get sent twice
+			if(err) next(err);
 		});
 	};
 

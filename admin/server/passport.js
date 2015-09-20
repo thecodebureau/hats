@@ -69,6 +69,8 @@ module.exports = function(epiphany) {
 			if(user) {
 				if(!user.local || !user.local.password) {
 					message = config.messages.notLocal;
+				} else if (!user.isVerified) {
+					message = config.messages.unverified;
 				} else if (user.isBlocked) {
 					message = config.messages.blocked;
 				} else if (user.isBanned) {
