@@ -1,22 +1,25 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var req = require('http').IncomingMessage.prototype;
+var reqProto = require('http').IncomingMessage.prototype;
 
-req.hasRoles = function(roles) {
+reqProto.hasRoles = function(roles) {
 	if(!_.isArray(roles)) roles = [ roles ];
 
 	return this.isAuthenticated() && roles.every(this.user.hasRole);
 };
 
-req.isAdmin = function() {
+reqProto.isAdmin = function() {
 	return req.hasRoles([ 'admin' ]);
 };
 
-req._login = req.login;
+reqProto._login = reqProto.login;
 
-req.login = function(user) {
+reqProto.login = function(user, req) {
 	user.login();
+	if(this.session && this.session.newUser)
+		delete req.session.newUser;	
+
 	this._login.apply(this, arguments);
 };
 
