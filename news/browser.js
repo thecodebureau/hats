@@ -1,4 +1,5 @@
 module.exports = {
-	collections: require('./client/collections'),
-	models: require('./client/models')
+	collections: {
+		NewsArticles: require('./client/collections/news-articles')
+	}
 };
