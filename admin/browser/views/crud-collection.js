@@ -1,6 +1,6 @@
-module.exports = {
-	extends: 'Collection',
+var app = require('ridge');
 
+module.exports = require('ridge/views/collection').extend({
 	events: {
 		'click :has(.controls):not(.editing)': function(e) {
 			var view = _.findWhere(this.modelViews, { el: e.currentTarget });
@@ -12,12 +12,12 @@ module.exports = {
 	},
 
 	initialize: function() {
-		this.DefaultModelView = this.app.views.CrudModel;
+		this.DefaultModelView = app.views.CrudModel;
 
-		this.app.views.Collection.prototype.initialize.apply(this, arguments);
+		app.views.Collection.prototype.initialize.apply(this, arguments);
 
 		this.listenTo(this.collection, 'edit cancel', function() {
 			this.$('.editing').removeClass('editing');
 		});
 	}
-};
+});

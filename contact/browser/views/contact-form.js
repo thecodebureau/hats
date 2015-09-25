@@ -1,4 +1,6 @@
-module.exports = {
+var app = require('ridge');
+
+module.exports = require('ridge/view').extend({
 	events: {
 		'submit form': 'submit',
 	},
@@ -28,7 +30,7 @@ module.exports = {
 					if(_view.messageView)
 						_view.messageView.remove();
 
-					_view.messageView = new _view.app.views.Message({
+					_view.messageView = new app.views.Message({
 						message: message
 					});
 
@@ -40,7 +42,7 @@ module.exports = {
 					if(_view.messageView)
 						_view.messageView.remove();
 
-					_view.messageView = new _view.app.views.Message({
+					_view.messageView = new app.views.Message({
 						message: xhr.responseJSON
 					});
 
@@ -54,4 +56,4 @@ module.exports = {
 			});
 		}
 	}
-};
+});

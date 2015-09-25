@@ -25,7 +25,7 @@ var fncs = {
 	}
 };
 
-module.exports = {
+module.exports = require('ridge/view').extend({
 	events: {
 		'click button': 'stopPropagation',
 		'click button[data-command="block"]': 'block',
@@ -142,4 +142,4 @@ module.exports = {
 				this.model.fetch();
 			}
 	},
-};
+});

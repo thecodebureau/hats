@@ -1,6 +1,6 @@
-module.exports = {
-	extends: 'Model',
+var app = require('ridge');
 
+module.exports = require('ridge/views/model').extend({
 	events: {
 		'click': 'toggle'
 	},
@@ -8,7 +8,7 @@ module.exports = {
 	template: 'admin/models/error',
 
 	attach: function() {
-		this.app.views.Model.prototype.attach.apply(this, arguments);
+		app.views.Model.prototype.attach.apply(this, arguments);
 
 		this.$el.addClass(this.model.get('status') < 500 ? 'client' : 'server');
 
@@ -22,4 +22,4 @@ module.exports = {
 			this.elements.$info.toggleClass('visible');
 	}
 
-};
+});

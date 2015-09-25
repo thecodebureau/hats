@@ -1,10 +1,7 @@
-module.exports = {
+module.exports = require('ridge/view').extend({
 	events: {
 		'change [type="file"]': 'changeImage',
 		'click button[data-command="upload"]': 'upload'
-	},
-
-	initialize: function(options) {
 	},
 
 	attach: function() {
@@ -91,4 +88,4 @@ module.exports = {
 			}
 		});
 	}
-};
+});

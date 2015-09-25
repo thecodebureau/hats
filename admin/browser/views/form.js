@@ -1,6 +1,6 @@
-var Spytext = require('spytext');
+var app = require('ridge');
 
-module.exports = {
+module.exports = require('./crud-model').extend({
 	extends: 'CrudModel',
 
 	events: {
@@ -15,7 +15,7 @@ module.exports = {
 	attach: function() {
 		var _view = this;
 
-		_view.app.views.CrudModel.prototype.attach.apply(this, arguments);
+		app.views.CrudModel.prototype.attach.apply(this, arguments);
 
 		_view.elements.$form = this.$('form');
 
@@ -25,14 +25,14 @@ module.exports = {
 
 		_view.$('[data-spytext]').each(function(i, el) {
 			// TODO clear previous spytext fields
-			new _view.app.views.SpytextField({ el: el });
+			new app.views.SpytextField({ el: el });
 		});
 
 		_view.$('.image-upload').each(function() {
 			if(!_view.imageUploads) _view.imageUploads = [];
 
 			// TODO do we need to save reference for these views and remove when rerendering?
-			_view.imageUploads.push(new _view.app.views.ImageUpload({ el: this, model: _view.model }));
+			_view.imageUploads.push(new app.views.ImageUpload({ el: this, model: _view.model }));
 		});
 
 		_view.watch(true);
@@ -46,7 +46,7 @@ module.exports = {
 	setModel: function() {
 		var _view = this;
 
-		_view.app.views.CrudModel.prototype.setModel.apply(this, arguments);
+		app.views.CrudModel.prototype.setModel.apply(this, arguments);
 
 		if(_view.imageUploads) {
 			_view.imageUploads.forEach(function(imageUpload) {
@@ -64,4 +64,4 @@ module.exports = {
 	submit: function(e) {
 		e.preventDefault();
 	}
-};
+});

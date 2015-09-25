@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = require('ridge/model').extend({
 	defaults: {
 		'@type': 'Person',
 		address: {
@@ -9,4 +9,4 @@ module.exports = {
 	name: 'employee',
 
 	idAttribute: '_id'
-};
+});

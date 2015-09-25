@@ -1,4 +1,6 @@
-module.exports = {
+var app = require('ridge');
+
+module.exports = require('ridge/views/collection').extend({
 	events: {
 		'submit form.filter': 'filter',
 	},
@@ -6,14 +8,14 @@ module.exports = {
 	extends: 'Collection',
 
 	initialize: function() {
-		this.collection = new this.app.collections.Users(null, { 
+		this.collection = new app.collections.Users(null, { 
 			defaultFilter: {
 				_limit: 50,
 				_sort: '-dateCreated'
 			}
 		});
 
-		this.app.views.Collection.prototype.initialize.apply(this, arguments);
+		app.views.Collection.prototype.initialize.apply(this, arguments);
 	},
 
 	filter: function(e) {
@@ -27,4 +29,4 @@ module.exports = {
 
 		_view.collection.fetch({ reset: true });
 	}
-};
+});
