@@ -1,4 +1,6 @@
-<section class="content crud page" data-view="Crud" data-collection="Fields">
-	{>"admin/models/field-form"/}
+<section class="content new-crud page" data-view="ContentPage">
+	<header>
+		<h1>Content</h1>
+	</header>
 	{>"admin/models/fields"/}
 </section>

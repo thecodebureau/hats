@@ -1,13 +1,14 @@
 var app = require('ridge');
 
 module.exports = require('ridge/view').extend({
-	initialize: function() {
-		console.log('init content-item-page');
+	initialize: function(opts) {
 		var id = _.last(window.location.pathname.split('/'));
 
 		var collection = new app.collections.Fields();
 
-		console.log(id);
+		this.data = this.model.toJSON();
+		console.log(this.data);
+
 		if(id === 'new') {
 			this.model = collection.add({});
 		} else {

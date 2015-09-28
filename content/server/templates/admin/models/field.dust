@@ -4,7 +4,8 @@
 		<ul>
 			<li><strong>Created:</strong> <time property="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
 			<li><strong>Modified:</strong> <time property="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
+			<a class="nav" href="/admin/content/{_id}">Edit</a> 
 		</ul>
-		{>"admin/partials/model-view-controls"/}
+		{>"admin/partials/crud-collection-controls"/}
 	</header>
 </article>

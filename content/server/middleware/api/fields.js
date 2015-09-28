@@ -14,6 +14,8 @@ module.exports = function(config, mongoose) {
 	}
 
 	function findById(req, res, next) {
+		if(req.params.id === 'new') return next();
+
 		Field.findOne({ _id: req.params.id }).lean().exec(function (err, field) {
 			if (err) return next(err);
 
@@ -58,13 +60,13 @@ module.exports = function(config, mongoose) {
 	}
 
 	function remove(req, res, next) {
-		Field.remove({ _id: req.params.id }, function (err, count) {
+		Field.findByIdAndRemove(req.params.id, function (err, field) {
 			if (err) return next(err);
 
-			if (count > 0) 
+			if (field) {
 				res.status(204);
-			else 
-				res.status(410);
+				res.data.field = field;
+			}
 
 			return next();
 		});

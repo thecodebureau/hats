@@ -5,6 +5,8 @@ module.exports = function(mongoose, schemas, plugins) {
 		name: String,
 		path: String,
 		content: String,
+		radio: String,
+		check: Array,
 		draft: String
 	});
 

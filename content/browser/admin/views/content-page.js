@@ -4,7 +4,7 @@ module.exports = require('ridge/view').extend({
 	subviews: {
 		//CrudForm: '.form',
 		CrudCollection: {
-			el: '.collection',
+			selector: '.collection',
 			collection: 'Fields',
 			modelTemplate: 'admin/models/field'
 		}
@@ -12,5 +12,7 @@ module.exports = require('ridge/view').extend({
 
 	initialize: function() { 
 		console.log('hello good sir');
-	}
+		console.log(this.data);
+	},
+
 });
