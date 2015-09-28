@@ -26,6 +26,7 @@
 		</ul>
 	</div>
 
-	{>"admin/partials/model-view-controls"/}
+	{>"admin/partials/crud-collection-controls"/}
 
+	<a class="nav" href="/admin/employees/{_id}">Edit</a> 
 </article>

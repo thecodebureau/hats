@@ -1,0 +1,3 @@
+<section data-view="EmployeePage" class="employee page" >
+	{>"admin/models/employee-form"/}
+</section>

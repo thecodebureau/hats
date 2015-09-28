@@ -5,7 +5,7 @@
 		<div class="m-6">
 			<div>
 				<label for='givenName'>givenName</label>
-				<input type='text' property="givenName" value="{givenName}" required />
+				<input type='text' data-hook="givenName" name="givenName" value="{givenName}" required />
 			</div>
 			<div>
 				<label for='familyName'>Family Name</label>
