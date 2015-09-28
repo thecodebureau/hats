@@ -1,11 +1,9 @@
 var app = require('ridge');
 
-module.exports = require('ridge/views/collection').extend({
+module.exports = require('ridge/view').extend({
 	events: {
 		'submit form.filter': 'filter',
 	},
-
-	extends: 'Collection',
 
 	initialize: function() {
 		this.collection = new app.collections.Users(null, { 

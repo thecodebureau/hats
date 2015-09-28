@@ -1,6 +1,6 @@
 var app = require('ridge');
 
-module.exports = require('ridge/views/model').extend({
+module.exports = require('ridge/view').extend({
 	events: {
 		'click': 'toggle'
 	},

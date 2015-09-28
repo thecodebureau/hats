@@ -1,6 +1,6 @@
 var app = require('ridge');
 
-module.exports = require('ridge/views/collection').extend({
+module.exports = require('ridge/view').extend({
 	events: {
 		'change select[data-command="filter"]': 'errorType',
 		'click button[data-command="clear"]': 'clear'

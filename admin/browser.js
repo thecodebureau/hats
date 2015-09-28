@@ -7,12 +7,12 @@ module.exports = {
 	},
 
 	views: {
-		ModelControls: require('./browser/views/model-controls'),
-		ImageUpload: require('./browser/views/image-upload'),
-		Form: require('./browser/views/form'),
-		Crud: require('./browser/views/crud'),
-		CrudModel: require('./browser/views/crud-model'),
-		CrudCollection: require('./browser/views/crud-collection'),
+		//ModelControls: require('./browser/views/model-controls'),
+		//ImageUpload: require('./browser/views/image-upload'),
+		//CrudForm: require('./browser/views/crud-form'),
+		//Crud: require('./browser/views/crud'),
+		//CrudModel: require('./browser/views/crud-model'),
+		//CrudCollection: require('./browser/views/crud-collection'),
 		User: require('./browser/views/user'),
 		Users: require('./browser/views/users')
 	}
