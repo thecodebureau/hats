@@ -1,6 +1,11 @@
 var browser = require('./browser');
 
-var admin = {};
+var admin = {
+	views: {
+		ContentPage: require('./browser/admin/views/content-page'),
+		ContentItemPage: require('./browser/admin/views/content-item-page')
+	}
+};
 
 _.each(admin, function(value, key) {
 	if(browser[key]) _.extend(browser[key], admin[key]);
