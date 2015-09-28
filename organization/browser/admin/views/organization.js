@@ -9,7 +9,7 @@ module.exports = require('ridge/view').extend({
 		this.model = new app.models.Organization();
 		this.model.fetch({
 			success: function() {
-				new app.views.Form({ model: _view.model, el: _view.$('.form') });
+				new app.views.CrudForm({ model: _view.model, el: _view.$('.form') });
 			}
 		});
 	}

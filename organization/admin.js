@@ -2,7 +2,8 @@ var browser = require('./browser');
 
 var admin = {
 	views: {
-		Organization: require('./browser/admin/views/organization.js')
+		Organization: require('./browser/admin/views/organization'),
+		OrganizationPage: require('./browser/admin/views/organization-page')
 	}
 };
 
