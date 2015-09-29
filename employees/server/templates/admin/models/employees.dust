@@ -1,4 +1,4 @@
-<section data-view="Employees" class="collection employees">
+<section data-view="Employees" class="employees collection container">
 	{#employees}
 		{>"admin/models/employee"/}
 	{/employees}

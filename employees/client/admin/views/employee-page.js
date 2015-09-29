@@ -2,7 +2,6 @@ var app = require('ridge');
 
 module.exports = require('ridge/view').extend({
 	initialize: function(opts) {
-		console.log('init init');
 		var id = _.last(window.location.pathname.split('/'));
 
 		var collection = new app.collections.Employees();
@@ -22,10 +21,16 @@ module.exports = require('ridge/view').extend({
 			el: this.$('.form'),
 			model: this.model,
 			bindings: {
-				'givenName': {
-					type: 'value',
-					hook: 'givenName'
-				}
+				'givenName': 'value',
+				'familyName': 'value',
+				'email': 'value',
+				'telephone': 'value',
+				'jobTitle': 'value',
+				'address.streetAddress': 'value',
+				'address.postalCode': 'value',
+				'address.addressLocality': 'value',
+				'address.addressRegion': 'value',
+				'address.addressCountry': 'value'
 			}
 		});
 	},

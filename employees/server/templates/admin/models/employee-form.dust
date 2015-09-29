@@ -9,50 +9,50 @@
 			</div>
 			<div>
 				<label for='familyName'>Family Name</label>
-				<input type='text' property="familyName" value="{familyName}" required />
+				<input type='text' data-hook="familyName" name="familyName" value="{familyName}" required />
 			</div>
 			<div>
 				<label for='email'>Email</label>
-				<input type='text' property="email" value="{email}" required />
+				<input type='text' data-hook="email" name="email" value="{email}" required />
 			</div>
 			<div>
 				<label for='telephone'>Telephone</label>
-				<input type='text' property="telephone" value="{telephone}" required />
+				<input type='text' data-hook="telephone" name="telephone" value="{telephone}" required />
 			</div>
 			<div>
 				<label for='job-title'>Job Title</label>
-				<input type='text' property="jobTitle" value="{telephone}" required />
+				<input type='text' data-hook="jobTitle" name="jobTitle" value="{telephone}" required />
 			</div>
 		</div>
 		<div class="m-6">
-			<fieldset property="address" typeof="PostalAddress">
+			<fieldset>
 				<legend>Address</legend>
 				<div>
 					<label>streetAddress</label>
-					<input type="text" property="streetAddress" value="{address.streetAddress}" />
+					<input type="text" data-hook="address.streetAddress" name="address.streetAddress" value="{address.streetAddress}" />
 				</div>
 				<div>
 					<label>postalCode</label>
-					<input type="text" property="postalCode" value="{address.postalCode}" />
+					<input type="text" data-hook="postalCode" name="postalCode" value="{address.postalCode}" />
 				</div>
 				<div>
 					<label>Locality</label>
-					<input type="text" property="addressLocality" value="{address.addressLocality}" />
+					<input type="text" data-hook="address.addressLocality" name="address.addressLocality" value="{address.addressLocality}" />
 				</div>
 				<div>
 					<label>Region</label>
-					<input type="text" property="addressRegion" value="{address.addressRegion}" />
+					<input type="text" data-hook="address.addressRegion" name="address.addressRegion" value="{address.addressRegion}" />
 				</div>
 				<div>
 					<label>Country</label>
-					<input type="text" property="addressCountry" value="{address.addressCountry}" />
+					<input type="text" data-hook="address.addressCountry" name="address.addressCountry" value="{address.addressCountry}" />
 				</div>
 			</fieldset>
 		</div>
 	</div>
 	<div>
 		<label>Description</label>
-		<div data-sayer property="description"></div>
+		<div data-spytext data-hook="description" name="description"></div>
 	</div>
 	<div>
 		{>"admin/partials/image-upload":image property="image" type="employee" maxWidth="1024" mediumWidth="600" thumbWidth="300" /}

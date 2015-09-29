@@ -33,11 +33,13 @@ module.exports = function(config, mongoose) {
 		},
 
 		update: function(req, res, next) {
-			return Employee.findById(req.params.id, function(err, employee) {
-				delete req.body._id;
-				delete req.body.__v;
 
-				_.extend(employee, req.body);
+			return Employee.findById(req.params.id, function(err, employee) {
+				_.difference(_.keys(employee.toObject()), _.keys(req.body)).forEach(function(key) {
+					employee[key] = undefined;
+				});
+
+				_.extend(employee, _.omit(req.body, '_id', '__v'));
 
 				return employee.save(function(err) {
 					if(err) return next(err);

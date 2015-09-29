@@ -1,4 +1,4 @@
-<article class='event' vocab="http://schema.org" typeof="Event" data-published="{?datePublished}true{:else}false{/datePublished}">
+<div class="employee model" data-published="{?datePublished}true{:else}false{/datePublished}">
 	<header>
 		<h1 ><span property="givenName">{givenName}</span> <span property="familyName">{familyName}</span></h1>
 		<ul>
@@ -27,6 +27,4 @@
 	</div>
 
 	{>"admin/partials/crud-collection-controls"/}
-
-	<a class="nav" href="/admin/employees/{_id}">Edit</a> 
-</article>
+</div>

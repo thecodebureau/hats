@@ -1,3 +1,3 @@
-<section data-view="EmployeePage" class="employee page" >
+<section data-view="EmployeePage" class="employee form page" >
 	{>"admin/models/employee-form"/}
 </section>
