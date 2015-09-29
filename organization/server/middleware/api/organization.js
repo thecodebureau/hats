@@ -10,10 +10,11 @@ module.exports = function(config, mongoose) {
 
 		update: function(req, res, next) {
 			Organization.findOne({}, function(err, organization) {
-				delete req.body._id;
-				delete req.body.__v;
+				_.difference(_.keys(organization.toObject()), _.keys(req.body)).forEach(function(key) {
+					organization[key] = undefined;
+				});
 
-				_.extend(organization, req.body);
+				_.extend(organization, _.omit(req.body, '_id', '__v'));
 
 				return organization.save(function(err) {
 					if(err) return next(err);
