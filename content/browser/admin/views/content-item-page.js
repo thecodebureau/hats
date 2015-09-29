@@ -7,7 +7,6 @@ module.exports = require('ridge/view').extend({
 		var collection = new app.collections.Fields();
 
 		this.data = this.model.toJSON();
-		console.log(this.data);
 
 		if(id === 'new') {
 			this.model = collection.add({});

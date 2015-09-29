@@ -1,4 +1,4 @@
-<section class="content-item item page" data-view="ContentItemPage">
+<section class="content-item form page" data-view="ContentItemPage">
 	<header>
 		<h1>Content</h1>
 	</header>

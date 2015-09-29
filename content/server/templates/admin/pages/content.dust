@@ -1,4 +1,4 @@
-<section class="content new-crud page" data-view="ContentPage">
+<section class="content collection page" data-view="ContentPage">
 	<header>
 		<h1>Content</h1>
 	</header>

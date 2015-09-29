@@ -34,7 +34,7 @@
 			<button>Search</button>
 		</div>
 	</form>
-	<div class="models">
+	<div class="container">
 	{#fields}
 		{>"admin/models/field"/}
 	{/fields}

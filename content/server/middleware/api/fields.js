@@ -14,8 +14,6 @@ module.exports = function(config, mongoose) {
 	}
 
 	function findById(req, res, next) {
-		if(req.params.id === 'new') return next();
-
 		Field.findOne({ _id: req.params.id }).lean().exec(function (err, field) {
 			if (err) return next(err);
 
