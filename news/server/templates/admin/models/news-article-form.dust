@@ -3,11 +3,11 @@
 <form enctype="multipart/form-data" class="col flex">
 	<div>
 		<label for="headline">Headline</label>
-		<input type="text" property="headline" placeholder="Headline" value="{headline}"/>
+		<input type="text" data-hook="headline" name="headline" placeholder="Headline" value="{headline}"/>
 	</div>
 	<div>
 		<label for="articleBody">Article Body</label>
-		<div data-spytext property="articleBody">{articleBody|s}</div>
+		<div data-spytext data-hook="articleBody" name="articleBody">{articleBody|s}</div>
 	</div>
 	{>"admin/partials/image-upload":image property="image" type="news" maxWidth="1024" mediumWidth="600" thumbWidth="300" ratio="1.61803398875" /}
 </form>

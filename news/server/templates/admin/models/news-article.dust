@@ -16,5 +16,5 @@
 		<div property="articleBody">{articleBody|s}</div>
 	</div>
 
-	{>"admin/partials/model-view-controls"/}
+	{>"admin/partials/crud-collection-controls"/}
 </article>

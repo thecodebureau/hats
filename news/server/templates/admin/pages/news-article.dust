@@ -1,0 +1,3 @@
+<section data-view="NewsArticlePage" class="news-article form page" >
+	{>"admin/models/news-article-form"/}
+</section>

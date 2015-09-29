@@ -64,11 +64,14 @@ module.exports = function(config, mongoose) {
 
 			query[mongoose.Types.ObjectId.isValid(req.params.id) ? '_id' : '_hid'] = req.params.id;
 
+			console.log(req.body);
 			NewsArticle.findOne(query, function(err, newsArticle) {
-				delete req.body._id;
-				delete req.body.__v;
+				_.difference(_.keys(newsArticle.toObject()), _.keys(req.body)).forEach(function(key) {
+					console.log(key);
+					newsArticle[key] = undefined;
+				});
 
-				_.extend(newsArticle, req.body);
+				_.extend(newsArticle, _.omit(req.body, '_id', '__v'));
 
 				return newsArticle.save(function(err) {
 					if(err) return next(err);

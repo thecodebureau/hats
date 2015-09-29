@@ -1,7 +1,10 @@
 var browser = require('./browser');
 
 var admin = {
-	//views: require('./client/admin/views')
+	views: {
+		NewsPage: require('./client/admin/views/news-page'),
+		NewsArticlePage: require('./client/admin/views/news-article-page'),
+	}
 };
 
 _.each(admin, function(value, key) {

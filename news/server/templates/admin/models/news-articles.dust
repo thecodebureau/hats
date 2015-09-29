@@ -1,4 +1,6 @@
-<section class="collection news-articles">{#newsArticles}
-	<h1>News Articles</h1>
-	{>"admin/models/news-article"/}
-{/newsArticles}</section>
+<section class="collection news-articles">
+	{#newsArticles}
+		<h1>News Articles</h1>
+		{>"admin/models/news-article"/}
+	{/newsArticles}
+</section>
