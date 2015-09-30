@@ -6,8 +6,8 @@ module.exports = function(mw, config) {
 		[ 'get', '/', mw.findAll ],
 		[ 'post', '/', [ isAuthenticated, mw.create ]],
 		[ 'get', '/:id', mw.findById ],
-		[ 'put', '/:id', [ isAuthenticated, mw.update ]],
-		[ 'patch', '/:id', [ isAuthenticated, mw.update ]],
+		[ 'put', '/:id', [ isAuthenticated, mw.put ]],
+		[ 'patch', '/:id', [ isAuthenticated, mw.patch ]],
 		[ 'delete', '/:id', [ isAuthenticated, mw.remove ]]
 	];
 };

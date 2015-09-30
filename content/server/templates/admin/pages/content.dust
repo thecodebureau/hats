@@ -1,6 +1,7 @@
 <section class="content collection page" data-view="ContentPage">
 	<header>
 		<h1>Content</h1>
+		<a class="button new nav" href="/admin/content/new">New Content</a>
 	</header>
 	{>"admin/models/fields"/}
 </section>

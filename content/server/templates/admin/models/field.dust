@@ -1,10 +1,13 @@
-<div class="field model">
+<a class="field model nav" href="/admin/content/{_id}">
 	<header>
 		<h1><span property="path">{path}</span>: <span property="name">{name}</span></h1>
 		<ul>
 			<li><strong>Created:</strong> <time property="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
 			<li><strong>Modified:</strong> <time property="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
 		</ul>
-		{>"admin/partials/crud-collection-controls"/}
 	</header>
-</div>
+
+	<div class="controls">
+		<button data-command="delete" class="delete">Delete</button>
+	</div>
+</a>

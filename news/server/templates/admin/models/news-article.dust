@@ -1,10 +1,10 @@
-<article class='model news-article' data-published="{?datePublished}true{:else}false{/datePublished}" vocab="http://schema.org" typeof="NewsArticle">
+<a href="/admin/news/{_id}" class='news-article model nav {?datePublished}published{:else}unpublished{/datePublished}'>
 	<header>
 		<h1 property="headline">{headline}</h1>
 		<ul>
-			<li><strong>Created:</strong> <time property="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
-			<li><strong>Modified:</strong> <time property="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
-			<li><strong>Published:</strong> <time pubdate property="datePublished" datetime="{datePublished}">{?datePublished}{datePublished|d_datetime}{:else}N/A{/datePublished}</time></li>
+			<li><strong>Created:</strong> <time data-hook="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
+			<li><strong>Modified:</strong> <time data-hook="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
+			<li><strong>Published:</strong> <time pubdate data-hook="datePublished" datetime="{datePublished}">{?datePublished}{datePublished|d_datetime}{:else}N/A{/datePublished}</time></li>
 		</ul>
 	</header>
 
@@ -16,5 +16,8 @@
 		<div property="articleBody">{articleBody|s}</div>
 	</div>
 
-	{>"admin/partials/crud-collection-controls"/}
-</article>
+	<div class="controls">
+		{?datePublished}<button data-command="unpublish" class="publish">Unpublish</button>{:else}<button data-command="publish" class="publish">Publish</button>{/datePublished}
+		<button data-command="delete" class="delete">Delete</button>
+	</div>
+</a>
