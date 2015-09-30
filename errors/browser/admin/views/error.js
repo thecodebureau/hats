@@ -1,20 +1,34 @@
 var app = require('ridge');
 
-module.exports = require('ridge/view').extend({
+module.exports = require('ridge/views/crud-model').extend({
 	events: {
-		'click': 'toggle'
+		'click': 'toggle',
+		'click button': function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		},
+		'click button[data-command="publish"]': 'publish',
+		'click button[data-command="unpublish"]': 'unpublish',
+		'click button[data-command="delete"]': 'delete'
+	},
+
+	delete: function(e) {
+		this.model.destroy();
+		this.remove();
+	},
+
+	initialize: function(options) {
+		this.listenTo(this.model, 'destroy', this.remove);
 	},
 
 	template: 'admin/models/error',
 
 	attach: function() {
-		app.views.Model.prototype.attach.apply(this, arguments);
+		app.views.CrudModel.prototype.attach.apply(this, arguments);
 
-		this.$el.addClass(this.model.get('status') < 500 ? 'client' : 'server');
-
-		if(!this.elements) this.elements = {};
-
-		this.elements.$info = this.$('.info');
+		this.elements = {
+			$info: this.$('.info')
+		};
 	},
 
 	toggle: function() {

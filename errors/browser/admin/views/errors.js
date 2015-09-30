@@ -9,13 +9,12 @@ module.exports = require('ridge/view').extend({
 	initialize: function() {
 		this.collection = new app.collections.Errors();
 
-		app.views.Collection.prototype.initialize.apply(this, arguments);
+		this.listenTo(this.collection, 'reset', this.reset);
 	},
 
 	attach: function() {
-		app.views.Collection.prototype.attach.apply(this, arguments);
-
-		this.elements.$count = this.$('.count > .value');
+		this.container = this.$('.container');
+		this.collection.fetch({ reset: true });
 	},
 
 	clear: function(e) {
@@ -27,6 +26,16 @@ module.exports = require('ridge/view').extend({
 			model.destroy({ silent: true });
 		}
 		this.elements.$count.text(this.collection.length);
+	},
+
+	reset: function (models, options) {
+		models.each(this.renderModel, this);
+	},
+
+	renderModel: function(model) {
+		new app.views.Error({
+			model: model
+		}).enter(this.container);
 	},
 
 	errorType: function(e) {

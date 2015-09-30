@@ -1,4 +1,4 @@
-<article class='model error {status}'>
+<div class='model error' data-status="{status}">
 	<div class="summary">
 		<div class="date-created">{dateCreated|d_datetime}</div>
 		<div class="name">{name}</div>
@@ -20,4 +20,4 @@
 		{?description}<p class="description">{description}</p>{/description}
 		{?stack}<pre class="stack">{stack}</pre>{/stack}
 	</div>
-</article>
+</div>

@@ -8,8 +8,10 @@
 		</select>
 		<div class="count">Found <span class="value">0</span> errors.<div>
 		<button data-command="clear">Clear</button>
-		{#errors}
-			{>"admin/models/error"/}
-		{/errors}
+		<div class="container">
+			{#errors}
+				{>"admin/models/error"/}
+			{/errors}
+		</div>
 	</div>
 </section>
