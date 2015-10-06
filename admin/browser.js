@@ -7,7 +7,7 @@ module.exports = {
 	},
 
 	views: {
-		//ModelControls: require('./browser/views/model-controls'),
+		Navigation: require('./browser/views/navigation'),
 		//ImageUpload: require('./browser/views/image-upload'),
 		//CrudForm: require('./browser/views/crud-form'),
 		//Crud: require('./browser/views/crud'),
