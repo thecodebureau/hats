@@ -6,9 +6,7 @@ module.exports = require('ridge/view').extend({
 	onRouteChange: function(route, name, params) {
 		this.$('li.current').removeClass('current');
 
-		var path = params[0].split('/');
-
-		path.shift();
+		var path = Backbone.history.fragment.split('?')[0].split('/');
 
 		path[0] = path[0] || 'dashboard';
 
