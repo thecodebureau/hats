@@ -103,7 +103,7 @@ module.exports = function(config, mongoose) {
 				if(err) return next(err);
 				return newsArticle.remove(function(err) {
 					if(err) return next(err);
-					return res.sendStatus(200);
+					return res.sendStatus(204);
 				});
 			});
 		},
