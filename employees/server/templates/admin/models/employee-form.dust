@@ -33,7 +33,7 @@
 				</div>
 				<div>
 					<label>postalCode</label>
-					<input type="text" data-hook="postalCode" name="postalCode" value="{address.postalCode}" />
+					<input type="text" data-hook="address.postalCode" name="address.postalCode" value="{address.postalCode}" />
 				</div>
 				<div>
 					<label>Locality</label>

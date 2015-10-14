@@ -2,9 +2,9 @@
 	<header>
 		<h1 property="headline">{headline}</h1>
 		<ul>
-			<li><strong>Created:</strong> <time data-hook="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
-			<li><strong>Modified:</strong> <time data-hook="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
-			<li><strong>Published:</strong> <time pubdate data-hook="datePublished" datetime="{datePublished}">{?datePublished}{datePublished|d_datetime}{:else}N/A{/datePublished}</time></li>
+			<li><strong>Created:</strong> <time data-hook="dateCreated" datetime="{dateCreated}">{dateCreated|tz_default|utc_datetime_tz}</time></li>
+			<li><strong>Modified:</strong> <time data-hook="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|tz_default|utc_datetime_tz}{:else}N/A{/dateModified}</time></li>
+			<li><strong>Published:</strong> <time pubdate data-hook="datePublished" datetime="{datePublished}">{?datePublished}{datePublished|tz_default|utc_datetime_tz}{:else}N/A{/datePublished}</time></li>
 		</ul>
 	</header>
 
