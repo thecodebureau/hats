@@ -1,0 +1,32 @@
+<section class="image-upload" typeof="ImageObject"{?property} property="{property}"{/property} data-options="type={type},max={maxWidth},medium={mediumWidth},thumb={thumbWidth},ratio={ratio}">
+	<h1>Image</h1>
+	<div class="current">
+		<figure><img data-hook="image.thumbUrlPath" src="{image.thumbUrlPath}" /></figure>
+		<ul>
+			<li><strong>Basename:</strong> <span data-hook="image.basename">{image.basename}</li>
+			<!--<li><strong>Path:</strong> <span property="path">{path}</li>-->
+			<li><strong>Ext:</strong> <span data-hook="image.ext">{image.ext}</li>
+			<li><strong>Mime:</strong> <span data-hook="image.mime">{image.mime}</li>
+			<li><strong>Content Size:</strong> <span data-hook="image.contentSize">{image.contentSize}</li>
+			<li><strong>Upload Date:</strong> <span data-hook="image.uploadDate">{image.uploadDate}</li>
+			<li><strong>Dimensions:</strong> <span data-hook="image.width">{width}</span> x <span data-hook="image.height">{image.height}</span></li>
+			{?thumbnail}
+			<li>Thumbnail
+				<ul>
+					<li><strong>Content Size:</strong> <span data-hook="contentSize">{contentSize}</li>
+					<li><strong>Width:</strong> <span data-hook="width">{width}</li>
+					<li><strong>Height:</strong> <span data-hook="height">{height}</li>
+				</ul>
+			</li>
+			{/thumbnail}
+		</ul>
+		<label for="caption">Caption</label>
+		<input type="text" data-hook="image.caption" {^filename}disabled {/filename}value="{caption}"/>
+	</div>
+	<div class="upload">
+		<h2>Upload new image</h2>
+		<figure></figure>
+		<input type="file" />
+		<button type="button" data-command="upload" disabled>Upload</button>
+	</div>
+</section>
