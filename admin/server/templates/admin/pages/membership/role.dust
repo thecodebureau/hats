@@ -1,0 +1,3 @@
+<section data-view="RolePage" class="form page roles">
+	{>"admin/models/role-form"/}
+</section>

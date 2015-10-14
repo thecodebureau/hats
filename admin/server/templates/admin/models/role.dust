@@ -1,6 +1,7 @@
-<article class="role" id="{_id}">
+<div class="role model">
 	<div class="name">{name}</div>
 	<div class="controls">
+		<a href="/admin/membership/roles/{_id}" data-command="edit" class="button"></a>
 		<button data-command="delete" class="delete">Delete</button>
 	</div>
-</article>
+</div>

@@ -4,11 +4,11 @@
 	<div class="server error"></div>
 	<div>
 		<label>Regex</label>
-		<input type="text" property="regex" />
+		<input type="text" data-hook="regex" name="regex" />
 	</div>
 	<div>
 		{#roles}
-			<input type="checkbox" property="roles" value="{name}" />{name}
+			<input type="checkbox" data-hook="roles" name="roles" value="{name}" />{name}
 		{/roles}
 	</div>
 </form>

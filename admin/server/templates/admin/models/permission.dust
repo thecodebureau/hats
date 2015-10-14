@@ -1,4 +1,4 @@
-<article class="item" id="{_id}">
+<div class="permission model">
 	<div class="regex">{regex}</div>
 		<div class="roles">
 		{#roles}
@@ -6,6 +6,7 @@
 		{/roles}
 	</div>
 	<div class="controls">
+		<a href="/admin/membership/permissions/{_id}" data-command="edit" class="button"></a>
 		<button data-command="delete" class="delete">Delete</button>
 	</div>
-</article>
+</div>

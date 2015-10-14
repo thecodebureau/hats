@@ -12,6 +12,15 @@ module.exports = function(config, mongoose) {
 			});
 		},
 
+		findById: function (req, res, next) {
+			Permission.findById(req.params.id, function (err, permission) {
+				if (err) return next(err);
+
+				res.status(200).data.permission = permission;
+				next();
+			});
+		},
+
 		findAll: function (req, res, next) {
 			Permission.find({}, function (err, permissions) {
 				if (err) return next(err);
@@ -32,14 +41,34 @@ module.exports = function(config, mongoose) {
 			});
 		},
 
+		put: function(req, res, next) {
+			var query = {};
+
+			Permission.findById(req.params.id, function(err, permission) {
+				_.difference(_.keys(permission.toObject()), _.keys(req.body)).forEach(function(key) {
+					permission[key] = undefined;
+				});
+
+				_.extend(permission, _.omit(req.body, '_id', '__v'));
+
+				return permission.save(function(err) {
+					if(err) return next(err);
+
+					return res.status(200).json(permission);
+				});
+			});
+		},
+		
+
 		remove: function (req, res, next) {
 			Permission.remove({ _id: req.params.id }, function (err, count) {
 				if (err) return next(err);
 
-				if (count > 0)
-					res.status(200);
-				else
-					res.status(410);
+				if (count > 0) {
+					res.data.ok = true;
+					res.status(204);
+				} else
+					res.status(404);
 
 				return next();
 			});

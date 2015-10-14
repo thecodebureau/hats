@@ -2,7 +2,8 @@
 {<form}
 <form>
 	<div>
-		<input type="text" property="name" />
+		<label>Name</label>
+		<input type="text" data-hook="name" name="name" />
 	</div>
 </form>
 {/form}

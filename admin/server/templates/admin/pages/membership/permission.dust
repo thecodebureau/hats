@@ -1,0 +1,3 @@
+<section data-view="PermissionPage" class="permission form page">
+	{>"admin/models/permission-form"/}
+</section>
