@@ -20,27 +20,22 @@
 	
 </head>
 
+<!--
 <header>
 	<div class="company">
 		<h1>{title} Admin : <span class="page">{page}</span></h1>
 	</div>
 	{>"admin/partials/user-box"/}
 </header>
+-->
 
 <div class="container">
-	{>"partials/navigation":navigation page=page /}
+	<div class="left">
+		<div class="logo"></div>
+		{>"partials/navigation":navigation page=page /}
+	</div>
 
-	<main>
-
-	{?error}
-		{>"error"/}
-	{:else}
-		{?template}
-			{>"{template}"/}
-		{/template}
-	{/error}
-
-	</main>
+	<main></main>
 </div>
 
 </body>
