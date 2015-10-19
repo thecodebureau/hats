@@ -3,6 +3,14 @@ module.exports = require('ridge/view').extend({
 		this.listenTo(Backbone.history, 'route', this.onRouteChange);
 	},
 
+	attach: function() {
+		console.log('attach admin nav');
+		this.$('ul ul').each(function() {
+			$(this).css('height', this.scrollHeight + 'px');
+		});
+
+	},
+
 	onRouteChange: function(route, name, params) {
 		this.$('li.current').removeClass('current');
 
