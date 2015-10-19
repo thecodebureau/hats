@@ -4,7 +4,7 @@
 		
 	<title>{title} Admin</title>
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="/css/admin/main.css" />
+	<link rel="stylesheet" type="text/css" href="/css/admin/main{css.suffix}.css" />
 	<link rel="shortcut icon" href="/favicon.png">
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -15,8 +15,8 @@
 			document.documentElement.className = 'IE11';
 		}
 	</script>
-	<script src="/js/common.js"></script>
-	<script src="/js/admin.js"></script>
+	<script src="/js/common{js.suffix}.js"></script>
+	<script src="/js/admin{js.suffix}.js"></script>
 	
 </head>
 
