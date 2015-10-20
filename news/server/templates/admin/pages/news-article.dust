@@ -1,3 +1,13 @@
 <section data-view="NewsArticlePage" class="news-article form page" >
-	{>"admin/models/news-article-form"/}
+	<header>
+		<h1>News Article</h1>
+		<div class="controls">
+			<button data-command="save" class="save base" title="Save">Save</button>
+			<button data-command="create" class="create base" title="Create">Create</button>
+			<button data-command="reset" type="button" class="reset red" title="Reset Form">Clear form</button>
+		</div>
+	</header>
+	<div class="content">
+		{>"admin/models/news-article-form"/}
+	</div>
 </section>

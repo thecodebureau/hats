@@ -1,11 +1,29 @@
 var app = require('ridge');
 
-module.exports = require('ridge/view').extend({
+View = require('ridge/view').extend();
+
+_.extend(View.prototype, require('ridge/mixins/observe'), {
+	events: {
+		'submit': 'preventDefault'
+	},
+
+	subviews: {
+		SpytextField: '[data-spytext]',
+		ImageUpload: '.image-upload',
+		ModelControls: '.controls'
+	},
+
+	bindings: {
+		'headline': 'value',
+		'articleBody': 'html'
+	},
+
 	initialize: function(opts) {
 		var id = _.last(window.location.pathname.split('/'));
 
 		var collection = new app.collections.NewsArticles();
 
+		// save page model data
 		this.data = this.model.toJSON();
 
 		if(id === 'new') {
@@ -17,13 +35,8 @@ module.exports = require('ridge/view').extend({
 	},
 
 	attach: function() {
-		this.formView = new app.views.CrudForm({ 
-			el: this.$('.form'),
-			model: this.model,
-			bindings: {
-				'headline': 'value',
-				'articleBody': 'html'
-			}
-		});
+		this.observe();
 	},
 });
+
+module.exports = View;

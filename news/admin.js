@@ -4,6 +4,7 @@ var admin = {
 	views: {
 		NewsPage: require('./client/admin/views/news-page'),
 		NewsArticlePage: require('./client/admin/views/news-article-page'),
+		NewsArticle: require('./client/admin/views/news-article')
 	}
 };
 

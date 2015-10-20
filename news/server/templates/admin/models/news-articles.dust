@@ -1,4 +1,4 @@
-<section class="collection news-articles">
+<section class="news-articles collection list container">
 	{#newsArticles}
 		{>"admin/models/news-article"/}
 	{/newsArticles}
