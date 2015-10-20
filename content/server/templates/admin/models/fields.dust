@@ -1,4 +1,5 @@
-<section class="fields collection">
+<section class="fields list collection container">
+	<!--
 	<form class="filter">
 		<div class="row collapse">
 			<div class="m-4">
@@ -37,4 +38,5 @@
 	<div class="container">{#fields}
 		{>"admin/models/field"/}
 	{/fields}</div>
+	-->
 </section>
