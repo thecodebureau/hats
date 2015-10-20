@@ -1,3 +1,5 @@
-<section data-view="Employees" class="employees collection container">{#employees}
+<section data-view="Employees" class="employees list collection container">
+	{#employees}
 		{>"admin/models/employee"/}
-	{/employees}</section>
+	{/employees}
+</section>

@@ -1,10 +1,10 @@
-<a class="employee model nav {?datePublished}published{:else}unpublished{/datePublished}" href="/admin/employees/{_id}">
+<div class="employee item model {?datePublished}published{:else}unpublished{/datePublished}">
 	<header>
-		<h1 ><span property="givenName">{givenName}</span> <span property="familyName">{familyName}</span></h1>
+		<h1><a href="/admin/employees/{_id}"><span property="givenName">{givenName}</span> <span property="familyName">{familyName}</span></a></h1>
 		<ul>
-			<li><strong>Created:</strong> <time property="dateCreated" datetime="{dateCreated}">{dateCreated|tz_default|utc_datetime_tz}</time></li>
-			<li><strong>Modified:</strong> <time property="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|tz_default|utc_datetime_tz}{:else}N/A{/dateModified}</time></li>
-			<li><strong>Published:</strong> <time pubdate property="datePublished" datetime="{datePublished}">{?datePublished}{datePublished|tz_default|utc_datetime_tz}{:else}N/A{/datePublished}</time></li>
+			<li><strong>Created:</strong> <time property="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
+			<li><strong>Modified:</strong> <time property="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
+			<li><strong>Published:</strong> <time pubdate property="datePublished" datetime="{datePublished}">{?datePublished}{datePublished|d_datetime}{:else}N/A{/datePublished}</time></li>
 		</ul>
 	</header>
 
@@ -26,5 +26,8 @@
 		</ul>
 	</div>
 
-	{>"admin/partials/crud-collection-controls"/}
-</a>
+	<div class="controls">
+		{?datePublished}<button data-command="unpublish" class="publish orange" title="Unpublish">Unpublish</button>{:else}<button data-command="publish" class="publish base" title="Publish">Publish</button>{/datePublished}
+		<button data-command="delete" class="delete red" title="Delete">Delete</button>
+	</div>
+</div>

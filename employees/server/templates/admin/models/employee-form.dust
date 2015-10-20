@@ -1,5 +1,3 @@
-{>"admin/layouts/form"/}
-{<form}
 <form>
 	<div class="row">
 		<div class="m-6">
@@ -52,10 +50,9 @@
 	</div>
 	<div>
 		<label>Description</label>
-		<div data-spytext data-hook="description" name="description"></div>
+		<div data-spytext data-hook="description" name="description">{description|s}</div>
 	</div>
 	<div>
 		{>"admin/partials/image-upload":image property="image" type="employee" maxWidth="1024" mediumWidth="600" thumbWidth="300" /}
 	</div>
 </form>
-{/form}

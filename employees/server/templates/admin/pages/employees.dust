@@ -1,7 +1,9 @@
 <section data-view="EmployeesPage" class="employees collection page" >
 	<header>
 		<h1>Employees</h1>
-		<a class="button new nav" href="/admin/employees/new">New Employee</a>
+		<a class="button new base" href="/admin/employees/new">New Employee</a>
 	</header>
-	{>"admin/models/employees"/}
+	<div class="content">
+		{>"admin/models/employees"/}
+	</div>
 </section>
