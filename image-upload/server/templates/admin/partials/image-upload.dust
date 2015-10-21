@@ -21,12 +21,12 @@
 			{/thumbnail}
 		</ul>
 		<label for="caption">Caption</label>
-		<input type="text" data-hook="image.caption" {^filename}disabled {/filename}value="{caption}"/>
+		<input type="text" data-hook="image.caption" value="{caption}"/>
 	</div>
 	<div class="upload">
 		<h2>Upload new image</h2>
 		<figure></figure>
 		<input type="file" />
-		<button type="button" data-command="upload" disabled>Upload</button>
+		<button type="button" data-command="upload" class="upload base" disabled>Upload</button>
 	</div>
 </section>

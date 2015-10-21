@@ -27,7 +27,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	attach: function() {
-		this.property = this.$el.attr('property') || 'image';
+		this.property = this.$el.attr('property');
 
 		this.options = _.compact(this.$el.attr('data-options').split(',').map(function(val) {
 			var arr = _.compact(val.split('='));
@@ -65,10 +65,12 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 
 		_view.model = model;
 
-		_view.elements.uploadFigure.children().remove();
-		_view.elements.fileInput.val(null);
-		_view.elements.uploadButton.prop('disabled', true);
-		_view.elements.captionInput.prop('disabled', false);
+		var elements = this.elements;
+
+		elements.uploadFigure.children().remove();
+		elements.fileInput.val(null);
+		elements.uploadButton.prop('disabled', true);
+		elements.captionInput.prop('disabled', false);
 	},
 
 	upload: function() {
@@ -76,7 +78,8 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 			formData = new FormData(),
 			urlEncoded = this.options.map(function(arr) {
 				return arr.join('=');
-			}).join('&');
+			}).join('&'),
+			elements = this.elements;
 
 		formData.append('image', this.elements.fileInput[0].files[0]);
 
@@ -87,16 +90,15 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 			contentType: false,
 			processData: false,
 			success: function(res) {
-				console.log(res);
 				if(view.property)
 					view.model.set(view.property, res.image);
 				else 
 					view.model.set(res.image);
 
-				view.elements.fileInput.val(null);
-				view.elements.uploadButton.prop('disabled', true);
-				view.elements.uploadFigure.children().remove();
-				view.elements.captionInput.prop('disabled', false);
+				elements.fileInput.val(null);
+				elements.uploadButton.prop('disabled', true);
+				elements.uploadFigure.children().remove();
+				elements.captionInput.prop('disabled', false);
 			},
 			error: function(xhr, statusText, error) {
 
