@@ -1,6 +1,6 @@
 var app = require('ridge');
 
-module.exports = require('ridge/views/crud-model').extend({
+module.exports = require('ridge/view').extend({
 	events: {
 		'click': 'toggle',
 		'click button': function(e) {
