@@ -28,8 +28,6 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	initialize: function(opts) {
 		var id = _.last(window.location.pathname.split('/'));
 
-		var collection = new app.collections.Employees();
-
 		// save page model data
 		this.data = this.model.toJSON();
 
