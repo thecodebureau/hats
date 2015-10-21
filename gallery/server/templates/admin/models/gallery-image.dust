@@ -1,9 +1,12 @@
-<article class='news-article' vocab="http://schema.org" typeof="ImageObject" data-published="{?datePublished}true{:else}false{/datePublished}">
+<div class="news-article item model" data-published="{?datePublished}true{:else}false{/datePublished}">
 	<figure typeof="ImageObject">
-		<img property="thumbUrlPath" src="{thumbUrlPath}" />
+		<a href="/admin/gallery/{_id}"><img property="thumbUrlPath" src="{thumbUrlPath}" /></a>
 		<figcaption property="caption">{caption}</figcaption>
 	</figure>
 	<time pubdate property="datePublished">{datePublished|d_datetime}</time>
 
-	{>"admin/partials/model-view-controls"/}
-</article>
+	<div class="controls">
+		{?datePublished}<button data-command="unpublish" class="publish orange" title="Unpublish">Unpublish</button>{:else}<button data-command="publish" class="publish base" title="Publish">Publish</button>{/datePublished}
+		<button data-command="delete" class="delete red" title="Delete">Delete</button>
+	</div>
+</div>

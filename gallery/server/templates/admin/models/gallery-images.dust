@@ -1,3 +1,5 @@
-<section data-view="GalleryImages" class="collection gallery-images">{#galleryImages}
-	{>"admin/models/gallery-image"/}
-{/galleryImages}</section>
+<section class="gallery-images collection container">
+	{#galleryImages}
+		{>"admin/models/gallery-image"/}
+	{/galleryImages}
+</section>

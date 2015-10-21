@@ -1,4 +1,10 @@
-<section data-view="Crud" data-page="gallery" class="page crud gallery" data-collection="GalleryImages">
-	{>"admin/models/gallery-image-form"/}
-	{>"admin/models/gallery-images"/}
+<section data-view="GalleryPage"class="gallery page">
+	<header>
+		<h1>Gallery</h1>
+		<a class="button base new" href="/admin/gallery/new" title="Upload new image">New Image</a>
+	</header>
+
+	<div class="content">
+		{>"admin/models/gallery-images"/}
+	</div>
 </section>
