@@ -12,7 +12,5 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "formidable": "^1.0.17",
-    "gm": "^1.18.1"
   }
 }

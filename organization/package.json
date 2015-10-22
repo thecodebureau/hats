@@ -12,6 +12,6 @@
     "Linus Miller <linus.miller@thecodebureau.com>"
   ],
   "dependencies": {
-    "spytext": "^0.4.1"
+    "spytext": "^0.5.0"
   }
 }
