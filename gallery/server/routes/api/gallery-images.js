@@ -1,13 +1,16 @@
 module.exports = function(mw, config) {
 	var isAuthenticated = mw.authorization.isAuthenticated;
+
+	var formatQuery = mw.formatQuery;
+
 	mw = mw.api.galleryImages;
 
 	return [
-		[ 'get', '/', mw.findAll ],
+		[ 'get', '/', [ formatQuery, mw.paginate, mw.find ]],
 		[ 'post', '/', [ isAuthenticated, mw.create ]],
 		[ 'get', '/:id', mw.findById ],
-		[ 'put', '/:id', [ isAuthenticated, mw.update ]],
-		[ 'patch', '/:id', [ isAuthenticated, mw.update ]],
-		[ 'delete', '/:id', [ isAuthenticated, mw.delete ]]
+		[ 'put', '/:id', [ isAuthenticated, mw.put ]],
+		[ 'patch', '/:id', [ isAuthenticated, mw.patch ]],
+		[ 'delete', '/:id', [ isAuthenticated, mw.remove ]]
 	];
 };

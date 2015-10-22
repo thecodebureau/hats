@@ -27,6 +27,7 @@ module.exports = require('ridge/view').extend({
 	// of template but we still attach
 
 	renderModel: function(model) {
+		console.log('model', model);
 		this.modelViews.push(new app.views.Field({
 			model: model,
 			data: this.data,

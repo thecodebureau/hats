@@ -1,6 +1,4 @@
-var queryConstructor = require('query-constructor');
-
-module.exports = function(config, mongoose) {
+module.exports = function(config, mongoose, mw) {
 	var Field = mongoose.model('Field');
 
 	function create(req, res, next) {
@@ -40,8 +38,8 @@ module.exports = function(config, mongoose) {
 		});
 	}
 
-	function update(req, res, next) {
-		return Field.findById(req.params.id, function(err, field) {
+	function patch(req, res, next) {
+		Field.findById(req.params.id, function(err, field) {
 			delete req.body._id;
 			delete req.body.__v;
 
@@ -49,11 +47,42 @@ module.exports = function(config, mongoose) {
 
 			return field.save(function(err) {
 				if(err) return next(err);
-				res.status(200);
 
-				res.data.field = field;
-				next();
+				return res.status(200).json(field);
 			});
+		});
+	}
+	
+	function put(req, res, next) {
+		Field.findById(req.params.id, function(err, field) {
+			_.difference(_.keys(field.toObject()), _.keys(req.body)).forEach(function(key) {
+				field[key] = undefined;
+			});
+
+			_.extend(field, _.omit(req.body, '_id', '__v'));
+
+			return field.save(function(err) {
+				if(err) return next(err);
+
+				return res.status(200).json(field);
+			});
+		});
+	}
+
+	function find(req, res, next) {
+		var page = Math.max(0, req.query.page) || 0;
+		var perPage = Math.max(0, req.query.limit) || res.locals.perPage;
+
+		var query = Field.find(_.omit(req.query, 'limit', 'sort', 'page'),
+			null,
+			{ sort: req.query.sort || '-_id', lean: true });
+
+		if (perPage)
+			query.limit(perPage).skip(perPage * page);
+
+		query.exec(function(err, fields) {
+			res.data.fields = fields;
+			next(err);
 		});
 	}
 
@@ -74,8 +103,10 @@ module.exports = function(config, mongoose) {
 		create: create,
 		findByPath: findByPath,
 		findById: findById,
-		queryConstructor: queryConstructor(Field),
-		update: update,
+		find: find,
+		paginate: mw.paginate(Field, 50),
+		patch: patch,
+		put: put,
 		remove: remove
 	};
 };

@@ -18,7 +18,11 @@ module.exports = function(config, mongoose) {
 		}, 
 
 		findById: function(req, res, next) {
-			return Employee.findById(req.params.id, function(err, employee) {
+			var query = {};
+
+			query[mongoose.Types.ObjectId.isValid(req.params.id) ? '_id' : '_hid'] = req.params.id;
+
+			return Employee.findOne(query, function(err, employee) {
 				if(err) return next(err);
 				res.data.employee = employee;
 				next();
@@ -32,9 +36,31 @@ module.exports = function(config, mongoose) {
 			});
 		},
 
-		update: function(req, res, next) {
+		patch: function(req, res, next) {
+			var query = {};
 
-			return Employee.findById(req.params.id, function(err, employee) {
+			query[mongoose.Types.ObjectId.isValid(req.params.id) ? '_id' : '_hid'] = req.params.id;
+
+			Employee.findOne(query, function(err, employee) {
+				delete req.body._id;
+				delete req.body.__v;
+
+				_.extend(employee, req.body);
+
+				return employee.save(function(err) {
+					if(err) return next(err);
+
+					return res.status(200).json(employee);
+				});
+			});
+		},
+		
+		put: function(req, res, next) {
+			var query = {};
+
+			query[mongoose.Types.ObjectId.isValid(req.params.id) ? '_id' : '_hid'] = req.params.id;
+
+			Employee.findOne(query, function(err, employee) {
 				_.difference(_.keys(employee.toObject()), _.keys(req.body)).forEach(function(key) {
 					employee[key] = undefined;
 				});
@@ -43,12 +69,13 @@ module.exports = function(config, mongoose) {
 
 				return employee.save(function(err) {
 					if(err) return next(err);
+
 					return res.status(200).json(employee);
 				});
 			});
 		},
-		
-		delete: function(req, res, next) {
+
+		remove: function(req, res, next) {
 			return Employee.findById(req.params.id, function(err, employee) {
 				if(err) return next(err);
 				return employee.remove(function(err) {
