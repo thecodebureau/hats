@@ -1,5 +1,10 @@
 <section class="{page.name} page">
-	{?page.pages}
-		{>"partials/navigation":page.pages page=page class="front" /}
-	{/page.pages}
+	<header>
+		<h1>{page.title}</h1>
+	</header>
+	<div class="content">
+		{?page.pages}
+			{>"partials/navigation":page.pages page=page class="front" /}
+		{/page.pages}
+	</div>
 </section>
