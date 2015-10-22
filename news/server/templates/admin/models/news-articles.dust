@@ -1,5 +1,5 @@
-<section class="news-articles collection list container">
-	{#newsArticles}
-		{>"admin/models/news-article"/}
-	{/newsArticles}
+<section class="news-articles collection list">
+	{>"pagination"/}
+	<div class="collection container"></div>
+	{>"pagination"/}
 </section>

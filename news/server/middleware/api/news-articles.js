@@ -1,9 +1,15 @@
-var queryConstructor = require('query-constructor');
-
-module.exports = function(config, mongoose) {
+module.exports = function(config, mongoose, mw) {
 	var NewsArticle = mongoose.model('NewsArticle');
 
 	return {
+		create: function(req, res, next) {
+			NewsArticle.create(req.body, function(err, newsArticle) {
+				if(err) return next(err);
+
+				res.status(201).json(newsArticle);
+			});
+		},
+
 		getLatest: function(howMany) {
 			howMany = howMany || 5;
 			return function(req, res, next) {
@@ -19,7 +25,6 @@ module.exports = function(config, mongoose) {
 					res.data.newsArticles = newsArticles;
 					next();
 				});
-
 			};
 		},
 
@@ -49,15 +54,24 @@ module.exports = function(config, mongoose) {
 			});
 		},
 
-		create: function(req, res, next) {
-			NewsArticle.create(req.body, function(err, newsArticle) {
-				if(err) return next(err);
+		find: function(req, res, next) {
+			var page = Math.max(0, req.query.page) || 0;
+			var perPage = Math.max(0, req.query.limit) || res.locals.perPage;
 
-				res.status(201).json(newsArticle);
+			var query = NewsArticle.find(_.omit(req.query, 'limit', 'sort', 'page'),
+				null,
+				{ sort: req.query.sort || '-dateCreated', lean: true });
+
+			if (perPage)
+				query.limit(perPage).skip(perPage * page);
+
+			query.exec(function(err, newsArticles) {
+				res.data.newsArticles = newsArticles;
+				next(err);
 			});
 		},
 
-		queryConstructor: queryConstructor(NewsArticle),
+		paginate: mw.paginate(NewsArticle, 10),
 
 		patch: function(req, res, next) {
 			var query = {};

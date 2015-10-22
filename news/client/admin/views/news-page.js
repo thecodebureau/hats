@@ -1,8 +1,19 @@
 var app = require('ridge');
 
 module.exports = require('ridge/view').extend({
+	events: {
+		'click .collection + .pagination li:not(.current) a.nav': function() {
+			this.scroll = true;
+		}
+	},
+
 	elements: {
 		container: '.collection.container'
+	},
+
+	subviews: {
+		Pagination: '.pagination',
+		Search: '.search'
 	},
 
 	initialize: function(options) {
@@ -11,10 +22,25 @@ module.exports = require('ridge/view').extend({
 		this.collection = new app.collections.NewsArticles();
 
 		this.listenTo(this.collection, 'update', this.reset);
+
+		this.listenTo(this.model, 'change:query', this.fetch);
+	},
+
+	fetch: function(model, query) {
+		this.collection.fetch({ data: query });
 	},
 
 	attach: function() {
-		this.collection.fetch();
+		this.collection.set(this.model.get('newsArticles'));
+
+		var state = window.history && window.history.state;
+
+		if (_.has(state, 'scrollX'))
+			window.scrollTo(state.scrollX, state.scrollY);
+		else if (this.scroll)
+			this.el.scrollIntoView();
+
+		this.scroll = false;
 	},
 
 	reset: function (models, options) {
@@ -22,9 +48,6 @@ module.exports = require('ridge/view').extend({
 
 		models.each(this.renderModel, this);
 	},
-
-	// override default render function so no errors are cause by lack
-	// of template but we still attach
 
 	renderModel: function(model) {
 		this.modelViews.push(new app.views.NewsArticle({
