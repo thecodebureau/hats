@@ -1,6 +1,6 @@
 // load 3rd party modules
 
-module.exports = function(config, mongoose) {
+module.exports = function(config, mongoose, mw) {
 	var GalleryImage = mongoose.model('GalleryImage');
 
 	return {
@@ -60,7 +60,7 @@ module.exports = function(config, mongoose) {
 			});
 		},
 
-		paginate: mw.paginate(GalleryImage, 40),
+		paginate: mw.paginate(GalleryImage, 20),
 
 		patch: function(req, res, next) {
 			var query = {};

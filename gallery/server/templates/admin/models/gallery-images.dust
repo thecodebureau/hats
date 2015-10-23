@@ -1,5 +1,7 @@
-<section class="gallery-images collection container">
-	{#galleryImages}
-		{>"admin/models/gallery-image"/}
-	{/galleryImages}
+<section class="gallery-images collection">
+	{>"pagination"/}
+
+	<div class="collection container"></div>
+
+	{>"pagination"/}
 </section>
