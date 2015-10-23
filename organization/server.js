@@ -8,7 +8,7 @@ module.exports = {
 	setup: function(epiphany) {
 
 		epiphany.mongoose.model('Organization').findOne({}).lean().exec(function(err, organization) {
-			if (err) return next(err);
+			if(err) throw err;
 			if (organization) epiphany.server.locals.organization = organization;
 		});
 	}
