@@ -27,7 +27,12 @@ module.exports = require('ridge/view').extend({
 	},
 
 	attach: function() {
-		this.collection.set(this.model.get('galleryImages'));
+		this.collection.set({
+			totalCount: this.model.get('totalCount'),
+			galleryImages: this.model.get('galleryImages')
+		});
+
+		this.model.unset('galleryImages');
 
 		var state = window.history && window.history.state;
 

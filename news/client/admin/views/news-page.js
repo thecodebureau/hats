@@ -31,7 +31,12 @@ module.exports = require('ridge/view').extend({
 	},
 
 	attach: function() {
-		this.collection.set(this.model.get('newsArticles'));
+		this.collection.set({
+			totalCount: this.model.get('totalCount'),
+			newsArticles: this.model.get('newsArticles')
+		}, { parse: true });
+
+		this.model.unset('newsArticles');
 
 		var state = window.history && window.history.state;
 
