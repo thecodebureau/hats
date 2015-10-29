@@ -1,56 +1,66 @@
 <form>
 	<div class="row">
 		<div class="m-6">
-			<div>
-				<label for='givenName'>givenName</label>
-				<input type='text' data-hook="givenName" name="givenName" value="{givenName}" required />
+			<div class="container">
+				<label class="placeholder">givenName</label>
+				<input type='text' placeholder="givenName" name="givenName" value="{givenName}" required />
+				<label class="icon"></label>
 			</div>
-			<div>
-				<label for='familyName'>Family Name</label>
-				<input type='text' data-hook="familyName" name="familyName" value="{familyName}" required />
+			<div class="container">
+				<label class="placeholder">Family Name</label>
+				<input type='text' placeholder="familyName" name="familyName" value="{familyName}" required />
+				<label class="icon"></label>
 			</div>
-			<div>
-				<label for='email'>Email</label>
-				<input type='text' data-hook="email" name="email" value="{email}" required />
+			<div class="container">
+				<label class="placeholder">Email</label>
+				<input type='text' placeholder="email" name="email" value="{email}" required />
+				<label class="icon"></label>
 			</div>
-			<div>
-				<label for='telephone'>Telephone</label>
-				<input type='text' data-hook="telephone" name="telephone" value="{telephone}" required />
+			<div class="container">
+				<label class="placeholder">Telephone</label>
+				<input type='text' placeholder="telephone" name="telephone" value="{telephone}" required />
+				<label class="icon"></label>
 			</div>
-			<div>
-				<label for='job-title'>Job Title</label>
-				<input type='text' data-hook="jobTitle" name="jobTitle" value="{telephone}" required />
+			<div class="container">
+				<label class="placeholder">Job Title</label>
+				<input type='text' placeholder="jobTitle" name="jobTitle" value="{telephone}" required />
+				<label class="icon"></label>
 			</div>
 		</div>
 		<div class="m-6">
 			<fieldset>
 				<legend>Address</legend>
-				<div>
-					<label>streetAddress</label>
-					<input type="text" data-hook="address.streetAddress" name="address.streetAddress" value="{address.streetAddress}" />
+				<div class="container">
+					<label class="placeholder">streetAddress</label>
+					<input type="text" placeholder="address.streetAddress" name="address.streetAddress" value="{address.streetAddress}" />
+					<label class="icon"></label>
 				</div>
-				<div>
-					<label>postalCode</label>
-					<input type="text" data-hook="address.postalCode" name="address.postalCode" value="{address.postalCode}" />
+				<div class="container">
+					<label class="placeholder">postalCode</label>
+					<input type="text" placeholder="address.postalCode" name="address.postalCode" value="{address.postalCode}" />
+					<label class="icon"></label>
 				</div>
-				<div>
-					<label>Locality</label>
-					<input type="text" data-hook="address.addressLocality" name="address.addressLocality" value="{address.addressLocality}" />
+				<div class="container">
+					<label class="placeholder">Locality</label>
+					<input type="text" placeholder="address.addressLocality" name="address.addressLocality" value="{address.addressLocality}" />
+					<label class="icon"></label>
 				</div>
-				<div>
-					<label>Region</label>
-					<input type="text" data-hook="address.addressRegion" name="address.addressRegion" value="{address.addressRegion}" />
+				<div class="container">
+					<label class="placeholder">Region</label>
+					<input type="text" placeholder="address.addressRegion" name="address.addressRegion" value="{address.addressRegion}" />
+					<label class="icon"></label>
 				</div>
-				<div>
-					<label>Country</label>
-					<input type="text" data-hook="address.addressCountry" name="address.addressCountry" value="{address.addressCountry}" />
+				<div class="container">
+					<label class="placeholder">Country</label>
+					<input type="text" placeholder="address.addressCountry" name="address.addressCountry" value="{address.addressCountry}" />
+					<label class="icon"></label>
 				</div>
 			</fieldset>
 		</div>
 	</div>
 	<div>
 		<label>Description</label>
-		<div data-spytext data-hook="description" name="description">{description|s}</div>
+		<div data-spytext data-hook="description" data-name="description">{description|s}</div>
 	</div>
 	<div>
 		{>"admin/partials/image-upload":image property="image" type="employee" maxWidth="1024" mediumWidth="600" thumbWidth="300" /}
