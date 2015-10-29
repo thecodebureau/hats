@@ -81,8 +81,6 @@ module.exports = require('ridge/view').extend({
 			_view.update();
 	},
 
-	// Commands:
-	
 	stopPropagation: function(e) {
 		e.stopPropagation();
 	},
@@ -117,20 +115,25 @@ module.exports = require('ridge/view').extend({
 	},
 
 	create: function() {
-		if(this.collection) {
-			this.collection.add(this.model);
-		}
-
-		this.model.save(null, {
-			success: function(model, response, opts) {
-				var path = _.initial(window.location.pathname.split('/')).join('/') + '/' + model.id;
-				app.router.navigate(path, { replace: true });
+		if(this.model.isValid()) {
+			if(this.collection) {
+				this.collection.add(this.model);
 			}
-		});
+
+			this.model.save(null, {
+				success: function(model, response, opts) {
+					var path = _.initial(window.location.pathname.split('/')).join('/') + '/' + model.id;
+					app.router.navigate(path, { replace: true });
+				}
+			});
+		}
 	},
 
 	save: function() {
-		this.model.save();
+		console.log(this.model.toJSON());
+		if(this.model.isValid()) {
+			this.model.save();
+		}
 	},
 
 	reset: function() {
