@@ -1,28 +1,12 @@
 var app = require('ridge');
 
-View = require('ridge/view').extend();
-
-_.extend(View.prototype, require('ridge/mixins/observe'), {
+module.exports = require('ridge/view').extend({
 	events: {
 		'submit': 'preventDefault'
 	},
 
 	subviews: {
-		SpytextField: '[data-spytext]',
-		ImageUpload: '.image-upload',
 		ModelControls: '.controls'
-	},
-
-	bindings: {
-		'name': 'value',
-		'legalName': 'value',
-		'email': 'value',
-		'telephone': 'value',
-		'address.streetAddress': 'value',
-		'address.postalCode': 'value',
-		'address.addressLocality': 'value',
-		'address.addressRegion': 'value',
-		'address.addressCountry': 'value'
 	},
 
 	initialize: function(opts) {
@@ -37,8 +21,30 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	attach: function() {
-		this.observe();
-	},
-});
+		var _view = this;
 
-module.exports = View;
+		if(this.formView) {
+			this.stopListening(this.formView);
+			this.formView.remove();
+		}
+
+		this.formView = new app.views.Form({
+			el: this.$('form'),
+
+			subviews: {
+				SpytextField: '[data-spytext]',
+				ImageUpload: '.image-upload'
+			},
+
+			model: this.model,
+
+			bindings: {
+				'address.addressRegion': 'value'
+			},
+
+			onSuccess: function(model, message, options) {
+				console.log('organization saved!');
+			}
+		});
+	}
+});
