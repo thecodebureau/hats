@@ -1,21 +1,8 @@
 var app = require('ridge');
 
-View = require('ridge/view').extend();
-
-_.extend(View.prototype, require('ridge/mixins/observe'), {
-	events: {
-		'submit': 'preventDefault'
-	},
-
+module.exports = require('ridge/view').extend({
 	subviews: {
-		SpytextField: '[data-spytext]',
-		ImageUpload: '.image-upload',
 		ModelControls: '.controls'
-	},
-
-	bindings: {
-		'headline': 'value',
-		'articleBody': 'html'
 	},
 
 	initialize: function(opts) {
@@ -35,8 +22,33 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	attach: function() {
-		this.observe();
+		var _view = this;
+
+		if(this.formView) {
+			this.stopListening(this.formView);
+			this.formView.remove();
+		}
+
+		this.formView = new app.views.Form({
+			el: this.$('form'),
+
+			subviews: {
+				SpytextField: '[data-spytext]',
+				ImageUpload: '.image-upload'
+			},
+
+			model: this.model,
+
+			bindings: {
+				'articleBody': {
+					hook: 'articleBody',
+					type: 'html'
+				}
+			},
+
+			onSuccess: function(model, message, options) {
+				console.log('field saved!');
+			}
+		});
 	},
 });
-
-module.exports = View;
