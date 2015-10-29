@@ -1,11 +1,14 @@
 module.exports = function(config, mongoose, mw) {
 	var Field = mongoose.model('Field');
 
+	var cache = {};
+
 	function create(req, res, next) {
 		Field.create(req.body, function (err, field) {
 			if (err) return next(err);
 
 			res.data.field = field;
+
 			res.status(201);
 			next();
 		});
@@ -24,16 +27,34 @@ module.exports = function(config, mongoose, mw) {
 	}
 
 	function findByPath(req, res, next) {
-		Field.find({ path: req.path }).lean().exec(function (err, fields) {
+		var path = res.locals.page && res.locals.page.routePath || req.path ;
+
+		if(cache[path]) {
+			res.data.fields = cache[path];
+
+			if(res.lang)
+				res.data.fields = _.mapValues(res.data.fields, function(value, key) {
+					return value[res.lang];
+				});
+				
+			return next();
+		}
+
+		Field.find({ path: path }).lean().exec(function (err, fields) {
 			if (err) return next(err);
 
 			res.status(200);
 
-			res.data.fields = fields.reduce(function(out, value) {
+			cache[path] = res.data.fields = fields.reduce(function(out, value) {
 				out[value.name] = value.content;
 
 				return out;
 			}, {});
+
+			if(res.lang)
+				res.data.fields = _.mapValues(res.data.fields, function(value, key) {
+					return value[res.lang];
+				});
 			next();
 		});
 	}
@@ -44,6 +65,9 @@ module.exports = function(config, mongoose, mw) {
 			delete req.body.__v;
 
 			_.extend(field, req.body);
+
+			if(cache[field.path])
+				delete cache[field.path];
 
 			return field.save(function(err) {
 				if(err) return next(err);
@@ -60,6 +84,9 @@ module.exports = function(config, mongoose, mw) {
 			});
 
 			_.extend(field, _.omit(req.body, '_id', '__v'));
+
+			if(cache[field.path])
+				delete cache[field.path];
 
 			return field.save(function(err) {
 				if(err) return next(err);

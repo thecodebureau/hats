@@ -8,6 +8,6 @@
 		</div>
 	</header>
 	<div class="content">
-		{>"admin/models/field-form":field paths=paths /}
+		{>"admin/models/field-form" /}
 	</div>
 </section>

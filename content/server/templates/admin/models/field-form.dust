@@ -1,19 +1,28 @@
 <form class="row">
-	<div>
-		<label for='name'>Name</label>
-		<input type='text' data-hook="name" name="name" value="{name}" required />
+	<div class="container">
+		<label class="placeholder">Name</label>
+		<input type='text' placeholder="Name" name="name" required />
+		<label class="icon"></label>
 	</div>
-	<div>
-		<label for='description'>Path: {path}</label>
-		<select data-hook="path" name="path">
-			<option>Choose a path</option>
+	<div class="container">
+		<label class="placeholder">Path</label>
+		<select name="path">
+			<option value="undefined">Choose a path</option>
 			{#paths}
-			<option value="{.}"{@if test=". == path"} selected{/if}>{.}</option>
+			<option value="{.}">{.}</option>
 			{/paths}
 		</select>
+		<label class="icon"></label>
 	</div>
-	<div>
-		<label for='description'>Spytext</label>
-		<div type='text' data-hook="content" data-spytext data-name="content">{content|s}</div>
-	</div>
+	{#languages}
+		<div>
+			<label>Content {name}</label>
+		</div>
+		<div class="container">
+			<div type='text' data-hook="content.{iso}" data-spytext data-name="content.{iso}"></div>
+			<label class="icon"></label>
+		</div>
+	{:else}
+		No languages
+	{/languages}
 </form>

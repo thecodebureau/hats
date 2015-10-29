@@ -1,14 +1,22 @@
 
-module.exports = function(mongoose, schemas, plugins) {
+module.exports = function(mongoose, schemas, plugins, epiphany) {
+	var config = epiphany.config.content;
 
-	var FieldSchema = new mongoose.Schema({
+	fieldSchema = {
 		name: String,
 		path: String,
 		content: String,
-		radio: String,
-		check: Array,
 		draft: String
-	});
+	};
+
+	if(_.isArray(config.languages) && config.languages.length > 1) {
+		fieldSchema.content = {};
+		config.languages.forEach(function(lang) {
+			fieldSchema.content[lang.iso] = String;
+		});
+	}
+
+	var FieldSchema = new mongoose.Schema(fieldSchema);
 
 	FieldSchema.plugin(plugins.base);
 
