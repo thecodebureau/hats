@@ -1,13 +1,14 @@
 {
   "name": "hats/contact",
   "description": "",
-  "main": "server.js",
+  "main": "paths.js",
   "browser": "browser.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "The Code Bureau <info@thecodebureau.com> (https://thecodebureau.com)",
   "contributors": [
+    "Linus Miller <linus.miller@thecodebureau.com>",
     "Robin Hagg <robin.hagg@thecodebureau.com>"
   ],
   "dependencies": {

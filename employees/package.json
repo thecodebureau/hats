@@ -1,7 +1,7 @@
 {
   "name": "hats/employees",
   "description": "Employee module for Hatter.",
-  "main": "server.js",
+  "main": "paths.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

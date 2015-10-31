@@ -1,8 +1,7 @@
 {
   "name": "hats/errors",
-  "version": "0.1.0-pre",
   "description": "",
-  "main": "server.js",
+  "main": "paths.js",
   "browser": "admin.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
