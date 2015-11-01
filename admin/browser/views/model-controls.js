@@ -130,7 +130,6 @@ module.exports = require('ridge/view').extend({
 	},
 
 	save: function() {
-		console.log(this.model.toJSON());
 		if(this.model.isValid()) {
 			this.model.save();
 		}
