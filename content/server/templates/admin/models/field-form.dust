@@ -23,6 +23,12 @@
 			<label class="icon"></label>
 		</div>
 	{:else}
-		No languages
+		<div>
+			<label>Content {name}</label>
+		</div>
+		<div class="container">
+			<div type='text' data-hook="content" data-spytext data-name="content"></div>
+			<label class="icon"></label>
+		</div>
 	{/languages}
 </form>

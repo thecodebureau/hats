@@ -9,7 +9,7 @@ module.exports = function(mongoose, schemas, plugins, epiphany) {
 		draft: String
 	};
 
-	if(_.isArray(config.languages) && config.languages.length > 1) {
+	if(config && _.isArray(config.languages) && config.languages.length > 1) {
 		fieldSchema.content = {};
 		config.languages.forEach(function(lang) {
 			fieldSchema.content[lang.iso] = String;
