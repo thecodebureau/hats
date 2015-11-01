@@ -1,5 +1,5 @@
 // load 3rd party modules
-
+//
 module.exports = function(config, mongoose, mw) {
 	var GalleryImage = mongoose.model('GalleryImage');
 

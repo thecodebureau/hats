@@ -30,7 +30,7 @@ module.exports = require('ridge/view').extend({
 		this.collection.set({
 			totalCount: this.model.get('totalCount'),
 			galleryImages: this.model.get('galleryImages')
-		});
+		}, { parse: true });
 
 		this.model.unset('galleryImages');
 
