@@ -129,7 +129,7 @@ module.exports = function(epiphany) {
 	passport.use('local', new LocalStrategy(config.local, localCallback));
 
 	_.each(config.providers, function(config, key) {
-		var Strategy = key === 'google' ? require('passport-google-oauth').OAuth2Strategy : require('passport-' + key.toSpinalCase()).Strategy;
+		var Strategy = key === 'google' ? require('passport-google-oauth').OAuth2Strategy : require('passport-' + _.kebabCase(key)).Strategy;
 
 		passport.use(key, new Strategy(config, socialCallback));
 	});
