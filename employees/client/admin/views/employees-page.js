@@ -10,15 +10,17 @@ module.exports = require('ridge/view').extend({
 
 		this.collection = new app.collections.Employees();
 
-		this.listenTo(this.collection, 'update', this.reset);
+		this.listenTo(this.collection, 'reset', this.reset);
 	},
 
 	attach: function() {
-		this.collection.fetch();
+		this.collection.fetch({ reset: true });
 	},
 
 	reset: function (models, options) {
 		_.invoke(this.modelViews, 'remove');
+
+		this.modelViews = [];
 
 		models.each(this.renderModel, this);
 	},
