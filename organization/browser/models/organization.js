@@ -1,4 +1,6 @@
-module.exports = require('ridge/model').extend({
+var Model = require('ridge/model').extend();
+
+_.extend(Model.prototype, require('ridge/mixins/validate'), {
 	url: '/api/organization',
 
 	validation: {
@@ -29,3 +31,5 @@ module.exports = require('ridge/model').extend({
 		}
 	}
 });
+
+module.exports = Model;

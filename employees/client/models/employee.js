@@ -1,4 +1,7 @@
-module.exports = require('ridge/model').extend({
+var Model = require('ridge/model').extend();
+
+_.extend(Model.prototype, require('ridge/mixins/validate'), {
+
 	validation: {
 		'givenName': {
 			required: true
@@ -18,3 +21,5 @@ module.exports = require('ridge/model').extend({
 		},
 	}
 });
+
+module.exports = Model;

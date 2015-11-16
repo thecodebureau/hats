@@ -20,6 +20,10 @@ if(_.isArray(app.languages) && app.languages.length > 1)
 else
 	validation.content = content;
 
-module.exports = require('ridge/model').extend({
+var Model = require('ridge/model').extend();
+
+_.extend(Model.prototype, require('ridge/mixins/validate'), {
 	validation: validation
 });
+
+module.exports = Model;
