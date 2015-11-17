@@ -26,6 +26,7 @@ _.extend(Model.prototype, require('ridge/mixins/validate'), {
 		'address.addressLocality': {
 			required: true
 		},
+		'address.addressRegion': false,
 		'address.addressCountry': {
 			required: true
 		}

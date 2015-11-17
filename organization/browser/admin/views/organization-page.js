@@ -1,12 +1,25 @@
 var app = require('ridge');
 
-module.exports = require('ridge/view').extend({
+var View = require('ridge/view').extend();
+
+_.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	events: {
-		'submit': 'preventDefault'
+		'click button[data-command="create"]': 'create',
+		'click button[data-command="reset"]': 'reset',
+		'click button[data-command="save"]': 'save',
 	},
 
-	subviews: {
-		ModelControls: '.controls'
+	save: function() {
+		if(this.model.isValid()) {
+			this.model.save(null, null, { validate: false });
+		}
+	},
+
+	reset: function() {
+		if(confirm('Are you sure you want to reset?')) {
+			this.formView.reset();
+			this.model.reset();
+		}
 	},
 
 	initialize: function(opts) {
@@ -15,13 +28,21 @@ module.exports = require('ridge/view').extend({
 		// save page model data
 		this.data = this.model.toJSON();
 
-		this.model = new app.models.Organization();
+		var organization = this.model.get('organization');
 
-		this.model.fetch();
+		if(!organization) {
+			organization = {};
+		}
+
+		this.model = new app.models.Organization(organization);
+
+		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},
 
 	attach: function() {
 		var _view = this;
+
+		_view.setActiveButtons();
 
 		if(this.formView) {
 			this.stopListening(this.formView);
@@ -48,3 +69,5 @@ module.exports = require('ridge/view').extend({
 		});
 	}
 });
+
+module.exports = View;

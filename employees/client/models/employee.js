@@ -19,6 +19,12 @@ _.extend(Model.prototype, require('ridge/mixins/validate'), {
 		'jobTitle': {
 			required: true
 		},
+		'address.streetAddress': false,
+		'address.postalCode': false,
+		'address.addressLocality': false,
+		'address.addressRegion': false,
+		'address.addressCountry': false,
+		'description': false
 	}
 });
 

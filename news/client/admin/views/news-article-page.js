@@ -1,28 +1,66 @@
 var app = require('ridge');
 
-module.exports = require('ridge/view').extend({
-	subviews: {
-		ModelControls: '.controls'
+var View = require('ridge/view').extend();
+
+_.extend(View.prototype, require('ridge/mixins/active-buttons'), {
+	events: {
+		'click button[data-command="create"]': 'create',
+		'click button[data-command="reset"]': 'reset',
+		'click button[data-command="save"]': 'save',
+	},
+
+	save: function() {
+		if(this.model.isValid()) {
+			this.model.save(null, null, { validate: false });
+		}
+	},
+
+	reset: function() {
+		if(confirm('Are you sure you want to reset?')) {
+			this.formView.reset();
+			this.model.reset();
+		}
+	},
+
+	create: function() {
+		var _view = this;
+
+		if(_view.model.isValid()) {
+			_view.model.save(null, {
+				success: function(model, response, opts) {
+					if(_view.collection) {
+						_view.collection.add(_view.model);
+					}
+
+					var path = _.initial(Backbone.history.fragment.split('/')).concat(model.id).join('/');
+
+					app.router.navigate(path, { replace: true });
+				}
+			});
+		}
 	},
 
 	initialize: function(opts) {
-		var id = _.last(window.location.pathname.split('/'));
-
 		var collection = new app.collections.NewsArticles();
 
 		// save page model data
 		this.data = this.model.toJSON();
 
-		if(id === 'new') {
-			this.model = collection.add({});
-		} else {
-			this.model = collection.add({ _id: id });
-			this.model.fetch();
+		var newsArticle = this.model.get('newsArticle');
+
+		if(!newsArticle) {
+			newsArticle = {};
 		}
+
+		this.model = collection.add(newsArticle);
+
+		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},
 
 	attach: function() {
 		var _view = this;
+
+		_view.setActiveButtons();
 
 		if(this.formView) {
 			this.stopListening(this.formView);
@@ -52,3 +90,5 @@ module.exports = require('ridge/view').extend({
 		});
 	},
 });
+
+module.exports = View;

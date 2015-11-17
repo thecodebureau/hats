@@ -23,7 +23,7 @@
 			</div>
 			<div class="container">
 				<label class="placeholder">Job Title</label>
-				<input type='text' placeholder="jobTitle" name="jobTitle" value="{telephone}" required />
+				<input type='text' placeholder="jobTitle" name="jobTitle" value="{jobTitle}" required />
 				<label class="icon"></label>
 			</div>
 		</div>
@@ -60,7 +60,10 @@
 	</div>
 	<div>
 		<label>Description</label>
+	</div>
+	<div class="container">
 		<div data-spytext data-hook="description" data-name="description">{description|s}</div>
+		<label class="icon"></label>
 	</div>
 	<div>
 		{>"admin/partials/image-upload":image property="image" type="employee" maxWidth="1024" mediumWidth="600" thumbWidth="300" /}

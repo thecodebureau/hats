@@ -7,7 +7,7 @@
 	<div class="container">
 		<label class="placeholder">Path</label>
 		<select name="path">
-			<option value="undefined">Choose a path</option>
+			<option value="">Choose a path</option>
 			{#paths}
 			<option value="{.}">{.}</option>
 			{/paths}

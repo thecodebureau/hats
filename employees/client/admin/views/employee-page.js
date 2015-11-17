@@ -11,14 +11,14 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 
 	save: function() {
 		if(this.model.isValid()) {
-			this.model.save();
+			this.model.save(null, null, { validate: false });
 		}
 	},
 
 	reset: function() {
 		if(confirm('Are you sure you want to reset?')) {
-			this.model.reset();
 			this.formView.reset();
+			this.model.reset();
 		}
 	},
 
@@ -41,19 +41,18 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	},
 
 	initialize: function(opts) {
-		var id = _.last(window.location.pathname.split('/'));
-
 		var collection = new app.collections.Employees();
 
 		// save page model data
 		this.data = this.model.toJSON();
 
-		if(id === 'new') {
-			this.model = collection.add({});
-		} else {
-			this.model = collection.add({ _id: id });
-			this.model.fetch();
+		var employee = this.model.get('employee');
+
+		if(!employee) {
+			employee = {};
 		}
+
+		this.model = collection.add(employee);
 
 		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},
@@ -79,11 +78,6 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 			model: this.model,
 
 			bindings: {
-				'address.streetAddress': 'value',
-				'address.postalCode': 'value',
-				'address.addressLocality': 'value',
-				'address.addressRegion': 'value',
-				'address.addressCountry': 'value',
 				'description': {
 					hook: 'description',
 					type: 'html'

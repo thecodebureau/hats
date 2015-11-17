@@ -4,6 +4,7 @@
 		<input type="text" name="headline" placeholder="Headline" value="{headline}"/>
 		<label class="icon"></label>
 	</div>
+
 	<div>
 		<label>Article Body</label>
 	</div>
@@ -11,5 +12,6 @@
 		<div data-spytext data-hook="articleBody" name="articleBody">{articleBody|s}</div>
 		<label class="icon"></label>
 	</div>
+
 	{>"admin/partials/image-upload":image property="image" type="news" maxWidth="1024" mediumWidth="600" thumbWidth="300" ratio="1.61803398875" /}
 </form>
