@@ -16,7 +16,6 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 
 	reset: function() {
 		if(confirm('Are you sure you want to reset?')) {
-			this.formView.reset();
 			this.model.reset();
 		}
 	},
