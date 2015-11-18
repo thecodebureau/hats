@@ -4,7 +4,6 @@ var View = require('ridge/view').extend();
 
 _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	events: {
-		'click button[data-command="create"]': 'create',
 		'click button[data-command="reset"]': 'reset',
 		'click button[data-command="save"]': 'save',
 	},
