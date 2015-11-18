@@ -43,6 +43,8 @@ module.exports = function(config, mongoose, mw) {
 		}, 
 
 		findById: function(req, res, next) {
+			if(req.params.id === 'new') return next();
+
 			var query = {};
 
 			query[mongoose.Types.ObjectId.isValid(req.params.id) ? '_id' : '_hid'] = req.params.id;
