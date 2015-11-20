@@ -4,6 +4,8 @@
 		<a class="button new base" href="/admin/employees/new">New Employee</a>
 	</header>
 	<div class="content">
+		{>"pagination"/}
 		{>"admin/models/employees"/}
+		{>"pagination"/}
 	</div>
 </section>

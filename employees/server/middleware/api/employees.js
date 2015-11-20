@@ -1,5 +1,5 @@
 
-module.exports = function(config, mongoose) {
+module.exports = function(config, mongoose, mw) {
 	var Employee = mongoose.model('Employee');
 
 	return {
@@ -37,6 +37,25 @@ module.exports = function(config, mongoose) {
 				res.status(201).json(employee);
 			});
 		},
+
+		find: function(req, res, next) {
+			var page = Math.max(0, req.query.page) || 0;
+			var perPage = Math.max(0, req.query.limit) || res.locals.perPage;
+
+			var query = Employee.find(_.omit(req.query, 'limit', 'sort', 'page'),
+				null,
+				{ sort: req.query.sort || '-dateCreated', lean: true });
+
+			if (perPage)
+				query.limit(perPage).skip(perPage * page);
+
+			query.exec(function(err, employees) {
+				res.data.employees = employees;
+				next(err);
+			});
+		},
+
+		paginate: mw.paginate(Employee, 20),
 
 		patch: function(req, res, next) {
 			var query = {};

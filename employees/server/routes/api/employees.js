@@ -1,9 +1,11 @@
 module.exports = function(mw, config) {
-	var isAuthenticated = mw.authorization.isAuthenticated;
+	var isAuthenticated = mw.authorization.isAuthenticated,
+		formatQuery = mw.formatQuery;
+
 	mw = mw.api.employees;
 
 	return [
-		[ 'get', '/', mw.findAll ],
+		[ 'get', '/', [ formatQuery, mw.paginate, mw.find ]],
 		[ 'post', '/', [ isAuthenticated, mw.create ]],
 		[ 'get', '/:id', [ isAuthenticated, mw.findById ]],
 		[ 'put', '/:id', [ isAuthenticated, mw.put ]],
