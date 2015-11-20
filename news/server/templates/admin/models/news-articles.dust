@@ -1,5 +1,1 @@
-<section class="news-articles collection list">
-	{>"pagination"/}
-	<div class="collection container"></div>
-	{>"pagination"/}
-</section>
+<section class="news-articles container collection list"></section>

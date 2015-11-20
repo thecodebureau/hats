@@ -3,7 +3,10 @@
 		<h1>News</h1>
 		<a class="button base new nav" href="/admin/news/new" title="Create new article">New Article</a>
 	</header>
+
 	<div class="content">
+		{>"pagination"/}
 		{>"admin/models/news-articles"/}
+		{>"pagination"/}
 	</div>
 </section>

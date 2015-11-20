@@ -8,7 +8,7 @@ module.exports = require('ridge/view').extend({
 	},
 
 	elements: {
-		container: '.collection.container'
+		container: '.container'
 	},
 
 	subviews: {
@@ -21,17 +21,17 @@ module.exports = require('ridge/view').extend({
 
 		this.collection = new app.collections.NewsArticles();
 
-		this.listenTo(this.collection, 'update', this.reset);
+		this.listenTo(this.collection, 'reset', this.reset);
 
 		this.listenTo(this.model, 'change:query', this.fetch);
 	},
 
 	fetch: function(model, query) {
-		this.collection.fetch({ data: query });
+		this.collection.fetch({ reset: true, data: query });
 	},
 
 	attach: function() {
-		this.collection.set({
+		this.collection.reset({
 			totalCount: this.model.get('totalCount'),
 			newsArticles: this.model.get('newsArticles')
 		}, { parse: true });
