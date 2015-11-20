@@ -1,7 +1,7 @@
 <form class="row">
 	<div class="container">
 		<label class="placeholder">Name</label>
-		<input type='text' placeholder="Name" name="name" required />
+		<input type='text' placeholder="Name" name="name" value="{name}" required />
 		<label class="icon"></label>
 	</div>
 	<div class="container">
@@ -9,7 +9,7 @@
 		<select name="path">
 			<option value="">Choose a path</option>
 			{#paths}
-			<option value="{.}">{.}</option>
+			<option value="{.}" {@if test="path === ."}selected{/if}>{.}</option>
 			{/paths}
 		</select>
 		<label class="icon"></label>
@@ -19,7 +19,7 @@
 			<label>Content {name}</label>
 		</div>
 		<div class="container">
-			<div type='text' data-hook="content.{iso}" data-spytext data-name="content.{iso}"></div>
+			<div type='text' data-spytext data-name="content.{iso}">{#getContent/}</div>
 			<label class="icon"></label>
 		</div>
 	{:else}
@@ -27,7 +27,7 @@
 			<label>Content {name}</label>
 		</div>
 		<div class="container">
-			<div type='text' data-hook="content" data-spytext data-name="content"></div>
+			<div type='text' data-spytext data-name="content">{content}</div>
 			<label class="icon"></label>
 		</div>
 	{/languages}

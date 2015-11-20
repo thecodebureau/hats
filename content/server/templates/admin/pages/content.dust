@@ -4,6 +4,37 @@
 		<a class="button new base" href="/admin/content/new">New Field</a>
 	</header>
 	<div class="content">
+		<form class="search">
+			<div class="row collapse">
+				<div class="m-4">
+					<label>Sort By</label>
+					<select name="sort">
+						<option value="name" selected>Name</option>
+						<option value="-name">-Name</option>
+					</select>
+				</div>
+
+				<div class="m-2">
+					<label>Path</label>
+					<select name="path">
+						<option value="">All</option>
+						{#paths}
+							<option value="{.}">{.}</option>
+						{/paths}
+					</select>
+				</div>
+			</div>
+			<div>
+				<input type="text" data-regex="i" name="name" />
+			</div>
+
+			<div class="buttons">
+				<button type="reset">Reset</button>
+				<button>Search</button>
+			</div>
+		</form>
+		{>"pagination"/}
 		{>"admin/models/fields"/}
+		{>"pagination"/}
 	</div>
 </section>

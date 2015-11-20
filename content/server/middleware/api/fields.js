@@ -15,6 +15,8 @@ module.exports = function(config, mongoose, mw) {
 	}
 
 	function findById(req, res, next) {
+		if(req.params.id === 'new') return next();
+
 		Field.findOne({ _id: req.params.id }).lean().exec(function (err, field) {
 			if (err) return next(err);
 
@@ -131,7 +133,7 @@ module.exports = function(config, mongoose, mw) {
 		findByPath: findByPath,
 		findById: findById,
 		find: find,
-		paginate: mw.paginate(Field, 50),
+		paginate: mw.paginate(Field, 20),
 		patch: patch,
 		put: put,
 		remove: remove
