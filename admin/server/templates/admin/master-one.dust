@@ -21,14 +21,6 @@
 </head>
 
 <body>
-<!--
-<header>
-	<div class="company">
-		<h1>{title} Admin : <span class="page">{page}</span></h1>
-	</div>
-	{>"admin/partials/user-box"/}
-</header>
--->
 
 <div class="container">
 	<div class="left">
