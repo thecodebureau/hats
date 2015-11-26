@@ -8,6 +8,9 @@ var admin = {
 	}
 };
 
+_.extend(require('ridge/util/validate/tests'), require('./browser/admin/tests'));
+_.extend(require('ridge/util/validate/messages'), require('./browser/admin/messages'));
+
 _.each(admin, function(value, key) {
 	if(browser[key]) _.extend(browser[key], admin[key]);
 

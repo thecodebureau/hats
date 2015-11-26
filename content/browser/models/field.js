@@ -2,8 +2,10 @@ var app = require('ridge');
 
 var validation = {
 	'name': {
-		required: true
+		required: true,
+		alphanumeric: true
 	},
+
 	'path': {
 		required: true
 	},
