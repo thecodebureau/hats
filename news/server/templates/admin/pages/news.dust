@@ -5,6 +5,36 @@
 	</header>
 
 	<div class="content">
+		<form class="search">
+			<div class="row collapse">
+				<div class="container never-empty m-4">
+					<label class="placeholder">Sort By</label>
+					<select name="sort">
+						<option value="" selected>-Date Published</option>
+						<option value="datePublished">Date Published</option>
+						<option value="-dateCreated">-Date Created</option>
+						<option value="dateCreated">Date Created</option>
+					</select>
+				</div>
+			</div>
+			<div class="container never-empty m-2">
+				<label class="placeholder">Published</label>
+				<select name="datePublished">
+					<option value="">All</option>
+					<option value="true">Published</option>
+					<option value="false">Unpublished</option>
+				</select>
+			</div>
+			<div class="container">
+				<label class="placeholder">Headline</label>
+				<input type="text" placeholder="Headline" name="headline" />
+			</div>
+
+			<div class="buttons">
+				<button type="reset">Reset</button>
+				<button>Search</button>
+			</div>
+		</form>
 		{>"admin/pagination"/}
 		{>"admin/models/news-articles"/}
 		{>"admin/pagination"/}

@@ -6,10 +6,12 @@
 	<div class="content">
 		<form class="search">
 			<div class="row collapse">
-				<div class="container m-4">
+				<div class="container never-empty m-4">
 					<label class="placeholder">Sort By</label>
 					<select name="sort">
-						<option value="name" selected>Name</option>
+						<option value="" selected>Path</option>
+						<option value="-path">-Path</option>
+						<option value="name">Name</option>
 						<option value="-name">-Name</option>
 					</select>
 				</div>

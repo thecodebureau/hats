@@ -104,7 +104,7 @@ module.exports = function(config, mongoose, mw) {
 
 		var query = Field.find(_.omit(req.query, 'limit', 'sort', 'page'),
 			null,
-			{ sort: req.query.sort || '-_id', lean: true });
+			{ sort: req.query.sort || 'path', lean: true });
 
 		if (perPage)
 			query.limit(perPage).skip(perPage * page);

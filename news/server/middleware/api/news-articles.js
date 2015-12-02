@@ -62,7 +62,7 @@ module.exports = function(config, mongoose, mw) {
 
 			var query = NewsArticle.find(_.omit(req.query, 'limit', 'sort', 'page'),
 				null,
-				{ sort: req.query.sort || '-dateCreated', lean: true });
+				{ sort: req.query.sort || '-datePublished', lean: true });
 
 			if (perPage)
 				query.limit(perPage).skip(perPage * page);
@@ -73,7 +73,10 @@ module.exports = function(config, mongoose, mw) {
 			});
 		},
 
-		formatQuery: mw.formatQuery([ 'limit', 'sort', 'page' ]),
+		formatQuery: mw.formatQuery([ 'limit', 'sort', 'page' ], {
+			headline: 'regex',
+			datePublished: 'exists'
+		}),
 
 		paginate: mw.paginate(NewsArticle, 10),
 
