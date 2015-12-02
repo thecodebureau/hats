@@ -12,8 +12,14 @@ module.exports = require('ridge/view').extend({
 	},
 
 	subviews: {
-		Pagination: '.pagination',
-		Search: '.search'
+		Pagination: {
+			selector: '.pagination',
+			template: 'admin/pagination'
+		},
+		Search: {
+			selector: '.search',
+			model: null
+		}
 	},
 
 	initialize: function(options) {

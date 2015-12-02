@@ -73,6 +73,8 @@ module.exports = function(config, mongoose, mw) {
 			});
 		},
 
+		formatQuery: mw.formatQuery([ 'limit', 'sort', 'page' ]),
+
 		paginate: mw.paginate(NewsArticle, 10),
 
 		patch: function(req, res, next) {

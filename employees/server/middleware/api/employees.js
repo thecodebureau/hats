@@ -38,6 +38,8 @@ module.exports = function(config, mongoose, mw) {
 			});
 		},
 
+		formatQuery: mw.formatQuery([ 'page', 'limit', 'sort' ]),
+
 		find: function(req, res, next) {
 			var page = Math.max(0, req.query.page) || 0;
 			var perPage = Math.max(0, req.query.limit) || res.locals.perPage;
@@ -55,7 +57,7 @@ module.exports = function(config, mongoose, mw) {
 			});
 		},
 
-		paginate: mw.paginate(Employee, 20),
+		paginate: mw.paginate(Employee, 1),
 
 		patch: function(req, res, next) {
 			var query = {};

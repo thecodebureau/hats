@@ -5,7 +5,7 @@ module.exports = function(mw, config) {
 	mw = mw.api.fields;
 
 	return [
-		[ 'get', '/', [ isAuthenticated, formatQuery, mw.paginate, mw.find ]],
+		[ 'get', '/', [ isAuthenticated, mw.formatQuery, mw.paginate, mw.find ]],
 		[ 'post', '/', [ isAuthenticated, mw.create ]],
 		[ 'get', '/:id', [ isAuthenticated, mw.findById ]],
 		[ 'put', '/:id', [ isAuthenticated, mw.put ]],

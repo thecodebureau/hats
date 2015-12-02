@@ -133,6 +133,9 @@ module.exports = function(config, mongoose, mw) {
 		findByPath: findByPath,
 		findById: findById,
 		find: find,
+		formatQuery: mw.formatQuery([ 'page', 'sort', 'path', 'name' ], {
+			'name': 'regex'
+		}),
 		paginate: mw.paginate(Field, 20),
 		patch: patch,
 		put: put,

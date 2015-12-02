@@ -5,8 +5,8 @@
 	</header>
 
 	<div class="content">
-		{>"pagination"/}
+		{>"admin/pagination"/}
 		{>"admin/models/news-articles"/}
-		{>"pagination"/}
+		{>"admin/pagination"/}
 	</div>
 </section>

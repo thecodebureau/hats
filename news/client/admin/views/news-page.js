@@ -8,11 +8,14 @@ module.exports = require('ridge/view').extend({
 	},
 
 	elements: {
-		container: '.container'
+		container: '.collection.container'
 	},
 
 	subviews: {
-		Pagination: '.pagination',
+		Pagination: {
+			selector: '.pagination',
+			template: 'admin/pagination'
+		},
 		Search: '.search'
 	},
 
@@ -23,10 +26,14 @@ module.exports = require('ridge/view').extend({
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
-		this.listenTo(this.model, 'change:query', this.fetch);
+		console.log('about to listen');
+		this.listenTo(app.router.current(), 'change:query', this.fetch);
 	},
 
 	fetch: function(model, query) {
+		console.log('fetching');
+		console.log(query);
+		console.log(this.collection);
 		this.collection.fetch({ reset: true, data: query });
 	},
 
@@ -50,6 +57,8 @@ module.exports = require('ridge/view').extend({
 
 	reset: function (models, options) {
 		_.invoke(this.modelViews, 'remove');
+
+		this.modelViews = [];
 
 		models.each(this.renderModel, this);
 	},
