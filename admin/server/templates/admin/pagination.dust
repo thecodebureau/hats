@@ -1,5 +1,6 @@
 {@pagination path=page.path}
 <div class="pagination">
+<div class="results">Showing items <span class="first number">{firstIndex}</span> - <span class="last number">{lastIndex}</span> out of <span class="total number">{totalCount}</span></div>
 {?pages}
 	<ul>
 		<li class="arrow"><a {#prev}href="{path}{search}" rel="prev" class="nav" {:else}href="javascript:;" {/prev}title="Föregående sida">&laquo;</a></li>
