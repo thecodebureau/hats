@@ -1,0 +1,13 @@
+{@pagination path=page.path}
+<div class="pagination">
+{?pages}
+	<ul>
+		<li class="arrow"><a {#prev}href="{path}{search}" rel="prev" class="nav" {:else}href="javascript:;" {/prev}title="Föregående sida">&laquo;</a></li>
+		{#pages}
+		<li{?current} class="current"{/current}><a href="{path}{search}" {#rel}rel="{.}" {/rel}class="nav" title="Sida {number}">{number}</a></li>
+		{/pages}
+		<li class="arrow"><a {#next}href="{path}{search}" rel="next" class="nav" {:else}href="javascript:;" {/next}title="Nästa sida">&raquo;</a></li>
+	</ul>
+{/pages}
+</div>
+{/pagination}
