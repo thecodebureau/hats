@@ -29,7 +29,8 @@ module.exports = function(config, mongoose, mw) {
 	}
 
 	function findByPath(req, res, next) {
-		var path = res.locals.page && res.locals.page.routePath || req.path ;
+		var page = res.locals.page;
+		var path = page && page.routePath || req.path ;
 
 		if(cache[path]) {
 			res.data.fields = cache[path];
@@ -42,7 +43,10 @@ module.exports = function(config, mongoose, mw) {
 			return next();
 		}
 
-		Field.find({ path: path }).lean().exec(function (err, fields) {
+		var paths = page ? _.compact(_.pluck(page.pages, 'path')) : [];
+		paths.push(path);
+
+		Field.find({ path: { $in: paths } }).lean().exec(function (err, fields) {
 			if (err) return next(err);
 
 			res.status(200);
