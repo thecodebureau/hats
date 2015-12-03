@@ -57,7 +57,7 @@ module.exports = function(config, mongoose, mw) {
 			});
 		},
 
-		paginate: mw.paginate(Employee, 1),
+		paginate: mw.paginate(Employee, 10),
 
 		patch: function(req, res, next) {
 			var query = {};
