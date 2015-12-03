@@ -135,5 +135,4 @@ module.exports = function(epiphany) {
 	});
 
 	epiphany.preware([ passport.initialize(), passport.session() ], 'after', epiphany.mw.session);
-	epiphany.preware([ '/uploads', epiphany.express.static(epiphany.config.dir.server.uploads) ], 'after', epiphany.mw.static);
 };
