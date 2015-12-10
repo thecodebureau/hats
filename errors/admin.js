@@ -1,6 +1,6 @@
 module.exports = {
 	views: {
-		Errors: require('./browser/admin/views/errors.js'),
+		ErrorsPage: require('./browser/admin/views/errors-page.js'),
 		Error: require('./browser/admin/views/error.js')
 	},
 	collections: {

@@ -12,6 +12,10 @@ module.exports = require('ridge/view').extend({
 		'click button[data-command="delete"]': 'delete'
 	},
 
+	elements: {
+		info: '.info'
+	},
+
 	delete: function(e) {
 		this.model.destroy();
 		this.remove();
@@ -23,17 +27,9 @@ module.exports = require('ridge/view').extend({
 
 	template: 'admin/models/error',
 
-	attach: function() {
-		app.views.CrudModel.prototype.attach.apply(this, arguments);
-
-		this.elements = {
-			$info: this.$('.info')
-		};
-	},
-
 	toggle: function() {
-		if(this.elements.$info.children().length > 0)
-			this.elements.$info.toggleClass('visible');
+		if(this.elements.info.children().length > 0)
+			this.elements.info.toggleClass('visible');
 	}
 
 });

@@ -5,7 +5,7 @@
 		<div class="status">{status}</div>
 		<div class="_message">{?message}{message}{:else}Status: {statusText}{/message}</div>
 		<div class="controls">
-			<button data-command="delete">Delete</button>
+			<button data-command="delete" class="delete red">Delete</button>
 		</div>
 	</div>
 	<div class="info">

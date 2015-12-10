@@ -1,17 +1,41 @@
-<section class="page errors">
-	<h1>Errors</h1>
-	<div data-view="Errors" class="collection">
-		<select data-command="filter">
-			<option value="">All</option>
-			<option value="server">Server</option>
-			<option value="client">Client</option>
-		</select>
-		<div class="count">Found <span class="value">0</span> errors.<div>
-		<button data-command="clear">Clear</button>
-		<div class="container">
-			{#errors}
-				{>"admin/models/error"/}
-			{/errors}
+<section class="errors collection page">
+	<header>
+		<h1>Errors</h1>
+	</header>
+
+	<div class="content">
+		<form class="search">
+			<!--
+			<select>
+				<option value="">All</option>
+				<option value="server">Server</option>
+				<option value="client">Client</option>
+			</select>
+			-->
+			<div class="container">
+				<label class="placeholder">Status code</label>
+				<input type="text" placeholder="Status Code" name="status" />
+			</div>
+			<div class="container buttons">
+				<button type="reset">Reset</button>
+				<button>Search</button>
+			</div>
+		</form>
+
+		<div>
+			<button data-command="removeAll">Remove all</button>
+			<button data-command="removePage">Remove errors on page</button>
+			<button data-command="removeFiltered">Remove (all) filtered</button>
+		</div>
+
+		{>"admin/pagination"/}
+		<div class="list errors collection container"></div>
+		{>"admin/pagination"/}
+
+		<div>
+			<button data-command="removeAll">Remove all</button>
+			<button data-command="removePage">Remove errors on page</button>
+			<button data-command="removeFiltered">Remove (all) filtered</button>
 		</div>
 	</div>
 </section>
