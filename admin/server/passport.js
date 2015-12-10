@@ -71,18 +71,18 @@ module.exports = function(epiphany) {
 
 			if(user) {
 				if(!user.local || !user.local.password) {
-					message = config.messages.notLocal;
+					message = config.messages.login.notLocal;
 				} else if (!user.isVerified) {
-					message = config.messages.unverified;
+					message = config.messages.login.unverified;
 				} else if (user.isBlocked) {
-					message = config.messages.blocked;
+					message = config.messages.login.blocked;
 				} else if (user.isBanned) {
-					message = config.messages.banned;
+					message = config.messages.login.banned;
 				} else if(!user.authenticate(password)) {
-					message = config.messages.wrongPassword;
+					message = config.messages.login.wrongPassword;
 				}
 			} else {
-				message = config.messages.noLocalUser;
+				message = config.messages.login.noLocalUser;
 			}
 			
 			done(null, user, message);
@@ -103,10 +103,10 @@ module.exports = function(epiphany) {
 				var message;
 
 				if(!user) {
-					message = config.messages.noExternalUser;
+					message = config.messages.login.noExternalUser;
 					req.session.newUser = extractProfile(profile, token);
 				} else if (user.isBanned) {
-					message = config.messages.banned;
+					message = config.messages.login.banned;
 				}
 				
 				done(null, user, message);

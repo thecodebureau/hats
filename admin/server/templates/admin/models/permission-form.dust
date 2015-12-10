@@ -1,15 +1,12 @@
-{>"admin/layouts/form" model="Permission" /}
-{<form}
-<form class="add permission">
-	<div class="server error"></div>
-	<div>
-		<label>Regex</label>
-		<input type="text" data-hook="regex" name="regex" />
+<form>
+	<div class="container">
+		<label class="placeholder">Regex</label>
+		<input type="text" placeholder="Regex" name="regex" value="{regex}"/>
+		<label class="icon"></label>
 	</div>
-	<div>
-		{#roles}
-			<input type="checkbox" data-hook="roles" name="roles" value="{name}" />{name}
-		{/roles}
+	<div class="container">
+		{#allRoles}
+			<input type="checkbox" name="roles" value="{name}" {@contains array=roles value=name}checked{/contains} />{name}
+		{/allRoles}
 	</div>
 </form>
-{/form}

@@ -1,7 +1,13 @@
-<div class="role model">
-	<div class="name">{name}</div>
+<div class="role model {?datePublished}published{:else}unpublished{/datePublished}">
+	<header>
+		<h1><a href="/admin/membership/roles/{_id}">{name}</a></h1>
+		<ul>
+			<li><strong>Created:</strong> <time data-hook="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
+			<li><strong>Modified:</strong> <time data-hook="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
+		</ul>
+	</header>
+
 	<div class="controls">
-		<a href="/admin/membership/roles/{_id}" data-command="edit" class="button"></a>
-		<button data-command="delete" class="delete">Delete</button>
+		<button data-command="delete" class="delete red" title="Delete">Delete</button>
 	</div>
 </div>

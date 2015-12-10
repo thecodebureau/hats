@@ -1,7 +1,8 @@
 module.exports = function(mongoose) {
 	var PermissionSchema = new mongoose.Schema({
 		regex: { type: String, required: true, unique: true },
-		roles: { type: [ String ], required: true }
+		roles: { type: [ String ], required: true },
+		dateCreated: { type: Date, default: Date.now }
 	});
 
 	PermissionSchema.statics.findMatches = function (email, cb) {

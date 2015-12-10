@@ -16,7 +16,7 @@ module.exports = require('ridge/view').extend({
 	initialize: function(options) {
 		this.modelViews = [];
 
-		this.collection = new app.collections.Permissions();
+		this.collection = new app.collections.Invites();
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
@@ -30,7 +30,7 @@ module.exports = require('ridge/view').extend({
 	attach: function() {
 		this.collection.reset({
 			totalCount: this.model.get('totalCount'),
-			permissions: this.model.get('permissions')
+			invites: this.model.get('invites')
 		}, { parse: true });
 	},
 
@@ -43,7 +43,7 @@ module.exports = require('ridge/view').extend({
 	},
 
 	renderModel: function(model) {
-		this.modelViews.push(new app.views.Permission({
+		this.modelViews.push(new app.views.Invite({
 			model: model,
 			data: this.data,
 		}).enter(this.elements.container));

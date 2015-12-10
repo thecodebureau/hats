@@ -40,10 +40,11 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	},
 
 	initialize: function(opts) {
+		console.log('init invite-page');
 		// save page model data
 		this.data = this.model.toJSON();
 
-		this.model = new app.models.Permission(this.model.get('permission'));
+		this.model = new app.models.Invite(this.model.get('invite'));
 
 		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},
@@ -64,7 +65,7 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 			model: this.model,
 
 			onSuccess: function(model, message, options) {
-				console.log('permission saved!');
+				console.log('invite saved!');
 			}
 		});
 	},

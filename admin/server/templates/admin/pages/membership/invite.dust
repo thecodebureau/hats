@@ -1,6 +1,6 @@
-<section data-view="PermissionPage" class="permission form page">
+<section data-view="InvitePage" class="invite form page">
 	<header>
-		<h1>Permission</h1>
+		<h1>Invite</h1>
 		<div class="controls">
 			<button data-command="save" class="save base" title="Save">Save</button>
 			<button data-command="create" class="create base" title="Create">Create</button>
@@ -8,6 +8,6 @@
 		</div>
 	</header>
 	<div class="content">
-		{>"admin/models/permission-form"/}
+		{>"admin/models/invite-form"/}
 	</div>
 </section>

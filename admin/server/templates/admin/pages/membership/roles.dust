@@ -1,7 +1,12 @@
 <section data-view="RolesPage" class="collection page roles">
 	<header>
 		<h1>Roles</h1>
-		<a class="button new nav" href="/admin/membership/roles/new">New Role</a>
+		<a class="button base new nav" href="/admin/membership/roles/new">New Role</a>
 	</header>
-	{>"admin/models/roles"/}
+
+	<div class="content">
+		{>"admin/pagination"/}
+		{>"admin/models/roles"/}
+		{>"admin/pagination"/}
+	</div>
 </section>

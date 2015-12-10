@@ -25,7 +25,13 @@
 <div class="container">
 	<div class="left">
 		<div class="logo"></div>
-		{>"partials/navigation":navigation page=page /}
+		<nav class="main">
+			<ul>
+				{#navigation}
+					{>"partials/navigation-item"/}
+				{/navigation}
+			</ul>
+		</nav>
 	</div>
 
 	<main></main>

@@ -1,7 +1,12 @@
 <section data-view="PermissionsPage" class="permissions collection page">
 	<header>
 		<h1>Permissions</h1>
-		<a class="button new nav" href="/admin/membership/permissions/new">New Permission</a>
+		<a class="button base new nav" href="/admin/membership/permissions/new">New Permission</a>
 	</header>
-	{>"admin/models/permissions"/}
+
+	<div class="content">
+		{>"admin/pagination"/}
+		{>"admin/models/permissions"/}
+		{>"admin/pagination"/}
+	</div>
 </section>

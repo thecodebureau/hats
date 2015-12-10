@@ -1,3 +1,1 @@
-<section class="permissions collection">{#permissions}
-	{>"admin/models/permission"/}
-{/permissions}</section>
+<section class="permissions list collection container"></section>

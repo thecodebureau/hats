@@ -1,9 +1,13 @@
 module.exports = function(mw, config) {
+	var isAuthenticated = mw.authorization.isAuthenticated;
+
+	mw = mw.api.permissions;
+
 	return [
-		[ 'get', '/', mw.api.permissions.findAll ],
-		[ 'get', '/:id', mw.api.permissions.findById ],
-		[ 'post', '/', mw.api.permissions.create ],
-		[ 'put', '/:id', mw.api.permissions.put ],
-		[ 'delete', '/:id', mw.api.permissions.remove ],
+		[ 'get', '/', [ isAuthenticated, mw.formatQuery, mw.paginate, mw.find ]],
+		[ 'get', '/:id', [ isAuthenticated, mw.findById ]],
+		[ 'post', '/', [ isAuthenticated, mw.create ]],
+		[ 'put', '/:id', [ isAuthenticated, mw.put ]],
+		[ 'delete', '/:id', [ isAuthenticated, mw.remove ]],
 	];
 };

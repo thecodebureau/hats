@@ -1,4 +1,4 @@
-module.exports = function(config, mongoose) {
+module.exports = function(config, mongoose, mw) {
 	var Permission = mongoose.model('Permission');
 
 	return {
@@ -12,7 +12,26 @@ module.exports = function(config, mongoose) {
 			});
 		},
 
+		find: function(req, res, next) {
+			var page = Math.max(0, req.query.page) || 0;
+			var perPage = Math.max(0, req.query.limit) || res.locals.perPage;
+
+			var query = Permission.find(_.omit(req.query, 'limit', 'sort', 'page'),
+				null,
+				{ sort: req.query.sort || '-dateCreated', lean: true });
+
+			if (perPage)
+				query.limit(perPage).skip(perPage * page);
+
+			query.exec(function(err, permissions) {
+				res.data.permissions = permissions;
+				next(err);
+			});
+		},
+
 		findById: function (req, res, next) {
+			if(req.params.id === 'new') return next();
+
 			Permission.findById(req.params.id, function (err, permission) {
 				if (err) return next(err);
 
@@ -21,25 +40,27 @@ module.exports = function(config, mongoose) {
 			});
 		},
 
-		findAll: function (req, res, next) {
+		formatQuery: mw.formatQuery([ 'limit', 'sort', 'page' ]),
+
+		getAll: function (req, res, next) {
 			Permission.find({}, function (err, permissions) {
 				if (err) return next(err);
 
-				res.status(200);
-				res.data.permissions = permissions;
+				res.status(200).data.permissions = permissions;
 				next();
 			});
 		},
 
-		findAllActive: function (req, res, next) {
+		getActive: function (req, res, next) {
 			Permission.find({ active: true }, function (err, permissions) {
 				if (err) return next(err);
 
-				res.status(200);
-				res.data.permissions = permissions;
+				res.status(200).data.permissions = permissions;
 				next();
 			});
 		},
+
+		paginate: mw.paginate(Permission, 20),
 
 		put: function(req, res, next) {
 			var query = {};
@@ -58,17 +79,12 @@ module.exports = function(config, mongoose) {
 				});
 			});
 		},
-		
 
 		remove: function (req, res, next) {
 			Permission.remove({ _id: req.params.id }, function (err, count) {
 				if (err) return next(err);
 
-				if (count > 0) {
-					res.data.ok = true;
-					res.status(204);
-				} else
-					res.status(404);
+				res.data.ok = true;
 
 				return next();
 			});

@@ -1,12 +1,14 @@
 <div class="permission model">
-	<div class="regex">{regex}</div>
-		<div class="roles">
-		{#roles}
-			{.}
-		{/roles}
-	</div>
+	<header>
+		<h1><a href="/admin/membership/permissions/{_id}">{regex}</a></h1>
+		<div class="permissions">{#roles}{.}, {/roles}</div>
+		<ul>
+			<li><strong>Created:</strong> <time data-hook="dateCreated" datetime="{dateCreated}">{dateCreated|d_datetime}</time></li>
+			<li><strong>Modified:</strong> <time data-hook="dateModified" datetime="{dateModified}">{?dateModified}{dateModified|d_datetime}{:else}N/A{/dateModified}</time></li>
+		</ul>
+	</header>
+
 	<div class="controls">
-		<a href="/admin/membership/permissions/{_id}" data-command="edit" class="button"></a>
-		<button data-command="delete" class="delete">Delete</button>
+		<button data-command="delete" class="delete red" title="Delete">Delete</button>
 	</div>
 </div>

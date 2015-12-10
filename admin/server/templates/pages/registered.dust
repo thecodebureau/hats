@@ -1,0 +1,9 @@
+<div class="registered page">
+	<div class="row-col">
+		{?user}
+			<h1>Du är nu registrerad och inloggad!</h1>
+		{:else}
+			<h1>Ett bekräftelse mail har skickats till din epostaddress</h1>
+		{/user}
+	</div>
+</div>

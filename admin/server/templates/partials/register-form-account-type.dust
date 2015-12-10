@@ -1,0 +1,47 @@
+<fieldset class="account-type">
+	<legend>Account type</legend>
+	<div class="google col">
+		{#newUser.google}
+			<h2>Google connected</h1>
+			<input type="hidden" name="google.id" value="{id}" required />
+			<input type="hidden" name="google.token" value="{token}" required />
+			<input type="hidden" name="google.email" value="{email}" />
+			<input type="hidden" name="email" value="{email}" />
+			<table>
+				<tr>
+					<td>Name:</td>
+					<td>{displayName}</td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td>{email}</td>
+				</tr>
+			</table>
+		{:else}
+			<a data-provider="google" class="connect" href="/auth/google">Sign in with Google</a>
+		{/newUser.google}
+	</div>
+	<div class="col">
+		<div class="seperator">
+			<span>or</span>
+		</div>
+	</div>
+	<div class="local col">
+		<div>
+			<p>If you do not want to connect an external account, you can provide an email and password for login.</p>
+		</div>
+		<div class="container">
+			<label class="placeholder" for="familyName">Epostadress</label>
+			<input type="email" name="email" placeholder="Epostadress" value="linus.miller@thecodebureau.com" required{?newUser} disabled{/newUser}/>
+			<label class="icon" for="name"></label>
+		</div>
+		<div class="container">
+			<label class="placeholder" for="local.password">Lösenord</label>
+			<input type="password" name="local.password" placeholder="Lösenord" value="rasmus" required{?newUser} disabled{/newUser} /><label class="icon" for="name"></label>
+		</div>
+		<div class="container">
+			<label class="placeholder" for="confirm.local.password">Upprepa lösenord</label>
+			<input type="password" name="repeatPassword" placeholder="Upprepa lösenord" value="rasmus" required{?newUser} disabled{/newUser} /><label class="icon" for="name"></label>
+		</div>
+	</div>
+</fieldset>

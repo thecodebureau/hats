@@ -1,13 +1,14 @@
-<div class="item" id="<%- @invite._id %>">
-    <div class="email"><%- @invite.email %></div>
-    <div class="inviter"><%- @invite.inviter.email %></div>
-    <div class="roles">
-		<% for role in @invite.roles : %>
-			<%- role %>,
-		<% end %>
+<div class="invite model">
+	<header>
+		<h1><a href="/admin/membership/invites/{_id}">{email} (invited by {inviter.email})</a></h1>
+		<div class="invites">{#roles}{.}, {/roles}</div>
+		<ul>
+			<li><strong>Created:</strong> <time>{dateCreated|d_datetime}</time></li>
+			<li><strong>Consumed:</strong> <time>{?dateConsumed}{dateConsumed|d_datetime}{:else}N/A{/dateConsumed}</time></li>
+		</ul>
+	</header>
+
+	<div class="controls">
+		<button data-command="delete" class="delete red" title="Delete">Delete</button>
 	</div>
-	<div class="consumed">
-		<%- if @invite.consumed then 'CONSUMED' else 'NOT CONSUMED' %>
-	</div>
-    <% include 'admin/models/item_controls.ect', { delete: true, edit: false, path: '/api/invite', item: @invite } %>
 </div>

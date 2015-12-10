@@ -38,15 +38,17 @@ module.exports = function(config, mongoose) {
 				if(req.body.facebook && req.body.facebook.email)
 					req.body.email = req.body.facebook.email;
 				else
-					return next(new Error('Incomplete body'));
+					return next(new Error(config.passport.messages.register.missingProperties));
 			}
 
+			console.log("TRYING TO REGISTER");
 
 			User.findOne({ email: req.body.email }, function(err, user) {
 				if(err) next(err);
 
 				else if(user) {
-					err = new Error('The email address has already been used.');
+					console.log(config.passport.messages.register.duplicateEmail);
+					err = new Error(config.passport.messages.register.duplicateEmail);
 					err.status = 409;
 					next(err);
 				} else {
@@ -55,7 +57,7 @@ module.exports = function(config, mongoose) {
 
 					var provider = _.pick(req.body, passport.providers);
 
-					if(!_.isEmpty(provider) && (!req.session.newUser || !_.matches(provider)(_.pick(req.session.newUser, passport.providers)))) {
+					if(!_.isEmpty(provider) && (!req.session.newUser || !_.isEqual(provider, _.pick(req.session.newUser, passport.providers)))) {
 						err = new Error('The supplied user credentials does not match those retrieved from ' + _.keys(provider)[0] + '.');
 						err.status = 400;
 						return next(err);
@@ -69,7 +71,8 @@ module.exports = function(config, mongoose) {
 						if(err) return next(err);
 
 						if(roles.length < 1) {
-							err = new Error('The supplied email address is not authorized to register on this website.');
+							console.log('NO PERMISSION FOUND!');
+							err = new Error(config.passport.messages.register.notAuthorized);
 							err.status = 401;
 							return next(err);
 						}

@@ -1,6 +1,12 @@
-<section data-view="Crud" data-page="invites" class="page crud invites" data-collection="Invites">
-	{>"admin/models/invite-form"/}
-	{>"admin/models/invites"/}
-</section>
-		
+<section data-view="InvitesPage" class="invites collection page">
+	<header>
+		<h1>Invites</h1>
+		<a class="button base new nav" href="/admin/membership/invites/new">New Invite</a>
+	</header>
 
+	<div class="content">
+		{>"admin/pagination"/}
+		{>"admin/models/invites"/}
+		{>"admin/pagination"/}
+	</div>
+</section>

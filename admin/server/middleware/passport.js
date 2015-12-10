@@ -1,7 +1,7 @@
 var passport = require('passport');
 
 function _401(str) {
-	var err = new Error(str);
+	var err = new Error(str ? str.message || str : 'No message');
 	err.status = 401;
 	return err;
 }

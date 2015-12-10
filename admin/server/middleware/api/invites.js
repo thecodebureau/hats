@@ -1,38 +1,68 @@
-module.exports = function(config, mongoose) {
-	var Invite = mongoose.model('Invite');
+var nodemailer = require('nodemailer');
+
+module.exports = function(config, mongoose, mw) {
+	var Invite = mongoose.model('Invite'),
+		smtpTransport = nodemailer.createTransport(config.mail);
 
 	return {
 		create: function (req, res, next) {
-			req.body.inviter = {};
-			req.body.inviter._id = req.user._id;
-			req.body.inviter.email = req.user.email;
+			req.body.inviter = {
+				_id: req.user._id,
+				email: req.user.email
+			};
+
 			Invite.create(req.body, function (err, invite) {
 				if (err) return next(err);
 
-				var smtpTransport = nodemailer.createTransport('SMTP', config.mail);
-				res.render('emails/invite', { roles: req.body.roles }, function (err, html) {
+				res.render('emails/invite', { site: config.site, invite: invite }, function (err, html) {
+					if(err) return next(err);
+
 					smtpTransport.sendMail({
-						from: 'TCB Robot <no-reply@thecodebureau.com>',
+						from: config.invite.from,
 						to: req.body.email,
-						subject: 'You have been invited to the TCB Portal!',
+						subject: config.invite.subject,
 						html: html
 					}, function (err) {
-						if (err) throw err;
+						if (err) return next(err);
+						res.status(201).data.invite = invite;
 
-						res.data.invite = invite;
-						res.statusCode = 201;
-						res.message = {
-							type: 'success',
-							heading: 'Invite created!',
-							text: 'An email has been sent to the invitee.'
-						};
 						return next();
 					});
 				});
 			});
 		},
 
-		findAll: function (req, res, next) {
+		find: function(req, res, next) {
+			var page = Math.max(0, req.query.page) || 0;
+			var perPage = Math.max(0, req.query.limit) || res.locals.perPage;
+
+			var query = Invite.find(_.omit(req.query, 'limit', 'sort', 'page'),
+				null,
+				{ sort: req.query.sort || '-dateCreated', lean: true });
+
+			if (perPage)
+				query.limit(perPage).skip(perPage * page);
+
+			query.exec(function(err, invites) {
+				res.data.invites = invites;
+				next(err);
+			});
+		},
+
+		findById: function (req, res, next) {
+			if(req.params.id === 'new') return next();
+
+			Invite.findById(req.params.id, function (err, invite) {
+				if (err) return next(err);
+
+				res.status(200).data.invite = invite;
+				next();
+			});
+		},
+
+		formatQuery: mw.formatQuery([ 'limit', 'sort', 'page' ]),
+
+		getAll: function (req, res, next) {
 			Invite.find({}, function (err, invites) {
 				if (err) return next(err);
 				res.data.invites = invites;
@@ -40,7 +70,7 @@ module.exports = function(config, mongoose) {
 			});
 		},
 
-		findAllActive: function (req, res, next) {
+		getActive: function (req, res, next) {
 			Invite.find({ active: true }, function (err, invites) {
 				if (err) return next(err);
 				res.data.invites = invites;
@@ -48,22 +78,14 @@ module.exports = function(config, mongoose) {
 			});
 		},
 
+		paginate: mw.paginate(Invite, 20),
+
 		remove: function (req, res, next) {
 			Invite.remove({ _id: req.params.id }, function (err, count) {
 				if (err) return next(err);
-				if (count > 0) {
-					res.statusCode = 200;
-					res.message = {
-						type: 'success',
-						heading: 'The Invite has been removed.'
-					};
-				} else {
-					res.statusCode = 410;
-					res.message = {
-						type: 'error',
-						heading: 'Ingen invite hittades, ingen togs port.'
-					};
-				}
+
+				res.data.ok = true;
+
 				return next();
 			});
 		}

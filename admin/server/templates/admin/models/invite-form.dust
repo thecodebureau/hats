@@ -1,15 +1,12 @@
-{>"admin/layouts/form" model="Invite" /}
-{<form}
 <form>
-	<div class="server error"></div>
-	<div>
-		<label>Email</label>
-		<input type="email" name="email" required />
+	<div class="container">
+		<label class="placeholder">Email</label>
+		<input type="email" placeholder="Email" name="email" value="{email}" required />
+		<label class="icon"></label>
 	</div>
-	<div>
-		{#roles}
-			<input type="checkbox" property="roles" value="{name}" />{name}
-		{/roles}
+	<div class="container">
+		{#allRoles}
+			<input type="checkbox" name="roles" value="{name}" {@contains array=roles value=name}checked{/contains} />{name}
+		{/allRoles}
 	</div>
 </form>
-{/form}
