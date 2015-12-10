@@ -26,14 +26,10 @@ module.exports = require('ridge/view').extend({
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
-		console.log('about to listen');
 		this.listenTo(app.router.current(), 'change:query', this.fetch);
 	},
 
 	fetch: function(model, query) {
-		console.log('fetching');
-		console.log(query);
-		console.log(this.collection);
 		this.collection.fetch({ reset: true, data: query });
 	},
 
