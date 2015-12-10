@@ -29,21 +29,20 @@ module.exports = function(config, mongoose, mw) {
 	}
 
 	function findByPath(req, res, next) {
-		var page = res.locals.page;
-		var path = page && page.routePath || req.path ;
+		var page = res.locals.page,
+			path = page && page.path || req.path ;
 
-		if(cache[path]) {
+		if(_.has(cache, path)) {
 			res.data.fields = cache[path];
 
 			if(res.lang)
-				res.data.fields = _.mapValues(res.data.fields, function(value, key) {
-					return value[res.lang];
-				});
+				res.data.fields = extractLang(res.data.fields, res.lang);
 				
 			return next();
 		}
 
 		var paths = page ? _.compact(_.pluck(page.pages, 'path')) : [];
+
 		paths.push(path);
 
 		Field.find({ path: { $in: paths } }).lean().exec(function (err, fields) {
@@ -58,11 +57,73 @@ module.exports = function(config, mongoose, mw) {
 			}, {});
 
 			if(res.lang)
-				res.data.fields = _.mapValues(res.data.fields, function(value, key) {
-					return value[res.lang];
-				});
+				res.data.fields = extractLang(res.data.fields, res.lang);
+
 			next();
 		});
+	}
+
+	function extractLang(fields, lang) {
+		return _.mapValues(fields, function(value, key) {
+			return value[lang];
+		});
+	}
+
+	function fnc(page, lang, nested, cb) {
+		if(!page) 
+			return cb();
+
+		var path = page.path;
+
+		if(_.has(cache, path)) {
+			page.fields = cache[path];
+
+			if(lang)
+				page.fields = extractLang(page.fields, lang);
+				
+			if(nested && page.pages) {
+				page.pages = page.pages.map(_.clone);
+			
+				cb = _.after(page.pages.length, cb);
+
+				page.pages.forEach(function(_page) {
+					fnc(_page, lang, nested, cb);
+				});
+			} else {
+				cb();
+			}
+		} else {
+			Field.find({ path: path }).lean().exec(function (err, fields) {
+				cache[path] = page.fields = fields.reduce(function(result, value) {
+					result[value.name] = value.content;
+
+					return result;
+				}, {});
+
+				if(lang)
+					page.fields = extractLang(page.fields, lang);
+
+				if(nested && page.pages) {
+					page.pages = page.pages.map(_.clone);
+				
+					cb = _.after(page.pages.length, cb);
+
+					page.pages.forEach(function(_page) {
+						fnc(_page, lang, nested, cb);
+					});
+				} else {
+					cb();
+				}
+			});
+		}
+	}
+
+	function findByPage(nested) {
+		return function _findByPage(req, res, next) {
+			res.locals.page = _.clone(res.locals.page);
+
+			fnc(res.locals.page, res.lang, nested, next);
+		};
 	}
 
 	function patch(req, res, next) {
@@ -134,6 +195,7 @@ module.exports = function(config, mongoose, mw) {
 
 	return {
 		create: create,
+		findByPage: findByPage,
 		findByPath: findByPath,
 		findById: findById,
 		find: find,
