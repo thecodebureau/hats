@@ -17,6 +17,7 @@ _.extend(Model.prototype, require('ridge/mixins/validate'), {
 		'telephone': {
 			required: true
 		},
+		'address.area': false,
 		'address.streetAddress': {
 			required: true
 		},
