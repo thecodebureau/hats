@@ -1,12 +1,11 @@
-var path = require('path');
-
 module.exports = function(config) {
-	if(!config.url) throw new Error('config.url has not been set yet.');
+	if(!config.site) throw new Error('config.site has not been set yet.');
 
 	return {
 		local: {
 			usernameField: 'email'
 		},
+		scope: [ 'email' ],
 		messages: {
 			login: {
 				notLocal: 'Account requires external login.',
@@ -26,13 +25,13 @@ module.exports = function(config) {
 		facebook: {
 			clientID: 'changeThisFool',
 			clientSecret: 'changeThisFool',
-			callbackURL: path.join(config.site.url, "/auth/facebook/callback"),
+			callbackURL: config.site.url + "/auth/facebook/callback",
 			passReqToCallback: true
 		},
 		google: {
 			clientID: 'changeThisFool',
 			clientSecret: 'changeThisFool',
-			callbackURL: path.join(config.site.url, "/auth/google/callback"),
+			callbackURL: config.site.url + "/auth/google/callback",
 			passReqToCallback: true
 		}
 	};

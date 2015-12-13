@@ -40,18 +40,10 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	},
 
 	initialize: function(opts) {
-		var collection = new app.collections.NewsArticles();
-
 		// save page model data
 		this.data = this.model.toJSON();
 
-		var newsArticle = this.model.get('newsArticle');
-
-		if(!newsArticle) {
-			newsArticle = {};
-		}
-
-		this.model = collection.add(newsArticle);
+		this.model = new app.models.NewsArticle(this.model.get('newsArticle') || {});
 
 		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},

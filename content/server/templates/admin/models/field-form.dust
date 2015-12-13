@@ -27,7 +27,7 @@
 			<label>Content {name}</label>
 		</div>
 		<div class="container">
-			<div type='text' data-spytext data-name="content">{content}</div>
+			<div type='text' data-spytext data-name="content">{content|s}</div>
 			<label class="icon"></label>
 		</div>
 	{/languages}

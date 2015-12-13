@@ -51,13 +51,7 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 				return chunk.write(context.get('content.' + context.get('iso')));
 			};
 
-		var field = _view.model.get('field');
-
-		if(!field) {
-			field = {};
-		}
-
-		_view.model = collection.add(field);
+		_view.model = new app.models.Field(this.model.get('field') || {});
 
 		_view.listenTo(_view.model, 'change sync cancel', _view.setActiveButtons);
 
@@ -83,8 +77,7 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 			el: this.$('form'),
 
 			subviews: {
-				SpytextField: '[data-spytext]',
-				ImageUpload: '.image-upload'
+				SpytextField: '[data-spytext]'
 			},
 
 			model: this.model,

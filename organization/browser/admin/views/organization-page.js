@@ -21,18 +21,10 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	},
 
 	initialize: function(opts) {
-		var id = _.last(window.location.pathname.split('/'));
-
 		// save page model data
 		this.data = this.model.toJSON();
 
-		var organization = this.model.get('organization');
-
-		if(!organization) {
-			organization = {};
-		}
-
-		this.model = new app.models.Organization(organization);
+		this.model = new app.models.Organization(this.model.get('organization') || {});
 
 		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},
@@ -49,11 +41,6 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 
 		this.formView = new app.views.Form({
 			el: this.$('form'),
-
-			subviews: {
-				SpytextField: '[data-spytext]',
-				ImageUpload: '.image-upload'
-			},
 
 			model: this.model,
 

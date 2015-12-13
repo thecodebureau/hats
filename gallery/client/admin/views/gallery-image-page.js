@@ -2,33 +2,56 @@ var app = require('ridge');
 
 View = require('ridge/view').extend();
 
-_.extend(View.prototype, require('ridge/mixins/observe'), {
+_.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	events: {
-		'submit': 'preventDefault'
+		'click button[data-command="create"]': 'create',
+		'click button[data-command="reset"]': 'reset',
+		'click button[data-command="save"]': 'save',
 	},
 
-	subviews: {
-		ModelControls: '.controls'
+	save: function() {
+		if(this.model.isValid()) {
+			this.model.save(null, null, { validate: false });
+		}
 	},
+
+	reset: function() {
+		if(confirm('Are you sure you want to reset?')) {
+			this.model.reset();
+		}
+	},
+
+	create: function() {
+		var _view = this;
+
+		if(_view.model.isValid()) {
+			_view.model.save(null, {
+				success: function(model, response, opts) {
+					if(_view.collection) {
+						_view.collection.add(_view.model);
+					}
+
+					var path = _.initial(Backbone.history.fragment.split('/')).concat(model.id).join('/');
+
+					app.router.navigate(path, { replace: true });
+				}
+			});
+		}
+	},
+
 
 	initialize: function(opts) {
-		var id = _.last(window.location.pathname.split('/'));
-
-		var collection = new app.collections.GalleryImages();
-
 		// save page model data
 		this.data = this.model.toJSON();
 
-		if(id === 'new') {
-			this.model = collection.add({});
-		} else {
-			this.model = collection.add({ _id: id });
-		}
+		this.model = new app.models.GalleryImage(this.model.get('galleryImage') || {});
 
-		this.model.fetch();
+		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},
 
 	attach: function() {
+		this.setActiveButtons();
+
 		this.views.push(new app.views.ImageUpload({
 			el: this.$('.image-upload'),
 			data: this.data,

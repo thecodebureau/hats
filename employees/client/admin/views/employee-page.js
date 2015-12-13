@@ -40,26 +40,18 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	},
 
 	initialize: function(opts) {
-		var collection = new app.collections.Employees();
-
 		// save page model data
 		this.data = this.model.toJSON();
 
-		var employee = this.model.get('employee');
-
-		if(!employee) {
-			employee = {};
-		}
-
-		this.model = collection.add(employee);
+		this.model = new app.models.Employee(this.model.get('employee') || {});
 
 		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},
 
 	attach: function() {
-		this.setActiveButtons();
-
 		var _view = this;
+
+		this.setActiveButtons();
 
 		if(this.formView) {
 			this.stopListening(this.formView);
