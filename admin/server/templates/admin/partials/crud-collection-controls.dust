@@ -1,4 +1,0 @@
-<div class="controls">
-	{?datePublished}<button data-command="unpublish" class="publish">Unpublish</button>{:else}<button data-command="publish" class="publish">Publish</button>{/datePublished}
-	<button data-command="delete" class="delete">Delete</button>
-</div>

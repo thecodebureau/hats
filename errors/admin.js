@@ -1,10 +1,10 @@
 module.exports = {
 	views: {
-		ErrorsPage: require('./browser/admin/views/errors-page.js'),
-		Error: require('./browser/admin/views/error.js')
+		ErrorsPage: require('./client/admin/views/errors-page.js'),
+		Error: require('./client/admin/views/error.js')
 	},
 	collections: {
-		Errors: require('./browser/admin/collections/errors.js')
+		Errors: require('./client/admin/collections/errors.js')
 	}
 };
 

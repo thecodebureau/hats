@@ -1,5 +1,0 @@
-<div class="controls">
-	<button data-command="publish" class="publish">Publish</button>
-	<button data-command="unpublish" class="publish">Unpublish</button>
-	<button data-command="delete" class="delete">Delete</button>
-</div>

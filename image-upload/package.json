@@ -1,7 +1,7 @@
 {
   "description": "Image upload hat.",
-  "main": "paths.js",
-  "browser": "browser.js",
+  "main": "server.js",
+  "browser": "public.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

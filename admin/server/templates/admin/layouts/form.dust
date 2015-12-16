@@ -1,7 +1,0 @@
-<section class="{model|sc} form">
-	<header>
-		<h1>{model|SC}</h1>
-		{>"admin/partials/form-controls"/}
-	</header>
-	{+form/}
-</section>

@@ -1,5 +1,0 @@
-<div class="controls">
-	<button data-command="save" class="save">Save</button>
-	<button data-command="create" class="create">Create</button>
-	<button data-command="reset" type="button" class="reset">Clear form</button>
-</div>

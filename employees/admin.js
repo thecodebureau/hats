@@ -1,16 +1,15 @@
-var browser = require('./browser');
+module.exports = {
+	collections: {
+		Employees: require('./client/collections/employees'),
+	},
 
-var admin = {
+	models: {
+		Employee: require('./client/models/employee'),
+	},
+
 	views: {
 		EmployeePage: require('./client/admin/views/employee-page'),
 		EmployeesPage: require('./client/admin/views/employees-page'),
 		Employee: require('./client/admin/views/employee'),
 	}
 };
-
-_.each(admin, function(value, key) {
-	if(browser[key]) _.extend(browser[key], value);
-	else browser[key] = value;
-});
-
-module.exports = browser;

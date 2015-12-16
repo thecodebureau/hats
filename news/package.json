@@ -1,7 +1,7 @@
 {
-  "description": "News module for Hatter.",
-  "main": "paths.js",
-  "browser": "browser.js",
+  "description": "News module for Epiphany & Ridge.",
+  "main": "server.js",
+  "browser": "public.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

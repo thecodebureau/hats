@@ -1,10 +1,10 @@
-var path = require('path');
-
-module.exports = _.extend({
-	setup: function(epiphany) {
-		epiphany.mongoose.model('Organization').findOne({}).lean().exec(function(err, organization) {
-			if(err) throw err;
-			if (organization) epiphany.server.locals.organization = organization;
-		});
-	}
-}, require('./paths'));
+module.exports = {
+	models: {
+		Organization: require('./model')
+	},
+	middleware: {
+		organization: require('./middleware')
+	},
+	pages: require('./pages'),
+	routes: require('./routes'),
+};

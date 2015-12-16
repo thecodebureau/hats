@@ -1,8 +1,7 @@
 {
-  "name": "hats/gallery",
-  "description": "Gallery module for Hatter.",
-  "main": "paths.js",
-  "browser": "browser.js",
+  "description": "Gallery module for Epiphany and Ridge.",
+  "main": "server.js",
+  "browser": "public.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

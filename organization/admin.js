@@ -1,15 +1,9 @@
-var browser = require('./browser');
+module.exports = {
+	models: {
+		Organization: require('./client/models/organization.js')
+	},
 
-var admin = {
 	views: {
-		OrganizationPage: require('./browser/admin/views/organization-page')
+		OrganizationPage: require('./client/admin/views/organization-page')
 	}
 };
-
-_.each(admin, function(value, key) {
-	if(browser[key]) _.extend(browser[key], admin[key]);
-
-	else browser[key] = admin[key];
-});
-
-module.exports = browser;
