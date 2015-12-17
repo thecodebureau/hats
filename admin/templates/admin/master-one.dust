@@ -15,9 +15,6 @@
 			document.documentElement.className = 'IE11';
 		}
 	</script>
-	<script src="/js/common{js.suffix}.js"></script>
-	<script src="/js/admin{js.suffix}.js"></script>
-	
 </head>
 
 <body>
@@ -37,5 +34,11 @@
 	<main></main>
 </div>
 
+	<script>
+		var INITIAL_STATE = {INITIAL_STATE|s};
+	</script>
+	<script src="/js/common{js.suffix}.js"></script>
+	<script src="/js/admin{js.suffix}.js"></script>
+	
 </body>
 </html>
