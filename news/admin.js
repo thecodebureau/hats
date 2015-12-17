@@ -7,6 +7,17 @@ module.exports = {
 		NewsArticle: require('./client/models/news-article')
 	},
 
+	routes: {
+		'news': {
+			view: 'NewsPage',
+			routes: {
+				':id': {
+					view: 'NewsArticlePage',
+				}
+			}
+		}
+	},
+
 	views: {
 		NewsPage: require('./client/admin/views/news-page'),
 		NewsArticlePage: require('./client/admin/views/news-article-page'),

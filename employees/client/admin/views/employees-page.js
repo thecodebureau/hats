@@ -1,6 +1,6 @@
 var app = require('ridge');
 
-module.exports = require('ridge/view').extend({
+module.exports = require('ridge/views/page').extend({
 	events: {
 		'click .collection + .pagination li:not(.current) a.nav': function() {
 			this.scroll = true;
@@ -26,20 +26,20 @@ module.exports = require('ridge/view').extend({
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
-		this.listenTo(this.model, 'change:query', this.fetch);
+		this.listenTo(this.state, 'change:query', this.fetch);
 	},
 
-	fetch: function(model, query) {
+	fetch: function(state, query) {
 		this.collection.fetch({ reset: true, data: query });
 	},
 
 	attach: function() {
 		this.collection.reset({
-			totalCount: this.model.get('totalCount'),
-			employees: this.model.get('employees')
+			totalCount: this.state.get('totalCount'),
+			employees: this.state.get('employees')
 		}, { parse: true });
 
-		this.model.unset('employees');
+		this.state.unset('employees');
 
 		var state = window.history && window.history.state;
 

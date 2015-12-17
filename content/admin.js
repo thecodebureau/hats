@@ -10,7 +10,12 @@ module.exports = {
 		Field: require('./client/models/field.js')
 	},
 
-	routes: require('./client/admin/routes'),
+	routes: {
+		'content': {
+			view: 'ContentPage',
+			url: '/admin/content'
+		}
+	},
 
 	views: {
 		ContentPage: require('./client/admin/views/content-page'),

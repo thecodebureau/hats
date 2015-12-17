@@ -1,6 +1,6 @@
 var app = require('ridge');
 
-module.exports = require('ridge/view').extend({
+module.exports = require('ridge/views/page').extend({
 	elements: {
 		container: '.collection.container'
 	},
@@ -20,18 +20,17 @@ module.exports = require('ridge/view').extend({
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
-		this.listenTo(app.router.current(), 'change:query', this.fetch);
+		this.listenTo(this.state, 'change:query', this.fetch);
 	},
 
-	fetch: function(model, query) {
+	fetch: function(state, query) {
 		this.collection.fetch({ reset: true, data: query });
 	},
 
 	attach: function() {
-		console.log(this.model.get('roles'));
 		this.collection.reset({
-			totalCount: this.model.get('totalCount'),
-			roles: this.model.get('roles')
+			totalCount: this.state.get('totalCount'),
+			roles: this.state.get('roles')
 		}, { parse: true });
 	},
 

@@ -1,6 +1,6 @@
 var app = require('ridge');
 
-var View = require('ridge/view').extend();
+var View = require('ridge/views/page').extend();
 
 _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	events: {
@@ -40,10 +40,7 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	},
 
 	initialize: function(opts) {
-		// save page model data
-		this.data = this.model.toJSON();
-
-		this.model = new app.models.NewsArticle(this.model.get('newsArticle') || {});
+		this.model = new app.models.NewsArticle(this.state.get('newsArticle') || {});
 
 		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},

@@ -171,6 +171,23 @@ module.exports = {
 			});
 		});
 	},
+
+	paths: function(req, res, next) {
+		//var pages = epiphany.pages.public;
+
+		//var paths = [];
+
+		//while(pages && pages.length) {
+		//	paths.push.apply(paths, _.pluck(pages, 'path'));
+
+		//	pages = _.compact(_.flatten(_.pluck(pages, 'pages')));
+		//}
+
+		//res.locals.paths = paths.sort();
+		res.locals.paths = require('./config').paths;
+		next();
+	},
+	
 	
 	put: function(req, res, next) {
 		Field.findById(req.params.id, function(err, field) {

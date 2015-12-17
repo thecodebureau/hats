@@ -13,6 +13,28 @@ module.exports = {
 		//User: require('./client/admin/models/user'),
 	},
 
+	routes: {
+		'membership': {
+			view: 'Page',
+			url: '/admin/membership',
+			routes: {
+				'roles': {
+					view: 'RolesPage',
+					url: '/admin/membership/roles'
+				},
+				permissions: {
+					view: 'PermissionsPage',
+					url: '/admin/membership/permissions'
+				},
+				'invites': {
+					view: 'InvitesPage',
+					url: '/admin/membership/invites'
+				},
+			},
+		}
+	},
+
+
 	views: {
 		Form: require('ridge/views/form'),
 		Invite: require('./client/admin/views/invite'),

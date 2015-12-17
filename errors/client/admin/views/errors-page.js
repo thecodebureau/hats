@@ -1,10 +1,7 @@
 var app = require('ridge');
 
-module.exports = require('ridge/view').extend({
+module.exports = require('ridge/views/page').extend({
 	events: {
-		'click .collection + .pagination li:not(.current) a.nav': function() {
-			this.scroll = true;
-		},
 		'click button[data-command="removeAll"]': 'removeAll',
 		'click button[data-command="removeFiltered"]': 'removeFiltered',
 		'click button[data-command="removePage"]': 'removePage'
@@ -16,7 +13,7 @@ module.exports = require('ridge/view').extend({
 			method: 'DELETE',
 			url: '/api/errors',
 			success: function() {
-				_view.fetch(null, app.router.current().get('query'));
+				_view.fetch(null, this.state.get('query'));
 			}
 		});
 	},
@@ -25,9 +22,9 @@ module.exports = require('ridge/view').extend({
 		var _view = this;
 		$.ajax({
 			method: 'DELETE',
-			url: '/api/errors?' + app.router.current().get('query'),
+			url: '/api/errors?' + this.state.get('query'),
 			success: function() {
-				_view.fetch(null, app.router.current().get('query'));
+				_view.fetch(null, this.state.get('query'));
 			}
 		});
 	},
@@ -39,7 +36,7 @@ module.exports = require('ridge/view').extend({
 
 		this.modelViews = [];
 
-		this.fetch(null, app.router.current().get('query'));
+		this.fetch(null, this.state.get('query'));
 	},
 
 
@@ -62,29 +59,18 @@ module.exports = require('ridge/view').extend({
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
-		this.listenTo(app.router.current(), 'change:query', this.fetch);
+		this.listenTo(this.state, 'change:query', this.fetch);
 	},
 
-	fetch: function(model, query) {
+	fetch: function(state, query) {
 		this.collection.fetch({ reset: true, data: query });
 	},
 
 	attach: function() {
 		this.collection.reset({
-			totalCount: this.model.get('totalCount'),
-			errors: this.model.get('errors')
+			totalCount: this.state.get('totalCount'),
+			errors: this.state.get('errors')
 		}, { parse: true });
-
-		this.model.unset('errors');
-
-		var state = window.history && window.history.state;
-
-		if (_.has(state, 'scrollX'))
-			window.scrollTo(state.scrollX, state.scrollY);
-		else if (this.scroll)
-			this.el.scrollIntoView();
-
-		this.scroll = false;
 	},
 
 	reset: function (models, options) {

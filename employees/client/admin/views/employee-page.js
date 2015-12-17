@@ -1,6 +1,6 @@
 var app = require('ridge');
 
-var View = require('ridge/view').extend();
+var View = require('ridge/views/page').extend();
 
 _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	events: {
@@ -33,17 +33,14 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 
 					var path = _.initial(Backbone.history.fragment.split('/')).concat(model.id).join('/');
 
-					app.router.navigate(path, { replace: true });
+					Backbone.history.navigate(path, { replace: true });
 				}
 			});
 		}
 	},
 
 	initialize: function(opts) {
-		// save page model data
-		this.data = this.model.toJSON();
-
-		this.model = new app.models.Employee(this.model.get('employee') || {});
+		this.model = new app.models.Employee(this.state.get('employee') || {});
 
 		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},

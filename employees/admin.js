@@ -7,6 +7,17 @@ module.exports = {
 		Employee: require('./client/models/employee'),
 	},
 
+	routes: {
+		'employees': {
+			view: 'EmployeesPage',
+			routes: {
+				':id': {
+					view: 'EmployeePage',
+				}
+			}
+		}
+	},
+
 	views: {
 		EmployeePage: require('./client/admin/views/employee-page'),
 		EmployeesPage: require('./client/admin/views/employees-page'),
