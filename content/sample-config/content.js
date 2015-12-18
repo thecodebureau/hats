@@ -1,3 +1,12 @@
 module.exports = {
-	languages: []
+	languages: [],
+
+	paths: [
+		'/',
+		'/login',
+		'/register',
+		'/registered',
+		'/reset',
+	]
+
 };

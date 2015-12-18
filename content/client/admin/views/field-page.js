@@ -1,6 +1,6 @@
 var app = require('ridge');
 
-var View = require('ridge/view').extend();
+var View = require('ridge/views/page').extend();
 
 _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	events: {
@@ -24,8 +24,8 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	create: function() {
 		var _view = this;
 
-		if(_view.model.isValid()) {
-			_view.model.save(null, {
+		if(this.model.isValid()) {
+			this.model.save(null, {
 				success: function(model, response, opts) {
 					if(_view.collection) {
 						_view.collection.add(_view.model);
@@ -33,7 +33,7 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 
 					var path = _.initial(Backbone.history.fragment.split('/')).concat(model.id).join('/');
 
-					app.router.navigate(path, { replace: true });
+					Backbone.history.navigate(path, { replace: true });
 				}
 			});
 		}
@@ -43,15 +43,12 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 		var _view = this,
 			collection = new app.collections.Fields();
 
-		// save page model data
-		_view.data = _view.model.toJSON();
-
-		if(_view.data.languages)
+		if(_view.state.get('languages'))
 			_view.data.getContent = function(chunk, context, bodies, params) {
 				return chunk.write(context.get('content.' + context.get('iso')));
 			};
 
-		_view.model = new app.models.Field(this.model.get('field') || {});
+		_view.model = new app.models.Field(_view.state.get('field') || {});
 
 		_view.listenTo(_view.model, 'change sync cancel', _view.setActiveButtons);
 

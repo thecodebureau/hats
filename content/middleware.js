@@ -152,6 +152,11 @@ module.exports = {
 		'name': 'regex'
 	}),
 
+	lang: function(req, res, next) {
+		res.locals.languages = require('./config').languages;
+		next();
+	},
+
 	paginate: mw.paginate(Field, 20),
 
 	patch: function(req, res, next) {

@@ -13,7 +13,11 @@ module.exports = {
 	routes: {
 		'content': {
 			view: 'ContentPage',
-			url: '/admin/content'
+			routes: {
+				':id': {
+					view: 'FieldPage'
+				}
+			}
 		}
 	},
 

@@ -8,7 +8,7 @@ module.exports = [ {
 		path: ':id',
 		view: 'FieldPage',
 		template: 'admin/pages/field',
-		middleware: [ mw.findById, mw.paths ],
+		middleware: [ mw.findById, mw.lang, mw.paths ],
 		nav: false
 	} ]
 } ];
