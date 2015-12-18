@@ -1,6 +1,7 @@
 var Model = require('ridge/model').extend();
 
 _.extend(Model.prototype, require('ridge/mixins/validate'), {
+	urlRoot: '/api/employees',
 
 	validation: {
 		'givenName': {
