@@ -14,13 +14,23 @@ var isAuthenticated = function(req, res, next) {
 	}
 };
 
-var redirectAuthenticated = function(path) {
+var redirectAuthenticated = function(url) {
 	return function redirectAuthenticated(req, res, next) {
-		if(req.isAuthenticated()) {
-			res.redirect(path);
-		} else {
+		if(req.isAuthenticated())
+			res.redirect(url);
+		else
 			next();
-		}
+	
+	};
+};
+
+var redirectUnauthorized = function(url) {
+	return function redirectUnauthorized(error, req, res, next) {
+		if (error.status === 401 && !req.user && !req.xhr && req.accepts('html', 'json') === 'html') {
+			req.session.lastPath = req.path;
+			res.redirect('/login');
+		} else
+			next();
 	};
 };
 
@@ -46,6 +56,7 @@ module.exports = {
 	isAuthenticated: isAuthenticated,
 	isCurrent: isCurrent,
 	redirectAuthenticated: redirectAuthenticated,
+	redirectUnauthorized: redirectUnauthorized,
 	hasRole: hasRole,
 	isAdmin: isAdmin
 };
