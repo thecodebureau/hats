@@ -10,9 +10,11 @@ module.exports = {
 	routes: {
 		'news': {
 			view: 'NewsPage',
+			reload: true,
 			routes: {
 				':id': {
 					view: 'NewsArticlePage',
+					reload: true
 				}
 			}
 		}

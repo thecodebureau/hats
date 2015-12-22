@@ -16,19 +16,19 @@ module.exports = {
 	routes: {
 		'membership': {
 			view: 'Page',
-			url: '/admin/membership',
+			reload: true,
 			routes: {
 				'roles': {
 					view: 'RolesPage',
-					url: '/admin/membership/roles'
+					reload: true
 				},
 				permissions: {
 					view: 'PermissionsPage',
-					url: '/admin/membership/permissions'
+					reload: true
 				},
 				'invites': {
 					view: 'InvitesPage',
-					url: '/admin/membership/invites'
+					reload: true
 				},
 			},
 		}

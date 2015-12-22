@@ -10,9 +10,11 @@ module.exports = {
 	routes: {
 		'employees': {
 			view: 'EmployeesPage',
+			reload: true,
 			routes: {
 				':id': {
 					view: 'EmployeePage',
+					reload: true
 				}
 			}
 		}

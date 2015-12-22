@@ -13,9 +13,11 @@ module.exports = {
 	routes: {
 		'content': {
 			view: 'ContentPage',
+			reload: true,
 			routes: {
 				':id': {
-					view: 'FieldPage'
+					view: 'FieldPage',
+					reload: true
 				}
 			}
 		}

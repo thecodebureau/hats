@@ -6,7 +6,7 @@ module.exports = {
 	routes: {
 		'organization': {
 			view: 'OrganizationPage',
-			url: '/admin/organization'
+			reload: true
 		}
 	},
 

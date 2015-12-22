@@ -5,8 +5,8 @@ module.exports = {
 
 	routes: {
 		'errors': {
-			view: 'ErrorsPage',
-			url: '/admin/errors'
+			reload: true,
+			view: 'ErrorsPage'
 		}
 	},
 
