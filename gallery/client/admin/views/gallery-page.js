@@ -1,12 +1,6 @@
 var app = require('ridge');
 
 module.exports = require('ridge/view').extend({
-	events: {
-		'click .collection + .pagination li:not(.current) a.nav': function() {
-			this.scroll = true;
-		}
-	},
-
 	elements: {
 		container: '.collection.container'
 	},
@@ -31,17 +25,6 @@ module.exports = require('ridge/view').extend({
 			totalCount: this.model.get('totalCount'),
 			galleryImages: this.model.get('galleryImages')
 		}, { parse: true });
-
-		this.model.unset('galleryImages');
-
-		var state = window.history && window.history.state;
-
-		if (_.has(state, 'scrollX'))
-			window.scrollTo(state.scrollX, state.scrollY);
-		else if (this.scroll)
-			this.el.scrollIntoView();
-
-		this.scroll = false;
 	},
 
 	fetch: function(model, query) {
