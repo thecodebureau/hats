@@ -1,8 +1,15 @@
 var path = require('path');
 
 module.exports = {
-	models: path.join(__dirname, 'server', 'models'),
-	mw: path.join(__dirname, 'server', 'middleware'),
-	routes: path.join(__dirname, 'server', 'routes'),
-	templates: path.join(__dirname, 'server', 'templates')
+	models: {
+		GalleryImage: require('./model')
+	},
+
+	middleware: {
+		galleryImages: require('./middleware')
+	},
+
+	pages: require('./pages'),
+
+	routes: require('./routes')
 };

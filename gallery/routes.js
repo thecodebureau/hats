@@ -1,4 +1,4 @@
-var isAuthenticated = require('hats/admin/middleware/authorization').isAuthenticated;
+var isAuthenticated = require('hats/membership/middleware/authorization').isAuthenticated;
 
 var mw = require('./middleware');
 

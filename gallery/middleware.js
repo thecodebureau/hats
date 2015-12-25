@@ -1,5 +1,10 @@
 var GalleryImage = require('./model');
 
+var mw = {
+	formatQuery: require('epiphany/middleware/format-query'),
+	paginate: require('epiphany/middleware/paginate')
+};
+
 module.exports = {
 	create: function(req, res, next) {
 		GalleryImage.create(req.body, function(err, galleryImage) {
