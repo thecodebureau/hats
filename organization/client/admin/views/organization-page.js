@@ -23,7 +23,7 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	initialize: function(opts) {
 		this.model = new app.models.Organization(this.state.get('organization') || {});
 
-		this.listenTo(this.state, 'change sync cancel', this.setActiveButtons);
+		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},
 
 	attach: function() {
@@ -40,10 +40,6 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 			el: this.$('form'),
 
 			model: this.model,
-
-			bindings: {
-				'address.addressRegion': 'value'
-			},
 
 			onSuccess: function(model, message, options) {
 				console.log('organization saved!');
