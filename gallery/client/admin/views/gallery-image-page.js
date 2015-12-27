@@ -27,13 +27,9 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 		if(_view.model.isValid()) {
 			_view.model.save(null, {
 				success: function(model, response, opts) {
-					if(_view.collection) {
-						_view.collection.add(_view.model);
-					}
-
 					var path = _.initial(Backbone.history.fragment.split('/')).concat(model.id).join('/');
 
-					app.router.navigate(path, { replace: true });
+					Backbone.history.navigate(path, { replace: true });
 				}
 			});
 		}
