@@ -1,5 +1,1 @@
-<section class="fields list collection container">
-	{#fields}
-		{>"admin/models/field"/}
-	{/fields}
-</section>
+<section class="fields list collection container"></section>
