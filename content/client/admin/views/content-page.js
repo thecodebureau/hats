@@ -10,10 +10,7 @@ module.exports = require('ridge/views/page').extend({
 			selector: '.pagination',
 			template: 'admin/pagination'
 		},
-		Search: {
-			selector: '.search',
-			model: null
-		}
+		Search: '.search'
 	},
 
 	initialize: function(options) {
