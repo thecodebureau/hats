@@ -4,12 +4,14 @@ module.exports =  {
 	get: function(req, res, next) {
 		if(!res.app.locals.organization) {
 			Organization.findOne({}, function(err, organization) {
-				res.data.organization = res.app.locals.organization = organization;
+				res.app.locals.organization = organization;
 
-				next();
+				if(res.locals) res.locals.organization = organization;
+
+				if(next) next();
 			});
 		} else {
-			res.data.organization = res.app.locals.organization;
+			res.locals.organization = res.app.locals.organization;
 			next();
 		}
 	},

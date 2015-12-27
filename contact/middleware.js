@@ -15,10 +15,10 @@ module.exports = function (req, res, next) {
 		}, function (err) {
 			// TODO try to get a hold page object
 			if (err) {
-				res.data.formStatus = config.error;
+				res.locals.formStatus = config.error;
 				res.status(500);
 			} else {
-				res.data.formStatus = config.success;
+				res.locals.formStatus = config.success;
 			}
 
 			next();

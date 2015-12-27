@@ -31,7 +31,7 @@ module.exports = {
 			query.limit(perPage).skip(perPage * page);
 
 		query.exec(function(err, galleryImages) {
-			res.data.galleryImages = galleryImages;
+			res.locals.galleryImages = galleryImages;
 			next(err);
 		});
 	},
@@ -39,7 +39,7 @@ module.exports = {
 	findById: function(req, res, next) {
 		GalleryImage.findById(req.params.id).lean().exec(function(err, galleryImage) {
 			if(err) return next(err);
-			res.data.galleryImage = galleryImage;
+			res.locals.galleryImage = galleryImage;
 			next();
 		});
 	},
@@ -50,7 +50,7 @@ module.exports = {
 		GalleryImage.find().sort('-uploadDate').lean().exec(function(err, galleryImages) {
 			if(err) return next(err);
 
-			res.data.galleryImages = galleryImages;
+			res.locals.galleryImages = galleryImages;
 			next();
 		});
 	}, 
@@ -59,7 +59,7 @@ module.exports = {
 		GalleryImage.find({ datePublished: { $ne: null }}).sort('-datePublished').lean().exec(function(err, galleryImages) {
 			if(err) return next(err);
 
-			res.data.galleryImages = galleryImages;
+			res.locals.galleryImages = galleryImages;
 			next();
 		});
 	}, 

@@ -11,7 +11,7 @@ module.exports = {
 			if (err) return next(err);
 
 			res.status(201);
-			res.data.role = role;
+			res.locals.role = role;
 			next();
 		});
 	},
@@ -28,7 +28,7 @@ module.exports = {
 			query.limit(perPage).skip(perPage * page);
 
 		query.exec(function(err, roles) {
-			res.data.roles = roles;
+			res.locals.roles = roles;
 			next(err);
 		});
 	},
@@ -40,7 +40,7 @@ module.exports = {
 			if (err) return next(err);
 
 			res.status(200);
-			res.data.role = role;
+			res.locals.role = role;
 			next();
 		});
 	},
@@ -52,7 +52,7 @@ module.exports = {
 			if (err) return next(err);
 
 			res.status(200);
-			res.data.roles = roles;
+			res.locals.roles = roles;
 			next();
 		});
 	},
@@ -63,7 +63,7 @@ module.exports = {
 		Role.remove({ _id: req.params.id }, function (err, query) {
 			if (err) return next(err);
 
-			res.data.ok = true;
+			res.locals.ok = true;
 
 			return next();
 		});

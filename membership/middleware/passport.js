@@ -99,7 +99,7 @@ var mw = {
 	logout: function(req, res, next) {
 		req.logout();
 		res.status(200);
-		res.data.ok = true;
+		res.locals.ok = true;
 		next();
 	}
 };

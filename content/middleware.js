@@ -18,7 +18,7 @@ module.exports = {
 		Field.create(req.body, function (err, field) {
 			if (err) return next(err);
 
-			res.data.field = field;
+			res.locals.field = field;
 
 			res.status(201);
 			next();
@@ -37,7 +37,7 @@ module.exports = {
 			query.limit(perPage).skip(perPage * page);
 
 		query.exec(function(err, fields) {
-			res.data.fields = fields;
+			res.locals.fields = fields;
 			next(err);
 		});
 	},
@@ -50,7 +50,7 @@ module.exports = {
 
 			res.status(200);
 
-			res.data.field = field;
+			res.locals.field = field;
 
 			next();
 		});
@@ -61,10 +61,10 @@ module.exports = {
 			path = page && page.path || req.path ;
 
 		if(_.has(cache, path)) {
-			res.data.fields = cache[path];
+			res.locals.fields = cache[path];
 
 			if(res.lang)
-				res.data.fields = extractLang(res.data.fields, res.lang);
+				res.locals.fields = extractLang(res.locals.fields, res.lang);
 				
 			return next();
 		}
@@ -78,14 +78,14 @@ module.exports = {
 
 			res.status(200);
 
-			cache[path] = res.data.fields = fields.reduce(function(out, value) {
+			cache[path] = res.locals.fields = fields.reduce(function(out, value) {
 				out[value.name] = value.content;
 
 				return out;
 			}, {});
 
 			if(res.lang)
-				res.data.fields = extractLang(res.data.fields, res.lang);
+				res.locals.fields = extractLang(res.locals.fields, res.lang);
 
 			next();
 		});
@@ -189,7 +189,8 @@ module.exports = {
 		//}
 
 		//res.locals.paths = paths.sort();
-		res.locals.paths = require('./config').paths;
+		//res.locals.paths = require('./config').paths;
+		res.locals.paths = res.app.paths['/'];
 		next();
 	},
 	
@@ -219,7 +220,7 @@ module.exports = {
 
 			if (field) {
 				res.status(204);
-				res.data.field = field;
+				res.locals.field = field;
 			}
 
 			return next();

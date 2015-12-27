@@ -51,7 +51,7 @@ module.exports = {
 			query.limit(perPage).skip(perPage * page);
 
 		query.exec(function(err, invites) {
-			res.data.invites = invites;
+			res.locals.invites = invites;
 			next(err);
 		});
 	},
@@ -72,7 +72,7 @@ module.exports = {
 	getAll: function (req, res, next) {
 		Invite.find({}, function (err, invites) {
 			if (err) return next(err);
-			res.data.invites = invites;
+			res.locals.invites = invites;
 			next();
 		});
 	},
@@ -80,7 +80,7 @@ module.exports = {
 	getActive: function (req, res, next) {
 		Invite.find({ active: true }, function (err, invites) {
 			if (err) return next(err);
-			res.data.invites = invites;
+			res.locals.invites = invites;
 			next();
 		});
 	},
@@ -91,7 +91,7 @@ module.exports = {
 		Invite.remove({ _id: req.params.id }, function (err, count) {
 			if (err) return next(err);
 
-			res.data.ok = true;
+			res.locals.ok = true;
 
 			return next();
 		});

@@ -27,7 +27,7 @@ module.exports = {
 			NewsArticle.find(query).sort('-dateCreated').limit(howMany).lean().exec(function(err, newsArticles) {
 				if(err) return next(err);
 
-				res.data.newsArticles = newsArticles;
+				res.locals.newsArticles = newsArticles;
 				next();
 			});
 		};
@@ -42,7 +42,7 @@ module.exports = {
 		NewsArticle.find(query).sort('-dateCreated').exec(function(err, newsArticles) {
 			if(err) return next(err);
 
-			res.data.newsArticles = newsArticles;
+			res.locals.newsArticles = newsArticles;
 			next();
 		});
 	}, 
@@ -56,7 +56,7 @@ module.exports = {
 
 		return NewsArticle.findOne(query, function(err, newsArticle) {
 			if(err) return next(err);
-			res.data.newsArticle = newsArticle;
+			res.locals.newsArticle = newsArticle;
 			next();
 		});
 	},
@@ -73,7 +73,7 @@ module.exports = {
 			query.limit(perPage).skip(perPage * page);
 
 		query.exec(function(err, newsArticles) {
-			res.data.newsArticles = newsArticles;
+			res.locals.newsArticles = newsArticles;
 			next(err);
 		});
 	},

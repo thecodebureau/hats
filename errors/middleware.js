@@ -18,7 +18,7 @@ module.exports = {
 			query.limit(perPage).skip(perPage * page);
 
 		query.exec(function(err, errors) {
-			res.data.errors = errors;
+			res.locals.errors = errors;
 			next(err);
 		});
 	},
@@ -26,7 +26,7 @@ module.exports = {
 	findById: function(req, res, next) {
 		ErrorModel.findById(req.params.id, function(err, page) {
 			if (err) return next(err);
-			if (page) res.data.page = page;
+			if (page) res.locals.page = page;
 			next();
 		});
 	},
@@ -39,7 +39,7 @@ module.exports = {
 
 			res.status(200);
 
-			res.data.errors = errors;
+			res.locals.errors = errors;
 
 			next();
 		});

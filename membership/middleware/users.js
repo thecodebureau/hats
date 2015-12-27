@@ -96,7 +96,7 @@ module.exports = {
 							newUser.isVerified = true;
 							req.login(newUser, respond);
 						} else {
-							res.data.ok = true;
+							res.locals.ok = true;
 							newUser.generateVerificationCode();
 							res.render('emails/verify-email', { user: newUser }, function (err, html) {
 								transport.sendMail({
@@ -142,7 +142,7 @@ module.exports = {
 		query.exec(function (err, users) {
 			if (err) return next(err);
 
-			res.data.users = users;
+			res.locals.users = users;
 
 			User.count(queryDocument, function(err, count) {
 				if(err) return next(err);
@@ -156,13 +156,13 @@ module.exports = {
 
 	findOne: function (req, res, next) {
 		if(req.user && (req.params.id === req.user._id.toString())) {
-			res.data.user = _.omit(req.user.toJSON(), [ 'local', 'facebook' ]);
+			res.locals.user = _.omit(req.user.toJSON(), [ 'local', 'facebook' ]);
 			return next();
 		} else {
 			User.findById(req.params.id).lean().exec(function(err, user) {
 				if(err) return next(err);
 
-				res.data.user = _.omit(user, [ 'local', 'facebook' ]);
+				res.locals.user = _.omit(user, [ 'local', 'facebook' ]);
 				next();
 			});
 		}
@@ -171,7 +171,7 @@ module.exports = {
 	findAll: function (req, res, next) {
 		User.find(req.query, function (err, users) {
 			if (err) return next(err);
-			res.data.users = users;
+			res.locals.users = users;
 			return next();
 		});
 	},
@@ -314,7 +314,7 @@ module.exports = {
 				}
 
 				res.status(201);
-				res.data.user = _.omit(req.user.toJSON(), [ 'local', 'facebook' ]);
+				res.locals.user = _.omit(req.user.toJSON(), [ 'local', 'facebook' ]);
 
 				return next();
 			});

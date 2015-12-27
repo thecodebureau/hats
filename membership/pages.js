@@ -28,8 +28,8 @@ module.exports = [ {
 				name: 'permission',
 				view: 'PermissionPage',
 				middleware: [ mw.roles.getAll, function(req, res, next) {
-					res.data.allRoles = res.data.roles;
-					delete res.data.roles;
+					res.locals.allRoles = res.locals.roles;
+					delete res.locals.roles;
 					next();
 				}, mw.permissions.findById ],
 				nav: false
@@ -45,8 +45,8 @@ module.exports = [ {
 				template: 'admin/pages/membership/invite',
 				view: 'InvitePage',
 				middleware: [ mw.roles.getAll, function(req, res, next) {
-					res.data.allRoles = res.data.roles;
-					delete res.data.roles;
+					res.locals.allRoles = res.locals.roles;
+					delete res.locals.roles;
 					next();
 				}, mw.invites.findById ],
 				nav: false

@@ -25,7 +25,7 @@ module.exports = {
 			query.limit(perPage).skip(perPage * page);
 
 		query.exec(function(err, employees) {
-			res.data.employees = employees;
+			res.locals.employees = employees;
 			next(err);
 		});
 	},
@@ -39,7 +39,7 @@ module.exports = {
 		Employee.find(query, function(err, employees) {
 			if(err) return next(err);
 
-			res.data.employees = employees;
+			res.locals.employees = employees;
 			next();
 		});
 	}, 
@@ -51,9 +51,9 @@ module.exports = {
 
 		query[mongoose.Types.ObjectId.isValid(req.params.id) ? '_id' : '_hid'] = req.params.id;
 
-		return Employee.findOne(query, function(err, employee) {
+		Employee.findOne(query, function(err, employee) {
 			if(err) return next(err);
-			res.data.employee = employee;
+			res.locals.employee = employee;
 			next();
 		});
 	},

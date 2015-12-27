@@ -7,8 +7,7 @@ module.exports = [ {
 	pages: [ {
 		path: ':id',
 		template: 'admin/pages/employee',
-		view: 'EmployeePage',
-		middleware: mw.findById,
+		middleware: [ mw.findById ],
 		nav: false
 	} ]
 } ];

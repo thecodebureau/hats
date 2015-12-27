@@ -10,7 +10,7 @@ module.exports = {
 		Permission.create(req.body, function (err, permission) {
 			if (err) return next(err);
 
-			res.data.permission = permission;
+			res.locals.permission = permission;
 			res.status(201);
 			next();
 		});
@@ -28,7 +28,7 @@ module.exports = {
 			query.limit(perPage).skip(perPage * page);
 
 		query.exec(function(err, permissions) {
-			res.data.permissions = permissions;
+			res.locals.permissions = permissions;
 			next(err);
 		});
 	},
@@ -88,7 +88,7 @@ module.exports = {
 		Permission.remove({ _id: req.params.id }, function (err, count) {
 			if (err) return next(err);
 
-			res.data.ok = true;
+			res.locals.ok = true;
 
 			return next();
 		});
