@@ -1,6 +1,6 @@
 var app = require('ridge');
 
-var View = require('ridge/view').extend();
+var View = require('ridge/views/page').extend();
 
 _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 	events: {
@@ -27,23 +27,16 @@ _.extend(View.prototype, require('ridge/mixins/active-buttons'), {
 		if(_view.model.isValid()) {
 			_view.model.save(null, {
 				success: function(model, response, opts) {
-					if(_view.collection) {
-						_view.collection.add(_view.model);
-					}
-
 					var path = _.initial(Backbone.history.fragment.split('/')).concat(model.id).join('/');
 
-					app.router.navigate(path, { replace: true });
+					Backbone.history.navigate(path, { replace: true });
 				}
 			});
 		}
 	},
 
 	initialize: function(opts) {
-		// save page model data
-		this.data = this.model.toJSON();
-
-		this.model = new app.models.Permission(this.model.get('permission'));
+		this.model = new app.models.Permission(this.state.get('permission'));
 
 		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
 	},

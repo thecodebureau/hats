@@ -39,8 +39,7 @@ module.exports = {
 		Role.findById(req.params.id, function (err, role) {
 			if (err) return next(err);
 
-			res.status(200);
-			res.locals.role = role;
+			res.status(200).locals.role = role;
 			next();
 		});
 	},
@@ -51,13 +50,26 @@ module.exports = {
 		Role.find({}, function (err, roles) {
 			if (err) return next(err);
 
-			res.status(200);
-			res.locals.roles = roles;
+			res.status(200).locals.roles = roles;
 			next();
 		});
 	},
 
 	paginate: mw.paginate(Role, 20),
+
+	put: function(req, res, next) {
+		var query = {};
+
+		Role.findById(req.params.id, function(err, role) {
+			_.extend(role, _.omit(req.body, '_id', '__v'));
+
+			return role.save(function(err) {
+				if(err) return next(err);
+
+				return res.status(200).json(role);
+			});
+		});
+	},
 
 	remove: function (req, res, next) {
 		Role.remove({ _id: req.params.id }, function (err, query) {

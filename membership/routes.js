@@ -21,6 +21,7 @@ var routes = [
 	[ '/api/roles/',					'post',		[ isAuthenticated, mw.roles.create ]],
 	[ '/api/roles/:id',				'delete', [ isAuthenticated, mw.roles.remove ]],
 	[ '/api/roles/:id',				'get',		[ isAuthenticated, mw.roles.findById ]],
+	[ '/api/roles/:id',				'put',		[ isAuthenticated, mw.roles.put ]],
 	[ '/api/users/',					'get',		[ isAuthenticated, mw.users.query ] ],
 	[ '/api/users/',					'post',		[ mw.users.register ]],
 	[ '/api/users/:id',				'delete', [ isAuthenticated, mw.users.remove ]],
