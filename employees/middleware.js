@@ -3,6 +3,8 @@ var mw = {
 	paginate: require('epiphany/middleware/paginate')
 };
 
+var mongoose = require('mongoose');
+
 var Employee = require('./model');
 
 module.exports = {
