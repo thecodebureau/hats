@@ -30,7 +30,7 @@ var redirectUnauthorized = function(url) {
 			req.session.lastPath = req.path;
 			res.redirect('/login');
 		} else
-			next();
+			next(error);
 	};
 };
 
