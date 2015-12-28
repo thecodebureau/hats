@@ -1,9 +1,11 @@
-var config = ('./config');
+var config = require('./config');
 
 var nodemailer = require('nodemailer');
 
 module.exports = function (req, res, next) {
 	var smtpTransport = nodemailer.createTransport(config.smtp);
+
+	console.log('about to send');
 
 	res.render('emails/contact-form', req.body, function (err, html) {
 		smtpTransport.sendMail({
@@ -15,8 +17,8 @@ module.exports = function (req, res, next) {
 		}, function (err) {
 			// TODO try to get a hold page object
 			if (err) {
-				res.locals.formStatus = config.error;
-				res.status(500);
+				console.log(err);
+				res.status(500).locals.formStatus = config.error;
 			} else {
 				res.locals.formStatus = config.success;
 			}

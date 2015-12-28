@@ -1,8 +1,13 @@
-var mailConfig = require('./mail');
+var config = {
+	smtp: require('./smtp'),
+	site: require('./site')
+};
 
-var defaults = {
-	from: 'Carson Robot <' + mailConfig.emails.robot + '>',
-	subject: 'Meddelande från besökare till carson.nu',
+module.exports = {
+	smtp: config.smtp,
+	from: config.site.title + ' Robot <' + config.site.emails.robot + '>',
+	to: config.site.emails.info,
+	subject: 'Meddelande från besökare till ' + config.site.domain,
 	error: {
 		type: 'error',
 		heading: 'Hoppas!',
@@ -14,13 +19,3 @@ var defaults = {
 		body: 'Vi kommer att besvara era frågor så fort som möjligt. Tack för er tid!'
 	}
 };
-
-module.exports = _.merge(defaults, {
-	development: {
-		to: 'info@domain.com'
-	},
-
-	production: {
-		to: 'info@domain.com'
-	}
-}[ENV]);

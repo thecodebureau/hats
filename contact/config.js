@@ -1,1 +1,3 @@
-module.exports = require(PWD + '/server/config/contact');
+var p = require('path');
+
+module.exports = require(p.join(PWD, 'server/config/contact'));
