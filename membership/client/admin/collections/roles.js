@@ -1,4 +1,5 @@
 module.exports = require('ridge/collection').extend({
-	model: 'Role',
+	model: require('../models/role'),
+
 	url: '/api/roles'
 });

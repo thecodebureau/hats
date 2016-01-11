@@ -1,4 +1,5 @@
-var app = require('ridge');
+var ErrorsCollection = require('../collections/errors');
+var ErrorView = require('./error');
 
 module.exports = require('ridge/views/page').extend({
 	events: {
@@ -45,17 +46,12 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	subviews: {
-		Pagination: {
-			selector: '.pagination',
-			template: 'admin/pagination'
-		},
-		Search: '.search'
+		paginations: [ '.pagination', require('ridge/views/pagination'), { template: 'admin/pagination', multi: true } ],
+		search: [ '.search', require('ridge/views/search') ]
 	},
 
 	initialize: function(options) {
-		this.modelViews = [];
-
-		this.collection = new app.collections.Errors();
+		this.collection = new ErrorsCollection();
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
@@ -82,7 +78,7 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	renderModel: function(model) {
-		this.modelViews.push(new app.views.Error({
+		this.modelViews.push(new ErrorView({
 			model: model,
 			data: this.data,
 		}).enter(this.elements.container));

@@ -1,5 +1,3 @@
-var app = require('ridge');
-
 module.exports = require('ridge/view').extend({
 	template: 'admin/models/invite',
 

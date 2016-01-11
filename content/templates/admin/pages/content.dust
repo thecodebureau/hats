@@ -1,4 +1,4 @@
-<section class="content collection page" data-view="ContentPage">
+<section class="content collection page">
 	<header>
 		<h1>Content</h1>
 		<a class="button new base" href="/admin/content/new">New Field</a>

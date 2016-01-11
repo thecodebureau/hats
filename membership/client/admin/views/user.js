@@ -1,21 +1,18 @@
-var app = require('ridge');
+/* WARNING!!! THIS IS NOT FUNCTIONAL */
 
 module.exports = require('ridge/view').extend({
+	template: 'admin/models/user',
+
 	events: {
 		'click': 'toggle'
 	},
 
-	template: 'admin/models/user',
-
-	attach: function() {
-		app.views.Model.prototype.attach.apply(this, arguments);
-
-		this.elements.$info = this.$('.info');
+	elements: {
+		info: '.info'
 	},
 
 	toggle: function() {
-		if(this.elements.$info.children().length > 0)
-			this.elements.$info.toggleClass('visible');
+		if(this.elements.info.children().length > 0)
+			this.elements.info.toggleClass('visible');
 	}
-
 });

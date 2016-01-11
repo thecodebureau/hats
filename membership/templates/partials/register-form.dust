@@ -1,4 +1,4 @@
-<div class="register-form" data-view="RegisterForm">
+<div class="register-form">
 	<form method="POST" action="/api/users">
 		{>"partials/register-form-account-type"/}
 		<fieldset>

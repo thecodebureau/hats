@@ -1,6 +1,10 @@
-var app = require('ridge');
-
 module.exports = require('ridge/view').extend({
+	template: 'admin/models/error',
+
+	elements: {
+		info: '.info'
+	},
+
 	events: {
 		'click': 'toggle',
 		'click button': function(e) {
@@ -12,8 +16,8 @@ module.exports = require('ridge/view').extend({
 		'click button[data-command="delete"]': 'delete'
 	},
 
-	elements: {
-		info: '.info'
+	initialize: function(options) {
+		this.listenTo(this.model, 'destroy', this.remove);
 	},
 
 	delete: function(e) {
@@ -21,15 +25,8 @@ module.exports = require('ridge/view').extend({
 		this.remove();
 	},
 
-	initialize: function(options) {
-		this.listenTo(this.model, 'destroy', this.remove);
-	},
-
-	template: 'admin/models/error',
-
 	toggle: function() {
 		if(this.elements.info.children().length > 0)
 			this.elements.info.toggleClass('visible');
 	}
-
 });

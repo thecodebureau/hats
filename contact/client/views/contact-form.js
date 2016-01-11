@@ -1,4 +1,4 @@
-var app = require('ridge');
+var MessageView = require('ridge/views/message');
 
 module.exports = require('ridge/view').extend({
 	events: {
@@ -13,7 +13,7 @@ module.exports = require('ridge/view').extend({
 	submit: function(e) {
 		e.preventDefault();
 
-		var _view = this, 
+		var self = this, 
 			$form = $(e.currentTarget),
 			button = $form.find('button')[0];
 
@@ -27,26 +27,26 @@ module.exports = require('ridge/view').extend({
 				data: $form.JSONify(),
 				dataType: 'json',
 				success: function(message) {
-					if(_view.messageView)
-						_view.messageView.remove();
+					if(self.message)
+						self.message.remove();
 
-					_view.messageView = new app.views.Message({
+					self.message = new MessageView({
 						message: message
 					});
 
 					$form.remove();
 
-					_view.messageView.enter(_view.el);
+					self.message.enter(self.el);
 				}, 
 				error: function(xhr) {
-					if(_view.messageView)
-						_view.messageView.remove();
+					if(self.message)
+						self.message.remove();
 
-					_view.messageView = new app.views.Message({
+					self.message = new MessageView({
 						message: xhr.responseJSON
 					});
 
-					_view.messageView.enter($form, 'before');
+					self.message.enter($form, 'before');
 				},
 
 				complete: function() {

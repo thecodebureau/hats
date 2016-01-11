@@ -1,50 +1,43 @@
-var app = require('ridge');
+var OrganizationModel = require('../../models/organization');
 
 var View = require('ridge/views/page').extend();
 
-_.extend(View.prototype, require('ridge/mixins/active-buttons'), {
+_.extend(View.prototype, require('ridge/mixins/observe'), {
 	events: {
-		'click button[data-command="reset"]': 'reset',
-		'click button[data-command="save"]': 'save',
+		'submit form': 'preventDefault'
 	},
 
-	save: function() {
-		if(this.model.isValid()) {
-			this.model.save(null, null, { validate: false });
+	bindings: {
+		'description': {
+			'[data-name="description"]': 'html'
 		}
 	},
 
-	reset: function() {
-		if(confirm('Are you sure you want to reset?')) {
-			this.model.reset();
-		}
+	subviews: {
+		buttons: [ '.controls', require('./buttons') ],
+		form: [ 'form', require('ridge/views/form-styling') ]
 	},
 
 	initialize: function(opts) {
-		this.model = new app.models.Organization(this.state.get('organization') || {});
+		this.model = new OrganizationModel(this.state.get('organization') || {});
 
-		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
+		// use properties from model validation to set up more bindings.
+		// all model validation properties are assumed to be 'value' getter and setter
+		this.bindings = _.defaults(this.bindings, _.mapValues(this.model.validation, function(value, key) {
+			var binding = {};
+
+			binding['[name="' + key + '"],[data-name="' + key + '"]'] = {
+				both: 'value',
+			};
+
+			return binding;
+		}));
 	},
 
 	attach: function() {
-		var _view = this;
+		this.observe({ validate: true });
 
-		_view.setActiveButtons();
-
-		if(this.formView) {
-			this.stopListening(this.formView);
-			this.formView.remove();
-		}
-
-		this.formView = new app.views.Form({
-			el: this.$('form'),
-
-			model: this.model,
-
-			onSuccess: function(model, message, options) {
-				console.log('organization saved!');
-			}
-		});
+		this.model.validate(null, { validateAll: true });
 	}
 });
 

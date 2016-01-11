@@ -1,5 +1,5 @@
 <section class="page users">
-	<div data-view="Users" class="pos-rel">
+	<div class="pos-rel">
 		<form class="filter">
 			<div class="row">
 				<div>

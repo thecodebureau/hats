@@ -1,17 +1,14 @@
+var ErrorsPage = require('./client/admin/views/errors-page.js');
+
 module.exports = {
 	collections: {
 		Errors: require('./client/admin/collections/errors.js')
 	},
 
-	routes: {
-		'errors': {
-			reload: true,
-			view: 'ErrorsPage'
-		}
-	},
+	routes: require('./client/admin/routes'),
 
 	views: {
-		ErrorsPage: require('./client/admin/views/errors-page.js'),
+		ErrorsPage: ErrorsPage,
 		Error: require('./client/admin/views/error.js')
 	}
 };

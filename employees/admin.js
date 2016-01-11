@@ -1,3 +1,6 @@
+var EmployeePage = require('./client/admin/views/employee-page');
+var EmployeesPage = require('./client/admin/views/employees-page');
+
 module.exports = {
 	collections: {
 		Employees: require('./client/collections/employees'),
@@ -7,22 +10,11 @@ module.exports = {
 		Employee: require('./client/models/employee'),
 	},
 
-	routes: {
-		'employees': {
-			view: 'EmployeesPage',
-			reload: true,
-			routes: {
-				':id': {
-					view: 'EmployeePage',
-					reload: true
-				}
-			}
-		}
-	},
+	routes: require('./client/admin/routes'),
 
 	views: {
-		EmployeePage: require('./client/admin/views/employee-page'),
-		EmployeesPage: require('./client/admin/views/employees-page'),
+		EmployeePage: EmployeePage,
+		EmployeesPage: EmployeesPage,
 		Employee: require('./client/admin/views/employee'),
 	}
 };

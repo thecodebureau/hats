@@ -3,12 +3,7 @@ module.exports = {
 		Organization: require('./client/models/organization.js')
 	},
 
-	routes: {
-		'organization': {
-			view: 'OrganizationPage',
-			reload: true
-		}
-	},
+	routes: require('./client/admin/routes'),
 
 	views: {
 		OrganizationPage: require('./client/admin/views/organization-page')

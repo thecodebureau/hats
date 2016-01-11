@@ -2,7 +2,10 @@
   "name": "hats/content",
   "description": "",
   "main": "server.js",
-  "browser": "public.js",
+  "browser": {
+    "./": "public.js",
+    "./admin/routes": "./client/admin/routes"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

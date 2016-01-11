@@ -1,4 +1,4 @@
-<section data-view="GalleryImagePage" class="gallery-image form page" >
+<section class="gallery-image form page" >
 	<header>
 		<h1>Image</h1>
 		<div class="controls">

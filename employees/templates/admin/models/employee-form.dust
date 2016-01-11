@@ -3,27 +3,27 @@
 		<div class="m-6">
 			<div class="container">
 				<label class="placeholder">givenName</label>
-				<input type='text' placeholder="givenName" name="givenName" value="{givenName}" required />
+				<input type="text" placeholder="givenName" name="givenName" value="{givenName}" required />
 				<label class="icon"></label>
 			</div>
 			<div class="container">
 				<label class="placeholder">Family Name</label>
-				<input type='text' placeholder="familyName" name="familyName" value="{familyName}" required />
+				<input type="text" placeholder="familyName" name="familyName" value="{familyName}" required />
 				<label class="icon"></label>
 			</div>
 			<div class="container">
 				<label class="placeholder">Email</label>
-				<input type='text' placeholder="email" name="email" value="{email}" required />
+				<input type="text" placeholder="email" name="email" value="{email}" required />
 				<label class="icon"></label>
 			</div>
 			<div class="container">
 				<label class="placeholder">Telephone</label>
-				<input type='text' placeholder="telephone" name="telephone" value="{telephone}" required />
+				<input type="text" placeholder="telephone" name="telephone" value="{telephone}" required />
 				<label class="icon"></label>
 			</div>
 			<div class="container">
 				<label class="placeholder">Job Title</label>
-				<input type='text' placeholder="jobTitle" name="jobTitle" value="{jobTitle}" required />
+				<input type="text" placeholder="jobTitle" name="jobTitle" value="{jobTitle}" required />
 				<label class="icon"></label>
 			</div>
 		</div>

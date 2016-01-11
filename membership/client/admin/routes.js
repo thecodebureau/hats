@@ -1,34 +1,34 @@
 module.exports = {
 	'membership': {
-		view: 'Page',
+		view: require('ridge/views/page'),
 		reload: true,
 		routes: {
 			'roles': {
-				view: 'RolesPage',
+				view: require('./views/roles-page'),
 				reload: true,
 				routes: {
 					':id': {
-						view: 'RolePage',
+						view: require('./views/role-page'),
 						reload: true
 					}
 				}
 			},
 			permissions: {
-				view: 'PermissionsPage',
+				view: require('./views/permissions-page'),
 				reload: true,
 				routes: {
 					':id': {
-						view: 'PermissionPage',
+						view: require('./views/permission-page'),
 						reload: true
 					}
 				}
 			},
 			'invites': {
-				view: 'InvitesPage',
+				view: require('./views/invites-page'),
 				reload: true,
 				routes: {
 					':id': {
-						view: 'InvitePage',
+						view: require('./views/invite-page'),
 						reload: true
 					}
 				}

@@ -1,87 +1,45 @@
-var app = require('ridge');
+var FieldModel = require('../../models/field');
 
 var View = require('ridge/views/page').extend();
 
-_.extend(View.prototype, require('ridge/mixins/active-buttons'), {
+_.extend(View.prototype, require('ridge/mixins/observe'), {
 	events: {
-		'click button[data-command="create"]': 'create',
-		'click button[data-command="reset"]': 'reset',
-		'click button[data-command="save"]': 'save',
+		'submit form': 'preventDefault'
 	},
 
-	save: function() {
-		if(this.model.isValid()) {
-			this.model.save(null, null, { validate: false });
-		}
-	},
-
-	reset: function() {
-		if(confirm('Are you sure you want to reset?')) {
-			this.model.reset();
-		}
-	},
-
-	create: function() {
-		var _view = this;
-
-		if(this.model.isValid()) {
-			this.model.save(null, {
-				success: function(model, response, opts) {
-					var path = _.initial(Backbone.history.fragment.split('/')).concat(model.id).join('/');
-
-					Backbone.history.navigate(path, { replace: true });
-				}
-			});
-		}
+	subviews: {
+		buttons: [ '.controls', require('./field-page-buttons') ],
+		spytextFields: [ '[data-spytext]', require('spytext/field'), { multi: true } ],
+		form: [ 'form', require('ridge/views/form-styling') ]
 	},
 
 	initialize: function(opts) {
-		var _view = this,
-			collection = new app.collections.Fields();
-
-		if(_view.state.get('languages'))
-			_view.data.getContent = function(chunk, context, bodies, params) {
+		if(this.state.get('languages'))
+			this.data.getContent = function(chunk, context, bodies, params) {
 				return chunk.write(context.get('content.' + context.get('iso')));
 			};
 
-		_view.model = new app.models.Field(_view.state.get('field') || {});
+		this.model = new FieldModel(this.state.get('field') || {});
 
-		_view.listenTo(_view.model, 'change sync cancel', _view.setActiveButtons);
+		// use properties from model validation to set up more bindings.
+		// all model validation properties are assumed to be 'value' getter and setter
+		this.bindings = _.mapValues(this.model.validation, function(value, key) {
+			var binding = {};
 
-		_view.formBindings = {};
+			binding['[name="' + key + '"],[data-name="' + key + '"]'] = {
+				both: /^content/.test(key) ? 'html' : 'value',
+			};
 
-		_.each(this.model.validation, function(value, key) {
-			if(/^content/.test(key)) 
-				_view.formBindings[key] = 'html';
+			return binding;
 		});
 	},
 
 	attach: function() {
-		this.setActiveButtons();
+		this.observe({ validate: true });
 
-		var _view = this;
-
-		if(this.formView) {
-			this.stopListening(this.formView);
-			this.formView.remove();
-		}
-
-		this.formView = new app.views.Form({
-			el: this.$('form'),
-
-			subviews: {
-				SpytextField: '[data-spytext]'
-			},
-
-			model: this.model,
-
-			bindings: this.formBindings,
-
-			onSuccess: function(model, message, options) {
-				console.log('field saved!');
-			}
-		});
-	},
+		if(!this.model.isNew())
+			this.model.validate();
+	}
 });
 
 module.exports = View;

@@ -7,18 +7,7 @@ module.exports = {
 		NewsArticle: require('./client/models/news-article')
 	},
 
-	routes: {
-		'news': {
-			view: 'NewsPage',
-			reload: true,
-			routes: {
-				':id': {
-					view: 'NewsArticlePage',
-					reload: true
-				}
-			}
-		}
-	},
+	routes: require('./client/admin/routes'),
 
 	views: {
 		NewsPage: require('./client/admin/views/news-page'),

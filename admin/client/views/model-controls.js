@@ -123,7 +123,7 @@ module.exports = require('ridge/view').extend({
 			this.model.save(null, {
 				success: function(model, response, opts) {
 					var path = _.initial(Backbone.history.fragment.split('/')).concat(model.id).join('/');
-					app.router.navigate(path, { replace: true });
+					Backbone.history.navigate(path, { replace: true });
 				}
 			});
 		}

@@ -1,9 +1,9 @@
-<section data-view="OrganizationPage" class="organization form page">
+<section class="organization form page">
 	<header>
 		<h1>Organization</h1>
 		<div class="controls">
-			<button data-command="save" class="save base" title="Save">Save</button>
-			<button data-command="reset" type="button" class="reset red" title="Reset Form">Clear form</button>
+			<button data-command="save" class="save base" title="Save" disabled>Save</button>
+			<button data-command="reset" type="button" class="reset red" title="Reset Form" disabled>Clear form</button>
 		</div>
 	</header>
 	<div class="content">

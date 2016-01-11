@@ -1,4 +1,5 @@
-var app = require('ridge');
+var InvitesCollection = require('../collections/invites');
+var InviteView = require('./invite');
 
 module.exports = require('ridge/views/page').extend({
 	elements: {
@@ -6,17 +7,12 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	subviews: {
-		Pagination: {
-			selector: '.pagination',
-			template: 'admin/pagination'
-		},
-		Search: '.search'
+		paginations: [ '.pagination', require('ridge/views/pagination'), { template: 'admin/pagination', multi: true } ],
+		search: [ '.search', require('ridge/views/search') ]
 	},
 
 	initialize: function(options) {
-		this.modelViews = [];
-
-		this.collection = new app.collections.Invites();
+		this.collection = new InvitesCollection();
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
@@ -43,7 +39,7 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	renderModel: function(model) {
-		this.modelViews.push(new app.views.Invite({
+		this.modelViews.push(new InviteView({
 			model: model,
 			data: this.data,
 		}).enter(this.elements.container));

@@ -1,4 +1,5 @@
-var app = require('ridge');
+var PermissionsCollection = require('../collections/permissions');
+var PermissionView = require('./permission');
 
 module.exports = require('ridge/views/page').extend({
 	elements: {
@@ -6,17 +7,12 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	subviews: {
-		Pagination: {
-			selector: '.pagination',
-			template: 'admin/pagination'
-		},
-		Search: '.search'
+		paginations: [ '.pagination', require('ridge/views/pagination'), { template: 'admin/pagination', multi: true } ],
+		search: [ '.search', require('ridge/views/search') ]
 	},
 
 	initialize: function(options) {
-		this.modelViews = [];
-
-		this.collection = new app.collections.Permissions();
+		this.collection = new PermissionsCollection();
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
@@ -43,7 +39,7 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	renderModel: function(model) {
-		this.modelViews.push(new app.views.Permission({
+		this.modelViews.push(new PermissionView({
 			model: model,
 			data: this.data,
 		}).enter(this.elements.container));

@@ -4,7 +4,7 @@
 		<p>Som tur var är det bara att fylla i din epostadress här nedan så fixar vi en länk till
 		dig där du kan byta till ett nytt lösenord.</p>
 	</div>
-	<div class="form col" data-view="Forgot">
+	<div class="form col">
 		<form>
 			<div>
 				<input type="email" name="email" required placeholder="Ange din epostadress" />

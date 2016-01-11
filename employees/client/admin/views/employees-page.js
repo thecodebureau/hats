@@ -1,4 +1,5 @@
-var app = require('ridge');
+var EmployeeView = require('./employee');
+var Employees = require('../../collections/employees');
 
 module.exports = require('ridge/views/page').extend({
 	elements: {
@@ -6,17 +7,12 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	subviews: {
-		Pagination: {
-			selector: '.pagination',
-			template: 'admin/pagination'
-		},
-		Search: '.search'
+		paginations: [ '.pagination', require('ridge/views/pagination'), { template: 'admin/pagination', multi: true } ],
+		search: [ '.search', require('ridge/views/search') ]
 	},
 
 	initialize: function(options) {
-		this.modelViews = [];
-
-		this.collection = new app.collections.Employees();
+		this.collection = new Employees();
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
@@ -44,7 +40,7 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	renderModel: function(model) {
-		this.modelViews.push(new app.views.Employee({
+		this.modelViews.push(new EmployeeView({
 			model: model,
 			data: this.data,
 		}).enter(this.elements.container));

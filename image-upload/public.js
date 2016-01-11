@@ -1,5 +1,5 @@
 module.exports = {
 	views: {
-		ImageUpload: require('./client/views/image-upload')
+		ImageUpload: require('./browser/image-upload-view')
 	}
 };

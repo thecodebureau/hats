@@ -1,4 +1,5 @@
 module.exports = require('ridge/collection').extend({
-	model: 'Invite',
+	model: require('../models/invite'),
+
 	url: '/api/invites'
 });

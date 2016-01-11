@@ -1,78 +1,47 @@
-var app = require('ridge');
+var NewsArticleModel = require('../../models/news-article');
 
 var View = require('ridge/views/page').extend();
 
-_.extend(View.prototype, require('ridge/mixins/active-buttons'), {
+_.extend(View.prototype, require('ridge/mixins/observe'), {
 	events: {
-		'click button[data-command="create"]': 'create',
-		'click button[data-command="reset"]': 'reset',
-		'click button[data-command="save"]': 'save',
+		'submit form': 'preventDefault'
 	},
 
-	save: function() {
-		if(this.model.isValid()) {
-			this.model.save(null, null, { validate: false });
+	bindings: {
+		'articleBody': {
+			'[data-name="articleBody"]': 'html'
 		}
 	},
 
-	reset: function() {
-		if(confirm('Are you sure you want to reset?')) {
-			this.model.reset();
-		}
-	},
-
-	create: function() {
-		var _view = this;
-
-		if(_view.model.isValid()) {
-			_view.model.save(null, {
-				success: function(model, response, opts) {
-					var path = _.initial(Backbone.history.fragment.split('/')).concat(model.id).join('/');
-
-					Backbone.history.navigate(path, { replace: true });
-				}
-			});
-		}
+	subviews: {
+		buttons: [ '.controls', require('./news-article-page-buttons') ],
+		imageUpload: [ '.image-upload', require('hats/image-upload/browser/image-upload-view') ],
+		spytextFields: [ '[data-spytext]', require('spytext/field'), { multi: true } ],
+		form: [ 'form', require('ridge/views/form-styling') ]
 	},
 
 	initialize: function(opts) {
-		this.model = new app.models.NewsArticle(this.state.get('newsArticle') || {});
+		this.model = new NewsArticleModel(this.state.get('newsArticle') || {});
 
-		this.listenTo(this.model, 'change sync cancel', this.setActiveButtons);
+		// use properties from model validation to set up more bindings.
+		// all model validation properties are assumed to be 'value' getter and setter
+		this.bindings = _.defaults(this.bindings, _.mapValues(this.model.validation, function(value, key) {
+			var binding = {};
+
+			binding['[name="' + key + '"],[data-name="' + key + '"]'] = {
+				both: 'value',
+			};
+
+			return binding;
+		}));
 	},
 
 	attach: function() {
-		var _view = this;
+		this.observe({ validate: true });
 
-		_view.setActiveButtons();
-
-		if(this.formView) {
-			this.stopListening(this.formView);
-			this.formView.remove();
-		}
-
-		this.formView = new app.views.Form({
-			el: this.$('form'),
-
-			subviews: {
-				SpytextField: '[data-spytext]',
-				ImageUpload: '.image-upload'
-			},
-
-			model: this.model,
-
-			bindings: {
-				'articleBody': {
-					hook: 'articleBody',
-					type: 'html'
-				}
-			},
-
-			onSuccess: function(model, message, options) {
-				console.log('field saved!');
-			}
-		});
-	},
+		if(!this.model.isNew())
+			this.model.validate();
+	}
 });
 
 module.exports = View;

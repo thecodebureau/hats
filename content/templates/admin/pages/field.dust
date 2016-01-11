@@ -1,10 +1,10 @@
-<section class="field form page" data-view="FieldPage">
+<section class="field form page">
 	<header>
 		<h1>Content</h1>
 		<div class="controls">
-			<button data-command="save" class="save base" title="Save">Save</button>
-			<button data-command="create" class="create base" title="Create">Create</button>
-			<button data-command="reset" type="button" class="reset red" title="Reset Form">Clear form</button>
+			<button data-command="save" class="save base" title="Save" disabled>Save</button>
+			<button data-command="create" class="create base" title="Create" disabled>Create</button>
+			<button data-command="reset" type="button" class="reset red" title="Reset Form" disabled>Clear form</button>
 		</div>
 	</header>
 	<div class="content">

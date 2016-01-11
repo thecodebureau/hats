@@ -1,4 +1,5 @@
-var app = require('ridge');
+var GalleryImageView = require('./gallery-image');
+var GalleryImagesCollection = require('../../collections/gallery-images');
 
 module.exports = require('ridge/view').extend({
 	elements: {
@@ -6,22 +7,20 @@ module.exports = require('ridge/view').extend({
 	},
 
 	subviews: {
-		Pagination: '.pagination',
-		Search: '.search'
+		paginations: [ '.pagination', require('ridge/views/pagination'), { template: 'admin/pagination', multi: true } ],
+		search: [ '.search', require('ridge/views/search') ]
 	},
 
 	initialize: function(options) {
-		this.modelViews = [];
+		this.collection = new GalleryImagesCollection();
 
-		this.collection = new app.collections.GalleryImages();
-
-		this.listenTo(this.collection, 'update', this.reset);
+		this.listenTo(this.collection, 'reset', this.reset);
 
 		this.listenTo(this.model, 'change:query', this.fetch);
 	},
 
 	attach: function() {
-		this.collection.set({
+		this.collection.reset({
 			totalCount: this.model.get('totalCount'),
 			galleryImages: this.model.get('galleryImages')
 		}, { parse: true });
@@ -38,7 +37,7 @@ module.exports = require('ridge/view').extend({
 	},
 
 	renderModel: function(model) {
-		this.modelViews.push(new app.views.GalleryImage({
+		this.modelViews.push(new GalleryImageView({
 			model: model,
 			data: this.data,
 		}).enter(this.elements.container));

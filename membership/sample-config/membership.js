@@ -24,18 +24,22 @@ module.exports = {
 		local: {
 			usernameField: 'email'
 		},
+
 		scope: [ 'email' ],
-		facebook: {
-			clientID: 'changeThisFool',
-			clientSecret: 'changeThisFool',
-			callbackURL: config.site.url + "/auth/facebook/callback",
-			passReqToCallback: true
-		},
-		google: {
-			clientID: 'changeThisFool',
-			clientSecret: 'changeThisFool',
-			callbackURL: config.site.url + "/auth/google/callback",
-			passReqToCallback: true
+
+		providers: {
+			facebook: {
+				clientID: 'changeThisFool',
+				clientSecret: 'changeThisFool',
+				callbackURL: config.site.url + "/auth/facebook/callback",
+				passReqToCallback: true
+			},
+			google: {
+				clientID: 'changeThisFool',
+				clientSecret: 'changeThisFool',
+				callbackURL: config.site.url + "/auth/google/callback",
+				passReqToCallback: true
+			}
 		}
 	}
 };

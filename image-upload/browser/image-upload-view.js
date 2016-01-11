@@ -16,14 +16,32 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	bindings: {
-		'image.basename': 'html',
-		'image.ext': 'html',
-		'image.thumbUrlPath': 'src',
-		'image.mime': 'html',
-		'image.contentSize': 'html',
-		'image.width': 'html',
-		'image.height': 'html',
-		'image.caption': 'value'
+		'image.basename': {
+			'[data-hook="image.basename"]': 'html',
+		},
+		'image.ext': {
+			'[data-hook="image.ext"]': 'html'
+		},
+		'image.thumbUrlPath': {
+			'[data-hook="image.thumbUrlPath"]': 'src'
+		},
+		'image.mime': {
+			'[data-hook="image.mime"]': 'html'
+		},
+		'image.contentSize': {
+			'[data-hook="image.contentSize"]': 'html'
+		},
+		'image.width': {
+			'[data-hook="image.width"]': 'html'
+		},
+		'image.height': {
+			'[data-hook="image.height"]': 'html'
+		},
+		'image.caption': {
+			'[data-name="image.caption"]': {
+				both: 'value'
+			}
+		}
 	},
 
 	attach: function() {
@@ -39,7 +57,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 
 
 	changeImage: function(e) {
-		var view = this,
+		var self = this,
 			reader = new FileReader();
 
 		reader.onload = function(e) {
@@ -48,12 +66,12 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 
 			image.src = e.currentTarget.result;
 
-			view.elements.uploadFigure
+			self.elements.uploadFigure
 				.children().remove()
 				.end().prepend(image)
 				.append($('<figcaption>').text(caption));
 
-			view.elements.uploadButton.prop('disabled', false);
+			self.elements.uploadButton.prop('disabled', false);
 		};
 
 		// Read in the image file as a data URL.
@@ -61,9 +79,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	setModel: function(model) {
-		var _view = this;
-
-		_view.model = model;
+		this.model = model;
 
 		var elements = this.elements;
 
@@ -74,7 +90,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	upload: function() {
-		var view = this,
+		var self = this,
 			formData = new FormData(),
 			urlEncoded = this.options.map(function(arr) {
 				return arr.join('=');
@@ -90,10 +106,11 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 			contentType: false,
 			processData: false,
 			success: function(res) {
-				if(view.property)
-					view.model.set(view.property, res.image);
+				console.log(self.property);
+				if(self.property)
+					self.model.set(self.property, res.image);
 				else 
-					view.model.set(res.image);
+					self.model.set(res.image);
 
 				elements.fileInput.val(null);
 				elements.uploadButton.prop('disabled', true);

@@ -1,4 +1,4 @@
-<section data-view="EmployeesPage" class="employees collection page" >
+<section class="employees collection page" >
 	<header>
 		<h1>Employees</h1>
 		<a class="button new base" href="/admin/employees/new">New Employee</a>

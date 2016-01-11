@@ -1,4 +1,5 @@
 module.exports = require('ridge/collection').extend({
-	model: 'User',
+	//model: require('../models/user'),
+
 	url: '/api/users'
 });
