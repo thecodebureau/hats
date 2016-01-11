@@ -166,8 +166,9 @@ module.exports = {
 
 			_.extend(field, req.body);
 
-			if(cache[field.path])
-				delete cache[field.path];
+			cache = {};
+			//if(cache[field.path])
+			//	delete cache[field.path];
 
 			return field.save(function(err) {
 				if(err) return next(err);
@@ -203,8 +204,9 @@ module.exports = {
 
 			_.extend(field, _.omit(req.body, '_id', '__v'));
 
-			if(cache[field.path])
-				delete cache[field.path];
+			cache = {};
+			//if(cache[field.path])
+			//	delete cache[field.path];
 
 			return field.save(function(err) {
 				if(err) return next(err);
