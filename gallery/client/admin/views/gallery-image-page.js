@@ -1,4 +1,4 @@
-var GalleryImageModel = require('../models/gallery-image');
+var GalleryImageModel = require('../../models/gallery-image');
 
 var View = require('ridge/view').extend();
 
@@ -32,7 +32,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	subviews: {
-		buttons: [ '.controls', require('./role-page-buttons') ],
+		buttons: [ '.controls', require('./buttons') ],
 		imageUpload: [ '.image-upload', require('hats/image-upload/browser/image-upload-view') ],
 		spytextFields: [ '[data-spytext]', require('spytext/field'), { multi: true } ],
 		form: [ 'form', require('ridge/views/form-styling') ]
