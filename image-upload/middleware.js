@@ -48,12 +48,12 @@ module.exports = function(req, res, next) {
 
 		var file = {
 			basename: basename,
-			filePath: p.join(config.dir.uploads, basename + ext),
-			mediumFilePath: p.join(config.dir.uploads, basename + '-medium' + ext),
-			thumbFilePath: p.join(config.dir.uploads, basename + '-thumb' + ext),
-			urlPath: p.join('/uploads', basename + ext),
-			mediumUrlPath: p.join('/uploads', basename + '-medium' + ext),
-			thumbUrlPath: p.join('/uploads', basename + '-thumb' + ext),
+			filePath: p.join(config.dir.uploads, 'img', basename + ext),
+			mediumFilePath: p.join(config.dir.uploads, 'img', basename + '-medium' + ext),
+			thumbFilePath: p.join(config.dir.uploads, 'img', basename + '-thumb' + ext),
+			urlPath: p.join('/uploads/img', basename + ext),
+			mediumUrlPath: p.join('/uploads/img', basename + '-medium' + ext),
+			thumbUrlPath: p.join('/uploads/img', basename + '-thumb' + ext),
 			ext: ext,
 			uploadDate: new Date(),
 			mime: part.mime,
