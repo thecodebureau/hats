@@ -10,8 +10,8 @@ var NewsArticleSchema = new mongoose.Schema(_.defaults({
 		type: String,
 		unique: true
 	},
-	"@context": { type: String, default: "http://schema.org" },
-	"@type": { type: String, default: "NewsArticle" },
+	//"@context": { type: String, default: "http://schema.org" },
+	//"@type": { type: String, default: "NewsArticle" },
 	copyrightYear: {
 		type: Number,//The year during which the claimed copyright for the CreativeWork was first asserted.
 		default: '2015'
