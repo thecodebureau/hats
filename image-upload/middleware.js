@@ -43,19 +43,18 @@ module.exports = function(req, res, next) {
 		// from original Formidable.handlePart
 		this._flushing++;
 
-		var basename = type + new Date().toISOString().split(':').join('_');
+		var date = new Date();
+		var basename = type + date.toISOString().split(':').join('_');
 		var ext = p.extname(part.filename);
+
+		var filePath = p.join(config.dir.uploads, 'img', basename + ext);
+		var mediumFilePath = p.join(config.dir.uploads, 'img', basename + '-medium' + ext);
+		var thumbFilePath = p.join(config.dir.uploads, 'img', basename + '-thumb' + ext);
 
 		var file = {
 			basename: basename,
-			filePath: p.join(config.dir.uploads, 'img', basename + ext),
-			mediumFilePath: p.join(config.dir.uploads, 'img', basename + '-medium' + ext),
-			thumbFilePath: p.join(config.dir.uploads, 'img', basename + '-thumb' + ext),
-			urlPath: p.join('/uploads/img', basename + ext),
-			mediumUrlPath: p.join('/uploads/img', basename + '-medium' + ext),
-			thumbUrlPath: p.join('/uploads/img', basename + '-thumb' + ext),
 			ext: ext,
-			uploadDate: new Date(),
+			uploadDate: date,
 			mime: part.mime,
 			hash: form.hash,
 			thumbnail: {
@@ -108,7 +107,7 @@ module.exports = function(req, res, next) {
 						});
 
 						// write large image
-						var writeStream = fs.createWriteStream(file.filePath);
+						var writeStream = fs.createWriteStream(filePath);
 						stdout.pipe(writeStream);
 						writeStream.on('finish', function() {
 							done();
@@ -123,7 +122,7 @@ module.exports = function(req, res, next) {
 								gm(stdout)
 									.resize(mediumWidth, null)
 									// write medium image
-									.write(file.mediumFilePath, function(err) {
+									.write(mediumFilePath, function(err) {
 										if(err) return next(err);
 
 										done();
@@ -143,7 +142,7 @@ module.exports = function(req, res, next) {
 											file.thumbnail.contentSize = size;
 										});
 
-										var writeStream = fs.createWriteStream(file.thumbFilePath);
+										var writeStream = fs.createWriteStream(thumbFilePath);
 
 										stdout.pipe(writeStream);
 

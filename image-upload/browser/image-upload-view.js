@@ -44,6 +44,13 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 		}
 	},
 
+	initialize: function() {
+		this.listenTo(this.model, 'change:image.basename', function() {
+			var property = this.property ? this.property + '.' : '';
+			this.$('img').attr('src', '/img/' + this.model.get(property + 'basename') + '-thumb' + this.model.get(property + 'ext'));
+		});
+	},
+
 	attach: function() {
 		this.property = this.$el.attr('property');
 
@@ -106,10 +113,11 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 			contentType: false,
 			processData: false,
 			success: function(res) {
-				console.log(self.property);
-				if(self.property)
-					self.model.set(self.property, res.image);
-				else 
+				if(self.property) {
+					var obj = {};
+					obj[self.property] = res.image;
+					self.model.set(obj, { flatten: true });
+				} else 
 					self.model.set(res.image);
 
 				elements.fileInput.val(null);

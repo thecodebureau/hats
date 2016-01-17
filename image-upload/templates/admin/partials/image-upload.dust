@@ -7,9 +7,8 @@
 			<!--<li><strong>Path:</strong> <span property="path">{path}</li>-->
 			<li><strong>Ext:</strong> <span data-hook="image.ext">{image.ext}</li>
 			<li><strong>Mime:</strong> <span data-hook="image.mime">{image.mime}</li>
-			<li><strong>Content Size:</strong> <span data-hook="image.contentSize">{image.contentSize}</li>
-			<li><strong>Upload Date:</strong> <span data-hook="image.uploadDate">{image.uploadDate}</li>
-			<li><strong>Dimensions:</strong> <span data-hook="image.width">{width}</span> x <span data-hook="image.height">{image.height}</span></li>
+			<li><strong>Content Size (bytes):</strong> <span data-hook="image.contentSize">{image.contentSize}</li>
+			<li><strong>Dimensions (pixels):</strong> <span data-hook="image.width">{width}</span> x <span data-hook="image.height">{image.height}</span></li>
 			{?thumbnail}
 			<li>Thumbnail
 				<ul>
