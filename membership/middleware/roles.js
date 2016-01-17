@@ -1,4 +1,4 @@
-var Role = require('mongoose').model('Role');
+var Role = require('../models/role');
 
 var mw = {
 	formatQuery: require('epiphany/middleware/format-query'),

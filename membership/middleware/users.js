@@ -4,9 +4,9 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 
 // models
-var User = mongoose.model('User');
-var Permission = mongoose.model('Permission');
-var Invite = mongoose.model('Invite');
+var User = require('../models/user');
+var Permission = require('../models/permission');
+var Invite = require('../models/invite');
 
 var config = require('../config');
 
