@@ -69,7 +69,7 @@ module.exports = {
 			return next();
 		}
 
-		var paths = page ? _.compact(_.pluck(page.pages, 'path')) : [];
+		var paths = page ? _.compact(_.map(page.pages, 'path')) : [];
 
 		paths.push(path);
 
