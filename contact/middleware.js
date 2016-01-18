@@ -16,14 +16,13 @@ module.exports = function (req, res, next) {
 			html: html
 		}, function (err) {
 			// TODO try to get a hold page object
-			//if (err) {
-			//	console.log(err);
-				res.status(500).locals.message = config.error;
-			//} else {
-			//	res.locals.formStatus = config.success;
-			//}
+			if (err) {
+				err.message = config.error[err.status] || config.error.default;
+			} else {
+				res.locals.message = config.success;
+			}
 
-			next();
+			next(err);
 		});
 	});
 };
