@@ -1,32 +1,32 @@
 module.exports = {
 	collections: {
-		Invites: require('./client/admin/collections/invites'),
-		Permissions: require('./client/admin/collections/permissions'),
-		Roles: require('./client/admin/collections/roles'),
-		Users: require('./client/admin/collections/users'),
+		Invites: require('./browser/admin/collections/invites'),
+		Permissions: require('./browser/admin/collections/permissions'),
+		Roles: require('./browser/admin/collections/roles'),
+		Users: require('./browser/admin/collections/users'),
 	},
 
 	models: {
-		Invite: require('./client/admin/models/invite'),
-		Permission: require('./client/admin/models/permission'),
-		Role: require('./client/admin/models/role'),
-		//User: require('./client/admin/models/user'),
+		Invite: require('./browser/admin/models/invite'),
+		Permission: require('./browser/admin/models/permission'),
+		Role: require('./browser/admin/models/role'),
+		//User: require('./browser/admin/models/user'),
 	},
 
-	routes: require('./client/admin/routes'),
+	routes: require('./browser/admin/routes'),
 
 	views: {
 		Form: require('ridge/views/form'),
-		Invite: require('./client/admin/views/invite'),
-		InvitePage: require('./client/admin/views/invite-page'),
-		InvitesPage: require('./client/admin/views/invites-page'),
-		Permission: require('./client/admin/views/permission'),
-		PermissionPage: require('./client/admin/views/permission-page'),
-		PermissionsPage: require('./client/admin/views/permissions-page'),
-		Role: require('./client/admin/views/role'),
-		RolePage: require('./client/admin/views/role-page'),
-		RolesPage: require('./client/admin/views/roles-page'),
-		User: require('./client/admin/views/user'),
-		Users: require('./client/admin/views/users')
+		Invite: require('./browser/admin/views/invite'),
+		InvitePage: require('./browser/admin/views/invite-page'),
+		InvitesPage: require('./browser/admin/views/invites-page'),
+		Permission: require('./browser/admin/views/permission'),
+		PermissionPage: require('./browser/admin/views/permission-page'),
+		PermissionsPage: require('./browser/admin/views/permissions-page'),
+		Role: require('./browser/admin/views/role'),
+		RolePage: require('./browser/admin/views/role-page'),
+		RolesPage: require('./browser/admin/views/roles-page'),
+		User: require('./browser/admin/views/user'),
+		Users: require('./browser/admin/views/users')
 	}
 };

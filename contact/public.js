@@ -1,4 +1,4 @@
 module.exports = {
-	ContactFormView: require('./client/contact-form-view'),
-	ContactMessageModel: require('./client/contact-message-model')
+	ContactFormView: require('./browser/contact-form-view'),
+	ContactMessageModel: require('./browser/contact-message-model')
 };

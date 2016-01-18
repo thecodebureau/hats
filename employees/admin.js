@@ -1,20 +1,20 @@
-var EmployeePage = require('./client/admin/views/employee-page');
-var EmployeesPage = require('./client/admin/views/employees-page');
+var EmployeePage = require('./browser/admin/views/employee-page');
+var EmployeesPage = require('./browser/admin/views/employees-page');
 
 module.exports = {
 	collections: {
-		Employees: require('./client/collections/employees'),
+		Employees: require('./browser/collections/employees'),
 	},
 
 	models: {
-		Employee: require('./client/models/employee'),
+		Employee: require('./browser/models/employee'),
 	},
 
-	routes: require('./client/admin/routes'),
+	routes: require('./browser/admin/routes'),
 
 	views: {
 		EmployeePage: EmployeePage,
 		EmployeesPage: EmployeesPage,
-		Employee: require('./client/admin/views/employee'),
+		Employee: require('./browser/admin/views/employee'),
 	}
 };

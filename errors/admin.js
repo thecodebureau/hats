@@ -1,15 +1,15 @@
-var ErrorsPage = require('./client/admin/views/errors-page.js');
+var ErrorsPage = require('./browser/admin/views/errors-page.js');
 
 module.exports = {
 	collections: {
-		Errors: require('./client/admin/collections/errors.js')
+		Errors: require('./browser/admin/collections/errors.js')
 	},
 
-	routes: require('./client/admin/routes'),
+	routes: require('./browser/admin/routes'),
 
 	views: {
 		ErrorsPage: ErrorsPage,
-		Error: require('./client/admin/views/error.js')
+		Error: require('./browser/admin/views/error.js')
 	}
 };
 

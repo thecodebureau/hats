@@ -1,11 +1,11 @@
 module.exports = {
 	models: {
-		Organization: require('./client/models/organization.js')
+		Organization: require('./browser/models/organization.js')
 	},
 
-	routes: require('./client/admin/routes'),
+	routes: require('./browser/admin/routes'),
 
 	views: {
-		OrganizationPage: require('./client/admin/views/organization-page')
+		OrganizationPage: require('./browser/admin/views/organization-page')
 	}
 };

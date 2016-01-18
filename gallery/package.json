@@ -3,7 +3,7 @@
   "main": "server.js",
   "browser": {
     "": "public.js",
-    "./admin/routes": "./client/admin/routes"
+    "./admin/routes": "./browser/admin/routes"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

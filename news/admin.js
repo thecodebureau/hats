@@ -1,17 +1,17 @@
 module.exports = {
 	collections: {
-		NewsArticles: require('./client/collections/news-articles')
+		NewsArticles: require('./browser/collections/news-articles')
 	},
 
 	models: {
-		NewsArticle: require('./client/models/news-article')
+		NewsArticle: require('./browser/models/news-article')
 	},
 
-	routes: require('./client/admin/routes'),
+	routes: require('./browser/admin/routes'),
 
 	views: {
-		NewsPage: require('./client/admin/views/news-page'),
-		NewsArticlePage: require('./client/admin/views/news-article-page'),
-		NewsArticle: require('./client/admin/views/news-article')
+		NewsPage: require('./browser/admin/views/news-page'),
+		NewsArticlePage: require('./browser/admin/views/news-article-page'),
+		NewsArticle: require('./browser/admin/views/news-article')
 	}
 };

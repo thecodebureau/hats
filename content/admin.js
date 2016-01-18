@@ -1,23 +1,23 @@
-_.extend(require('ridge/util/validate/tests'), require('./client/admin/tests'));
-_.extend(require('ridge/util/validate/messages'), require('./client/admin/messages'));
+_.extend(require('ridge/util/validate/tests'), require('./browser/admin/tests'));
+_.extend(require('ridge/util/validate/messages'), require('./browser/admin/messages'));
 
-var ContentPage = require('./client/admin/views/content-page');
-var FieldPage = require('./client/admin/views/field-page');
+var ContentPage = require('./browser/admin/views/content-page');
+var FieldPage = require('./browser/admin/views/field-page');
 
 module.exports = {
 	collections: {
-		Fields: require('./client/collections/fields.js')
+		Fields: require('./browser/collections/fields.js')
 	},
 
 	models: {
-		Field: require('./client/models/field.js')
+		Field: require('./browser/models/field.js')
 	},
 
-	routes: require('./client/admin/routes'),
+	routes: require('./browser/admin/routes'),
 
 	views: {
 		ContentPage: ContentPage,
 		FieldPage: FieldPage,
-		Field: require('./client/admin/views/field')
+		Field: require('./browser/admin/views/field')
 	}
 };
