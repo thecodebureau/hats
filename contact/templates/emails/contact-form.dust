@@ -1,9 +1,6 @@
 <table align="center" width="600">
 	<tr>
 		<td style="text-align: left; font-family: Arial, sans-serif;" valign="top">
-			<h1>Message from{name}</h1>
-
-			<h3>Customer Details:</h3>
 			<p><strong>Name:</strong> {name}<br />
 			<strong>Email:</strong> {email}<br />
 			<strong>Telephone:</strong> {telephone}</p>

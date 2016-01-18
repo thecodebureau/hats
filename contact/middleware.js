@@ -5,8 +5,6 @@ var nodemailer = require('nodemailer');
 module.exports = function (req, res, next) {
 	var smtpTransport = nodemailer.createTransport(config.smtp);
 
-	console.log('about to send');
-
 	res.render('emails/contact-form', req.body, function (err, html) {
 		smtpTransport.sendMail({
 			from: config.from,
