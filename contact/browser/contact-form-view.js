@@ -33,12 +33,10 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	error: function(model, xhr, options) {
-		console.log('error!');
 		_.result(this.message, 'remove');
 
 		var resp = xhr.responseJSON;
 
-		console.log(resp);
 		this.message = new MessageView({
 			message: resp.message || {
 				heading: 'Oops',
@@ -49,7 +47,6 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 
 	save: function(e) {
 		e.preventDefault();
-		console.log('saving');
 
 		if(this.model.isValid()) {
 			$(document.body).addClass('progress');
@@ -68,6 +65,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 
 	complete: function() {
 		this.elements.button.prop('disabled', false);
+
 		$(document.body).removeClass('progress');
 	},
 
