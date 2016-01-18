@@ -1,0 +1,5 @@
+<tr class="item">
+	<td class="date">{dateCreated|d_datetime}</td>
+	<td class="email">{email}</td>
+	<td class="active"><input type="checkbox"{?active} checked{/active} /></td>
+</tr>

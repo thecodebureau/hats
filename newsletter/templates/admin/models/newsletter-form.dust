@@ -1,0 +1,26 @@
+<% extend 'admin/layout.ect' %>
+<% block 'scripts' : %>
+<script src="/js/vendor/lodash-compat.js"></script>
+<script src="/js/vendor/selectron.js"></script>
+<script src="/js/vendor/snapback.js"></script>
+<script src="/js/vendor/spytext.js"></script>
+<script src="/js/admin/newsletter.js"></script>
+<% end %>
+
+<section class="flex col send">
+	<div class="flex col" id="send-newsletter">
+		<div class="flex textarea-container">
+			<div spytext-field data-preset="full" data-name="body"></div>
+		</div>
+		<div class="controls">
+			<button data-action="/api/newsletter/send" data-confirm="true" class="send">Skicka till alla</button>
+			<button data-action="/api/newsletter/sendTest" class="send">Skicka test till admin</button>
+		</div>
+	</div>
+</section>
+<script>
+D(function() {
+	var spytext = new Spytext(O('section.send'));
+});
+</script>
+

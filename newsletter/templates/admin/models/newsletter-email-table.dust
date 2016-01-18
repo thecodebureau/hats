@@ -1,0 +1,10 @@
+<table class="collection">
+	<thead>
+		<tr>
+			<th>Datum</th>
+			<th>Epostadress</th>
+			<th>Aktiv</th>
+		</tr>
+	</thead>
+	<tbody class="collection container"></tbody>
+</table>
