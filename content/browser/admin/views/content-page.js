@@ -35,7 +35,7 @@ module.exports = require('ridge/views/page').extend({
 
 		this.modelViews = [];
 
-		models.each(this.renderModel, this);
+		models.each(this.renderModel.bind(this));
 	},
 
 	renderModel: function(model) {
