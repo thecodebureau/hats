@@ -6,6 +6,7 @@ var View = require('ridge/view').extend();
 
 _.extend(View.prototype, require('ridge/mixins/observe'), {
 	events: {
+		'click .close': 'close',
 		'submit form': 'save'
 	},
 
@@ -82,6 +83,10 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	attach: function() {
 		this.observe({ validate: true });
 	},
+
+	close: function() {
+		this.leave();
+	}
 });
 
 module.exports = View;
