@@ -12,7 +12,7 @@ var validation = {
 };
 
 var content = {
-	required: true
+	required: false
 };
 
 if(_.isArray(app.languages) && app.languages.length > 1)
