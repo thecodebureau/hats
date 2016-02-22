@@ -15,7 +15,16 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 
 	subviews: {
 		buttons: [ '.controls', require('./employee-page-buttons') ],
-		imageUpload: [ '.image-upload', require('hats/image-upload/browser/image-upload-view') ],
+		imageUpload: [ '.image-upload', require('hats/image-upload/browser/image-upload-view'), {
+			property: 'image',
+			imageOptions: {
+				type: "employee",
+				maxWidth: "1024",
+				mediumWidth: "600",
+				thumbWidth: "300",
+				ratio: "1.61803398875" 
+			}
+		} ],
 		spytextFields: [ '[data-spytext]', require('spytext/field'), { multi: true } ],
 		form: [ 'form', require('ridge/views/form-styling') ]
 	},

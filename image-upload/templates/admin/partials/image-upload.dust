@@ -1,7 +1,7 @@
-<section class="image-upload" typeof="ImageObject"{?property} property="{property}"{/property} data-options="type={type},max={maxWidth},medium={mediumWidth},thumb={thumbWidth},ratio={ratio}">
+<section class="image-upload">
 	<h1>Image</h1>
 	<div class="current">
-		<figure><img data-hook="image.thumbUrlPath" src="{image.thumbUrlPath}" /></figure>
+		<figure><img src="/img/{image.basename}-thumb{ext}" /></figure>
 		<ul>
 			<li><strong>Basename:</strong> <span data-hook="image.basename">{image.basename}</li>
 			<!--<li><strong>Path:</strong> <span property="path">{path}</li>-->

@@ -7,58 +7,22 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 		'submit form': 'preventDefault'
 	},
 
-	bindings: {
-		basename: {
-			'[data-hook="image.basename"]': 'html'
-		},
-		ext: {
-			'[data-hook="image.ext"]': 'html'
-		},
-		thumbUrlPath: {
-			'[data-hook="image.thumbUrlPath"]': 'src'
-		},
-		mime: {
-			'[data-hook="image.mime"]': 'html'
-		},
-		contentSize: {
-			'[data-hook="image.contentSize"]': 'html'
-		},
-		width: {
-			'[data-hook="image.width"]': 'html'
-		},
-		height: {
-			'[data-hook="image.height"]': 'html'
-		},
-	},
-
 	subviews: {
 		buttons: [ '.controls', require('./buttons') ],
-		imageUpload: [ '.image-upload', require('hats/image-upload/browser/image-upload-view') ],
+		imageUpload: [ '.image-upload', require('hats/image-upload/browser/image-upload-view'), {
+			imageOptions: {
+				type: "gallery",
+				maxWidth: "1024",
+				mediumWidth: "600",
+				thumbWidth: "300",
+				ratio: "1.333" 
+			}
+		} ],
 		spytextFields: [ '[data-spytext]', require('spytext/field'), { multi: true } ],
-		form: [ 'form', require('ridge/views/form-styling') ]
 	},
 
 	initialize: function(opts) {
 		this.model = new GalleryImageModel(this.state.get('galleryImage') || {});
-
-		// use properties from model validation to set up more bindings.
-		// all model validation properties are assumed to be 'value' getter and setter
-		this.bindings = _.defaults(this.bindings, _.mapValues(this.model.validation, function(value, key) {
-			var binding = {};
-
-			binding['[name="' + key + '"],[data-name="' + key + '"]'] = {
-				both: 'value',
-			};
-
-			return binding;
-		}));
-	},
-
-	attach: function() {
-		this.observe({ validate: true });
-
-		if(!this.model.isNew())
-			this.model.validate();
 	}
 });
 

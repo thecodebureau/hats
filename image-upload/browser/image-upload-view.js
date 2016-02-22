@@ -1,5 +1,6 @@
 var View = require('ridge/view').extend();
 
+var View = require('ridge/views/page').extend();
 
 _.extend(View.prototype, require('ridge/mixins/observe'), {
 	events: {
@@ -16,50 +17,51 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	bindings: {
-		'image.basename': {
+		'basename': {
 			'[data-hook="image.basename"]': 'html',
+			'figure img': function($el, value) {
+				if(!value) return;
+
+				var ext = this.model.get(this.property ? this.property + '.ext' : 'ext');
+
+				$el.attr('src', '/img/' + value + '-thumb' + ext);
+			}
 		},
-		'image.ext': {
+		'ext': {
 			'[data-hook="image.ext"]': 'html'
 		},
-		'image.thumbUrlPath': {
-			'[data-hook="image.thumbUrlPath"]': 'src'
-		},
-		'image.mime': {
+		'mime': {
 			'[data-hook="image.mime"]': 'html'
 		},
-		'image.contentSize': {
+		'contentSize': {
 			'[data-hook="image.contentSize"]': 'html'
 		},
-		'image.width': {
+		'width': {
 			'[data-hook="image.width"]': 'html'
 		},
-		'image.height': {
+		'height': {
 			'[data-hook="image.height"]': 'html'
 		},
-		'image.caption': {
+		'caption': {
 			'[data-name="image.caption"]': {
 				both: 'value'
 			}
 		}
 	},
 
-	initialize: function() {
-		this.listenTo(this.model, this.property ? 'change:' + this.property : 'change', function() {
-			var property = this.property ? this.property + '.' : '';
-			this.$('img').attr('src', '/img/' + this.model.get(property + 'basename') + '-thumb' + this.model.get(property + 'ext'));
-		});
+	initialize: function(options) {
+		this.property = options.property;
+
+		this.options = options.imageOptions || {};
+
+		if(this.property)
+			this.bindings = _.mapKeys(this.bindings, function(value, key) {
+				return this.property + '.' + key;
+			}, this);
 	},
 
 	attach: function() {
-		this.property = this.$el.attr('property');
-
-		this.options = _.compact(this.$el.attr('data-options').split(',').map(function(val) {
-			var arr = _.compact(val.split('='));
-			return arr.length > 1 ? arr : null;
-		}));
-		
-		this.observe();
+		this.observe({ populate: true, validate: true });
 	},
 
 
@@ -68,15 +70,14 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 			reader = new FileReader();
 
 		reader.onload = function(e) {
-			var image = new Image(),
-				caption = 'Width: ' + image.width + ' Height: ' + image.height + ' Ratio: ' + image.width / image.height;
+			var image = new Image();
 
 			image.src = e.currentTarget.result;
 
 			self.elements.uploadFigure
 				.children().remove()
 				.end().prepend(image)
-				.append($('<figcaption>').text(caption));
+				.append($('<figcaption>').text('Width: ' + image.width + ' Height: ' + image.height + ' Ratio: ' + image.width / image.height));
 
 			self.elements.uploadButton.prop('disabled', false);
 		};
@@ -99,9 +100,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	upload: function() {
 		var self = this,
 			formData = new FormData(),
-			urlEncoded = this.options.map(function(arr) {
-				return arr.join('=');
-			}).join('&'),
+			urlEncoded = $.param(this.options),
 			elements = this.elements;
 
 		formData.append('image', this.elements.fileInput[0].files[0]);

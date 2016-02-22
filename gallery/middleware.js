@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+
 var GalleryImage = require('./model');
 
 var mw = {

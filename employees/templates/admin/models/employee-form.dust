@@ -66,6 +66,6 @@
 		<label class="icon"></label>
 	</div>
 	<div>
-		{>"admin/partials/image-upload":image property="image" type="employee" maxWidth="1024" mediumWidth="600" thumbWidth="300" /}
+		{>"admin/partials/image-upload":image /}
 	</div>
 </form>

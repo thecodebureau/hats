@@ -38,6 +38,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 
 	attach: function() {
 		this.listenTo(this.model, 'change sync', function() {
+			console.log('change detected');
 			this.$('button').prop('disabled', !this.model.isDirty());
 		});
 
