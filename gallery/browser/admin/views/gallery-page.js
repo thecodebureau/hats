@@ -1,7 +1,7 @@
 var GalleryImageView = require('./gallery-image');
 var GalleryImagesCollection = require('../../collections/gallery-images');
 
-module.exports = require('ridge/view').extend({
+module.exports = require('ridge/views/page').extend({
 	elements: {
 		container: '.collection.container'
 	},
@@ -16,13 +16,13 @@ module.exports = require('ridge/view').extend({
 
 		this.listenTo(this.collection, 'reset', this.reset);
 
-		this.listenTo(this.model, 'change:query', this.fetch);
+		this.listenTo(this.state, 'change:query', this.fetch);
 	},
 
 	attach: function() {
 		this.collection.reset({
-			totalCount: this.model.get('totalCount'),
-			galleryImages: this.model.get('galleryImages')
+			totalCount: this.state.get('totalCount'),
+			galleryImages: this.state.get('galleryImages')
 		}, { parse: true });
 	},
 
@@ -32,6 +32,8 @@ module.exports = require('ridge/view').extend({
 
 	reset: function (models, options) {
 		_.invoke(this.modelViews, 'remove');
+
+		this.modelViews = [];
 
 		models.each(this.renderModel, this);
 	},

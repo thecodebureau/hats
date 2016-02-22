@@ -37,6 +37,8 @@ module.exports = {
 	},
 
 	findById: function(req, res, next) {
+		if(req.params.id === 'new') return next();
+
 		GalleryImage.findById(req.params.id).lean().exec(function(err, galleryImage) {
 			if(err) return next(err);
 			res.locals.galleryImage = galleryImage;

@@ -1,6 +1,6 @@
 <div class="news-article item model" data-published="{?datePublished}true{:else}false{/datePublished}">
 	<figure typeof="ImageObject">
-		<a href="/admin/gallery/{_id}"><img property="thumbUrlPath" src="{thumbUrlPath}" /></a>
+		<a href="/admin/gallery/{_id}"><img property="thumbUrlPath" src="/img/{basename}-thumb{ext}" /></a>
 		<figcaption property="caption">{caption}</figcaption>
 	</figure>
 	<time pubdate property="datePublished">{datePublished|d_datetime}</time>

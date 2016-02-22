@@ -1,6 +1,6 @@
 var GalleryImageModel = require('../../models/gallery-image');
 
-var View = require('ridge/view').extend();
+var View = require('ridge/views/page').extend();
 
 _.extend(View.prototype, require('ridge/mixins/observe'), {
 	events: {
@@ -39,7 +39,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	initialize: function(opts) {
-		this.model = new GalleryImage(this.model.get('galleryImage') || {});
+		this.model = new GalleryImageModel(this.state.get('galleryImage') || {});
 
 		// use properties from model validation to set up more bindings.
 		// all model validation properties are assumed to be 'value' getter and setter
