@@ -45,7 +45,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 	},
 
 	initialize: function() {
-		this.listenTo(this.model, 'change:image.basename', function() {
+		this.listenTo(this.model, this.property ? 'change:' + this.property : 'change', function() {
 			var property = this.property ? this.property + '.' : '';
 			this.$('img').attr('src', '/img/' + this.model.get(property + 'basename') + '-thumb' + this.model.get(property + 'ext'));
 		});
