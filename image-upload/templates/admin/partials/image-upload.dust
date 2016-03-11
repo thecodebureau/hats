@@ -1,7 +1,7 @@
 <section class="image-upload">
 	<h1>Image</h1>
 	<div class="current">
-		<figure><img src="/img/{image.basename}-thumb{ext}" /></figure>
+		<figure>{?image}<img src="/img/{image.basename}-thumb{ext}" />{/image}</figure>
 		<ul>
 			<li><strong>Basename:</strong> <span data-hook="image.basename">{image.basename}</li>
 			<!--<li><strong>Path:</strong> <span property="path">{path}</li>-->
