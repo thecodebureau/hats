@@ -38,8 +38,7 @@
 	<script>
 		var INITIAL_STATE = {INITIAL_STATE|s};
 	</script>
-	<script src="/js/common{js.suffix}.js"></script>
-	<script src="/js/admin{js.suffix}.js"></script>
+	<script src="/js/admin/app{js.suffix}.js"></script>
 	
 </body>
 </html>
