@@ -30,6 +30,7 @@
 				{/navigation}
 			</ul>
 		</nav>
+		<a href="/auth/logout" class="logout" target="_self"><span>Logout</span></a>
 	</div>
 
 	<main></main>
