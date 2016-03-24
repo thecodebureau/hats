@@ -5,7 +5,8 @@ var mw = require('./middleware');
 var isAuthenticated = mw.authorization.isAuthenticated,
 	isAdmin = mw.authorization.isAdmin,
 	isAuthenticated = mw.authorization.isAuthenticated,
-	isCurrent = mw.authorization.isCurrent;
+	isCurrent = mw.authorization.isCurrent,
+	redirect = require('epiphany/middleware/redirect');
 
 
 var routes = [
@@ -31,7 +32,7 @@ var routes = [
 	[ '/api/users/reset-password',	'post', [ mw.users.resetPassword ] ],
 	[ '/api/users/update-password', 'post', [ mw.users.updatePassword ] ],
 	[ '/auth/local',					'post',		[ mw.passport.local ]],
-	[ '/auth/logout',					'get',		[ mw.passport.logout ]],
+	[ '/auth/logout',					'get',		[ mw.passport.logout, redirect('/') ]],
 	[ '/auth/verify',					'get',		[ mw.users.verify ]]
 ];
 
