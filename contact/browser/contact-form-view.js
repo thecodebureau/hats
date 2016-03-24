@@ -39,9 +39,10 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 		var resp = xhr.responseJSON;
 
 		this.message = new MessageView({
-			message: resp.message || {
-				heading: 'Oops',
-				body: 'A problem occured.'
+			message: { 
+				type: 'error',
+				heading: resp.statusText || 'Oops!',
+				body: resp.message || 'A problem has occured'
 			}
 		}).enter(this.elements.form, { method: 'prepend' });
 	},
