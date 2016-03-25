@@ -31,7 +31,7 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	reset: function (models, options) {
-		_.invoke(this.modelViews, 'remove');
+		_.invokeMap(this.modelViews, 'remove');
 
 		this.modelViews = [];
 

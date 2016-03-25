@@ -184,9 +184,9 @@ module.exports = {
 		//var paths = [];
 
 		//while(pages && pages.length) {
-		//	paths.push.apply(paths, _.pluck(pages, 'path'));
+		//	paths.push.apply(paths, _.map(pages, 'path'));
 
-		//	pages = _.compact(_.flatten(_.pluck(pages, 'pages')));
+		//	pages = _.compact(_.flatten(_.map(pages, 'pages')));
 		//}
 
 		//res.locals.paths = paths.sort();

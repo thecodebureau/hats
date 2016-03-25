@@ -33,7 +33,7 @@ module.exports = require('ridge/views/page').extend({
 	removePage: function() {
 		var _view = this;
 
-		_.invoke(this.modelViews, 'delete');
+		_.invokeMap(this.modelViews, 'delete');
 
 		this.modelViews = [];
 
@@ -70,11 +70,11 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	reset: function (models, options) {
-		_.invoke(this.modelViews, 'remove');
+		_.invokeMap(this.modelViews, 'remove');
 
 		this.modelViews = [];
 
-		models.each(this.renderModel, this);
+		models.each(this.renderModel.bind(this));
 	},
 
 	renderModel: function(model) {

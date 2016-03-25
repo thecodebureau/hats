@@ -121,7 +121,7 @@ module.exports = {
 	query: function(req, res, next) {
 		var options = [];
 
-		var queryDocument = _.object(_.pairs(req.query).filter(function(arr) {
+		var queryDocument = _.fromPairs(_.toPairs(req.query).filter(function(arr) {
 			if(/^_/.test(arr[0])) {
 				arr[0] = arr[0].slice(1);
 				options.push(arr);
@@ -131,7 +131,7 @@ module.exports = {
 			return true;
 		}));
 
-		options = _.object(options);
+		options = _.fromPairs(options);
 
 		var query = User.find(queryDocument);
 

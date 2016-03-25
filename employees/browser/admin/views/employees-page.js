@@ -32,11 +32,11 @@ module.exports = require('ridge/views/page').extend({
 	},
 
 	reset: function (models, options) {
-		_.invoke(this.modelViews, 'remove');
+		_.invokeMap(this.modelViews, 'remove');
 
 		this.modelViews = [];
 
-		models.each(this.renderModel, this);
+		models.each(this.renderModel.bind(this));
 	},
 
 	renderModel: function(model) {
