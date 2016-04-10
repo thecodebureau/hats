@@ -35,7 +35,7 @@ var UserSchema = new mongoose.Schema(_.defaults({
 	isBanned: { type: Boolean, default: false },
 	isBlocked: { type: Boolean, default: false },
 	isVerified: { type: Boolean, default: false }
-}, require('epiphany/schemas/person')));
+}, require('warepot/schemas/person')));
 
 UserSchema.methods.login = function() {
 	this.lastLogin = Date.now();

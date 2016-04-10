@@ -6,7 +6,7 @@ var isAuthenticated = mw.authorization.isAuthenticated,
 	isAdmin = mw.authorization.isAdmin,
 	isAuthenticated = mw.authorization.isAuthenticated,
 	isCurrent = mw.authorization.isCurrent,
-	redirect = require('epiphany/middleware/redirect');
+	redirect = require('warepot/redirect');
 
 
 var routes = [

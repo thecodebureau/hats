@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var GalleryImage = require('./model');
 
 var mw = {
-	formatQuery: require('epiphany/middleware/format-query'),
-	paginate: require('epiphany/middleware/paginate')
+	formatQuery: require('warepot/format-query'),
+	paginate: require('warepot/paginate')
 };
 
 module.exports = {

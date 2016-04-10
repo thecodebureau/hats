@@ -1,6 +1,6 @@
 var mw = {
-	paginate: require('epiphany/middleware/paginate'),
-	formatQuery: require('epiphany/middleware/format-query')
+	paginate: require('warepot/paginate'),
+	formatQuery: require('warepot/format-query')
 };
 
 var NewsletterEmail = require('../models/newsletter-email');

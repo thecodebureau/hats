@@ -5,9 +5,9 @@ var schemaOptions = {
 	toJSON: { virtuals: true }
 };
 
-var EmployeeSchema = new mongoose.Schema(_.defaults({}, require('epiphany/schemas/person')), schemaOptions);
+var EmployeeSchema = new mongoose.Schema(_.defaults({}, require('warepot/schemas/person')), schemaOptions);
 
-EmployeeSchema.plugin(require('epiphany/plugins/base'));
+EmployeeSchema.plugin(require('warepot/plugins/base'));
 
 EmployeeSchema.virtual('name').get(function() {
 	return this.givenName + ' ' + this.familyName;

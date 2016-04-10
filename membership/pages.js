@@ -7,6 +7,7 @@ module.exports = [ {
 		{
 			title: 'Roles',
 			middleware: [ mw.roles.formatQuery, mw.roles.paginate, mw.roles.find ],
+			template: 'admin/pages/membership/roles',
 			pages: [ {
 				title: 'Role',
 				path: ':id',
@@ -18,6 +19,7 @@ module.exports = [ {
 		}, {
 			title: 'Permissions',
 			middleware: [ mw.permissions.formatQuery, mw.permissions.paginate, mw.permissions.find ],
+			template: 'admin/pages/membership/permissions',
 			pages: [ {
 				title: 'Permission',
 				path: ':id',
@@ -33,6 +35,7 @@ module.exports = [ {
 		}, {
 			title: 'Invites',
 			middleware: [ mw.invites.formatQuery, mw.invites.paginate, mw.invites.find ],
+			template: 'admin/pages/membership/invites',
 			pages: [ {
 				title: 'Invite',
 				name: 'invite',

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
-var GalleryImageSchema = new mongoose.Schema(require('epiphany/schemas/image-object'));
+var GalleryImageSchema = new mongoose.Schema(require('warepot/schemas/image-object'));
 
-GalleryImageSchema.plugin(require('epiphany/plugins/base'));
+GalleryImageSchema.plugin(require('warepot/plugins/base'));
 
 module.exports = mongoose.model('GalleryImage', GalleryImageSchema);

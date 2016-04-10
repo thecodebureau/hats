@@ -20,6 +20,6 @@ if(config && _.isArray(config.languages) && config.languages.length > 1) {
 
 var FieldSchema = new mongoose.Schema(fieldSchema);
 
-FieldSchema.plugin(require('epiphany/plugins/base'));
+FieldSchema.plugin(require('warepot/plugins/base'));
 
 module.exports = mongoose.model('Field', FieldSchema);

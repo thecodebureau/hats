@@ -7,8 +7,8 @@ var config = require('../config');
 var smtpTransport = nodemailer.createTransport(config.mail);
 
 var mw = {
-	formatQuery: require('epiphany/middleware/format-query'),
-	paginate: require('epiphany/middleware/paginate')
+	formatQuery: require('warepot/format-query'),
+	paginate: require('warepot/paginate')
 };
 
 module.exports = {

@@ -1,9 +1,9 @@
 var mw = {
-	formatQuery: require('epiphany/middleware/format-query'),
-	paginate: require('epiphany/middleware/paginate')
+	formatQuery: require('warepot/format-query'),
+	paginate: require('warepot/paginate')
 };
 
-var ErrorModel = require('epiphany/models/error');
+var ErrorModel = require('warepot/models/error');
 
 module.exports = {
 	find: function(req, res, next) {

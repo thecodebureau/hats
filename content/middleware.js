@@ -7,8 +7,8 @@ function extractLang(fields, lang) {
 var Field = require('./model');
 
 var mw = {
-	formatQuery: require('epiphany/middleware/format-query'),
-	paginate: require('epiphany/middleware/paginate')
+	formatQuery: require('warepot/format-query'),
+	paginate: require('warepot/paginate')
 };
 
 var cache = {};
@@ -179,7 +179,7 @@ module.exports = {
 	},
 
 	paths: function(req, res, next) {
-		//var pages = epiphany.pages.public;
+		//var pages = warepot.pages.public;
 
 		//var paths = [];
 

@@ -4,6 +4,7 @@ module.exports = [
 	{
 		title: 'Gallery',
 		middleware: [ mw.formatQuery, mw.paginate, mw.find ],
+		template: 'admin/pages/gallery',
 		pages: [ {
 			path: ':id',
 			template: 'admin/pages/gallery-image',

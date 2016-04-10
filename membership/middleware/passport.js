@@ -105,7 +105,7 @@ var mw = {
 };
 
 // TODO place this in server/passport.js instead... it is currently placed
-// here because of Epiphany's loader sequence (server/passport.js needs to be
+// here because of warepot's loader sequence (server/passport.js needs to be
 // loaded after (User) model.
 passport.providers = [];
 

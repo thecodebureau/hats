@@ -3,6 +3,7 @@ var mw = require('./middleware');
 module.exports = [ {
 	title: 'Content',
 	middleware: [ mw.formatQuery, mw.paginate, mw.find, mw.paths ],
+	template: 'admin/pages/content',
 	pages: [ {
 		path: ':id',
 		template: 'admin/pages/field',

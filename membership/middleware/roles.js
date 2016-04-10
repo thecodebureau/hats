@@ -1,8 +1,8 @@
 var Role = require('../models/role');
 
 var mw = {
-	formatQuery: require('epiphany/middleware/format-query'),
-	paginate: require('epiphany/middleware/paginate')
+	formatQuery: require('warepot/format-query'),
+	paginate: require('warepot/paginate')
 };
 
 module.exports = {
