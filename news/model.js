@@ -28,9 +28,9 @@ var NewsArticleSchema = new mongoose.Schema(_.defaults({
 		type: String,//Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
 		default: 'racing,cars'
 	},
-}, require('warepot/schemas/article')), schemaOptions);
+}, require('mongopot/schemas/article')), schemaOptions);
 
-NewsArticleSchema.plugin(require('warepot/plugins/base'));
+NewsArticleSchema.plugin(require('mongopot/plugins/base'));
 
 NewsArticleSchema.virtual('summary').get(function() {
 	var summaryLength = 255;

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
-var OrganizationSchema = new mongoose.Schema(require('warepot/schemas/organization'));
+var OrganizationSchema = new mongoose.Schema(require('mongopot/schemas/organization'));
 
-OrganizationSchema.plugin(require('warepot/plugins/base'));
+OrganizationSchema.plugin(require('mongopot/plugins/base'));
 
 module.exports = mongoose.model('Organization', OrganizationSchema);

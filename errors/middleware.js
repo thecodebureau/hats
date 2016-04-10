@@ -3,7 +3,7 @@ var mw = {
 	paginate: require('warepot/paginate')
 };
 
-var ErrorModel = require('warepot/models/error');
+var ErrorModel = require('mongopot/models/error');
 
 module.exports = {
 	find: function(req, res, next) {
