@@ -190,8 +190,8 @@ module.exports = {
 		//}
 
 		//res.locals.paths = paths.sort();
-		//res.locals.paths = require('./config').paths;
-		res.locals.paths = res.app.paths['/'];
+		res.locals.paths = require('./config').paths;
+		//res.locals.paths = res.app.paths['/'];
 		next();
 	},
 	
