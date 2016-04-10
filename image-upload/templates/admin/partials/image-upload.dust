@@ -1,15 +1,15 @@
 <section class="image-upload">
 	<h1>Image</h1>
 	<div class="current">
-		<figure><img src="/img/{image.basename}-thumb{ext}" /></figure>
+		<figure><img src="/img/{basename}-thumb{ext}" /></figure>
 		<ul>
-			<li><strong>Basename:</strong> <span data-hook="image.basename">{image.basename}</li>
+			<li><strong>Basename:</strong> <span data-hook="basename">{basename}</li>
 			<!--<li><strong>Path:</strong> <span property="path">{path}</li>-->
-			<li><strong>Ext:</strong> <span data-hook="image.ext">{image.ext}</li>
-			<li><strong>Mime:</strong> <span data-hook="image.mime">{image.mime}</li>
-			<li><strong>Content Size (bytes):</strong> <span data-hook="image.contentSize">{image.contentSize}</li>
-			<li><strong>Dimensions (pixels):</strong> <span data-hook="image.width">{width}</span> x <span data-hook="image.height">{image.height}</span></li>
-			{?thumbnail}
+			<li><strong>Ext:</strong> <span data-hook="ext">{ext}</li>
+			<li><strong>Mime:</strong> <span data-hook="mime">{mime}</li>
+			<li><strong>Content Size (bytes):</strong> <span data-hook="contentSize">{contentSize}</li>
+			<li><strong>Dimensions (pixels):</strong> <span data-hook="width">{width}</span> x <span data-hook="height">{height}</span></li>
+			{#thumbnail}
 			<li>Thumbnail
 				<ul>
 					<li><strong>Content Size:</strong> <span data-hook="contentSize">{contentSize}</li>
@@ -20,7 +20,7 @@
 			{/thumbnail}
 		</ul>
 		<label for="caption">Caption</label>
-		<input type="text" data-hook="image.caption" value="{caption}"/>
+		<input type="text" data-hook="caption" value="{caption}"/>
 	</div>
 	<div class="upload">
 		<h2>Upload new image</h2>

@@ -1,7 +1,5 @@
 var View = require('ridge/view').extend();
 
-var View = require('ridge/views/page').extend();
-
 _.extend(View.prototype, require('ridge/mixins/observe'), {
 	events: {
 		'change [type="file"]': 'changeImage',
@@ -18,7 +16,7 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 
 	bindings: {
 		'basename': {
-			'[data-hook="image.basename"]': 'html',
+			'[data-hook="basename"]': 'html',
 			'figure img': function($el, value) {
 				if(!value) return;
 
@@ -28,22 +26,22 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 			}
 		},
 		'ext': {
-			'[data-hook="image.ext"]': 'html'
+			'[data-hook="ext"]': 'html'
 		},
 		'mime': {
-			'[data-hook="image.mime"]': 'html'
+			'[data-hook="mime"]': 'html'
 		},
 		'contentSize': {
-			'[data-hook="image.contentSize"]': 'html'
+			'[data-hook="contentSize"]': 'html'
 		},
 		'width': {
-			'[data-hook="image.width"]': 'html'
+			'[data-hook="width"]': 'html'
 		},
 		'height': {
-			'[data-hook="image.height"]': 'html'
+			'[data-hook="height"]': 'html'
 		},
 		'caption': {
-			'[data-name="image.caption"]': {
+			'[data-name="caption"]': {
 				both: 'value'
 			}
 		}
@@ -55,9 +53,9 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 		this.options = options.imageOptions || {};
 
 		if(this.property)
-			this.bindings = _.mapKeys(this.bindings, function(value, key) {
+			this.bindings = _.mapKeys(this.bindings, function (value, key) {
 				return this.property + '.' + key;
-			}, this);
+			}.bind(this));
 	},
 
 	attach: function() {
