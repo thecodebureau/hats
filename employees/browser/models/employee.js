@@ -12,13 +12,13 @@ _.extend(Model.prototype, require('ridge/mixins/validate'), {
 		},
 		'email': {
 			email: true,
-			required: true
+			required: false
 		},
 		'telephone': {
-			required: true
+			required: false
 		},
 		'jobTitle': {
-			required: true
+			required: false
 		},
 		'address.streetAddress': false,
 		'address.postalCode': false,
