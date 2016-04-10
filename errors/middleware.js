@@ -51,7 +51,7 @@ module.exports = {
 		ErrorModel.remove({ _id: req.params.id }, function(err) {
 			if(err) return next(err);
 
-			res.status(204).data.ok = true;
+			res.status(204).locals.ok = true;
 
 			next();
 		});
@@ -61,7 +61,7 @@ module.exports = {
 		ErrorModel.remove(_.omit(req.query, 'limit', 'sort', 'page'), function(err) {
 			if(err) return next(err);
 
-			res.status(204).data.ok = true;
+			res.status(204).locals.ok = true;
 
 			next();
 		});
