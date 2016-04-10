@@ -14,7 +14,7 @@ module.exports = require('ridge/views/page').extend({
 			method: 'DELETE',
 			url: '/api/errors',
 			success: function() {
-				_view.fetch(null, this.state.get('query'));
+				_view.fetch(null, _view.state.get('query'));
 			}
 		});
 	},
@@ -23,9 +23,9 @@ module.exports = require('ridge/views/page').extend({
 		var _view = this;
 		$.ajax({
 			method: 'DELETE',
-			url: '/api/errors?' + this.state.get('query'),
+			url: '/api/errors?' + _view.state.get('query'),
 			success: function() {
-				_view.fetch(null, this.state.get('query'));
+				_view.fetch(null, _view.state.get('query'));
 			}
 		});
 	},
