@@ -1,30 +1,30 @@
 module.exports = require('ridge/view').extend({
-	initialize: function() {
-		this.listenTo(Backbone.history, 'route', this.onRouteChange);
-	},
+  initialize: function() {
+    this.listenTo(Backbone.history, 'route', this.onRouteChange);
+  },
 
-	attach: function() {
-		this.$('ul ul').each(function() {
-			$(this).css('height', this.scrollHeight + 'px');
-		});
+  attach: function() {
+    this.$('ul ul').each(function() {
+      $(this).css('height', this.scrollHeight + 'px');
+    });
 
-	},
+  },
 
-	onRouteChange: function(route, name, params) {
-		this.$('li.current').removeClass('current');
+  onRouteChange: function(route, name, params) {
+    this.$('li.current').removeClass('current');
 
-		var path = Backbone.history.fragment.split('?')[0].split('/');
+    var path = Backbone.history.fragment.split('?')[0].split('/');
 
-		path[0] = path[0] || 'dashboard';
+    path[0] = path[0] || 'dashboard';
 
-		var $ref = this.$el.children('ul');
+    var $ref = this.$el.children('ul');
 
-		while($ref.length > 0 && path.length > 0) {
-			var $el = $ref.children('.' + path.shift());
+    while($ref.length > 0 && path.length > 0) {
+      var $el = $ref.children('.' + path.shift());
 
-			$el.addClass('current');
+      $el.addClass('current');
 
-			$ref = $el.children('ul');
-		}
-	}
+      $ref = $el.children('ul');
+    }
+  }
 });

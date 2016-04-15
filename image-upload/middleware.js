@@ -9,156 +9,156 @@ var formidable = require('formidable');
 
 // some default values
 var defaultRatio = null,
-	defaultMaxWidth = 1024,
-	defaultMediumWidth = 600,
-	defaultThumbWidth = 300;
+  defaultMaxWidth = 1024,
+  defaultMediumWidth = 600,
+  defaultThumbWidth = 300;
 
 var config = require('./config');
 
 module.exports = function(req, res, next) {
-	var ratio = req.query.ratio || defaultRatio,
-		maxWidth = req.query.max || defaultMaxWidth,
-		mediumWidth = req.query.medium || defaultMediumWidth,
-		thumbWidth = req.query.thumb || defaultThumbWidth,
-		maxHeight = ratio ? Math.floor(maxWidth / ratio) : null,
-		mediumHeight = ratio ? Math.floor(mediumWidth / ratio) : null,
-		thumbHeight = ratio ? Math.floor(thumbWidth / ratio) : null,
-		type = req.query.type ? req.query.type + '-' : '';
+  var ratio = req.query.ratio || defaultRatio,
+    maxWidth = req.query.max || defaultMaxWidth,
+    mediumWidth = req.query.medium || defaultMediumWidth,
+    thumbWidth = req.query.thumb || defaultThumbWidth,
+    maxHeight = ratio ? Math.floor(maxWidth / ratio) : null,
+    mediumHeight = ratio ? Math.floor(mediumWidth / ratio) : null,
+    thumbHeight = ratio ? Math.floor(thumbWidth / ratio) : null,
+    type = req.query.type ? req.query.type + '-' : '';
 
-	var form = new formidable.IncomingForm();
+  var form = new formidable.IncomingForm();
 
-	form.onPart = function (part) {
-		var done = _.after(3, function() {
-			// from original Formidable.handlePart
-			form._flushing--;
-			form.emit('file', part.name, file);
-			form._maybeEnd();
-		});
+  form.onPart = function (part) {
+    var done = _.after(3, function() {
+      // from original Formidable.handlePart
+      form._flushing--;
+      form.emit('file', part.name, file);
+      form._maybeEnd();
+    });
 
-		if (part.filename === undefined) {
-			// let formidable handle everything besides files
-			return this.handlePart(part);
-		}
+    if (part.filename === undefined) {
+      // let formidable handle everything besides files
+      return this.handlePart(part);
+    }
 
-		// from original Formidable.handlePart
-		this._flushing++;
+    // from original Formidable.handlePart
+    this._flushing++;
 
-		var date = new Date();
-		var basename = type + date.toISOString().split(':').join('_');
-		var ext = p.extname(part.filename);
+    var date = new Date();
+    var basename = type + date.toISOString().split(':').join('_');
+    var ext = p.extname(part.filename);
 
-		var filePath = p.join(config.dir.uploads, 'img', basename + ext);
-		var mediumFilePath = p.join(config.dir.uploads, 'img', basename + '-medium' + ext);
-		var thumbFilePath = p.join(config.dir.uploads, 'img', basename + '-thumb' + ext);
+    var filePath = p.join(config.dir.uploads, 'img', basename + ext);
+    var mediumFilePath = p.join(config.dir.uploads, 'img', basename + '-medium' + ext);
+    var thumbFilePath = p.join(config.dir.uploads, 'img', basename + '-thumb' + ext);
 
-		var file = {
-			basename: basename,
-			ext: ext,
-			uploadDate: date,
-			mime: part.mime,
-			hash: form.hash,
-			thumbnail: {
-				width: thumbWidth,
-				height: thumbHeight
-			}
-		};
+    var file = {
+      basename: basename,
+      ext: ext,
+      uploadDate: date,
+      mime: part.mime,
+      hash: form.hash,
+      thumbnail: {
+        width: thumbWidth,
+        height: thumbHeight
+      }
+    };
 
-		// noProfile removes all EXIF data
-		gm(part).noProfile()
-			// if you need data from read functions (eg size), you need to
-			// pass options obj with bufferStream: true and call all manipulations inside
-			// the callback
-			.size({ bufferStream: true }, function(err, value) {
-				var width,
-					height,
-					imgRatio = value.width / value.height,
-					shaveHeight,
-					shaveWidth;
+    // noProfile removes all EXIF data
+    gm(part).noProfile()
+      // if you need data from read functions (eg size), you need to
+      // pass options obj with bufferStream: true and call all manipulations inside
+      // the callback
+      .size({ bufferStream: true }, function(err, value) {
+        var width,
+          height,
+          imgRatio = value.width / value.height,
+          shaveHeight,
+          shaveWidth;
 
-				// calculate how much to shave off to make thumbnail correct ratio
-				if(ratio) {
-					if(imgRatio >= ratio) {
-						shaveWidth = (1 - ratio / imgRatio) * 50;// 50 = 100% / 2
-						shaveHeight = 0;
-						if(value.width > maxWidth)
-							width = maxWidth;
-					} else {
-						shaveWidth = 0;
-						shaveHeight = (1 - imgRatio / ratio) * 50;// 50 = 100% / 2
-						if(value.height > maxHeight)
-							height = maxHeight;
-					}
-				}
+        // calculate how much to shave off to make thumbnail correct ratio
+        if(ratio) {
+          if(imgRatio >= ratio) {
+            shaveWidth = (1 - ratio / imgRatio) * 50;// 50 = 100% / 2
+            shaveHeight = 0;
+            if(value.width > maxWidth)
+              width = maxWidth;
+          } else {
+            shaveWidth = 0;
+            shaveHeight = (1 - imgRatio / ratio) * 50;// 50 = 100% / 2
+            if(value.height > maxHeight)
+              height = maxHeight;
+          }
+        }
 
-				// only downsize large version if it is large than max size
-				((width || height) ? this.resize(width, height) : this )
-					.stream(function (err, stdout, stderr) {
+        // only downsize large version if it is large than max size
+        ((width || height) ? this.resize(width, height) : this )
+          .stream(function (err, stdout, stderr) {
 
-						file.width = width || value.width;
-						file.height = height || value.height;
+            file.width = width || value.width;
+            file.height = height || value.height;
 
-						var size = 0;
-						stdout.on('data', function(chunk) {
-							size += chunk.length;
-						});
+            var size = 0;
+            stdout.on('data', function(chunk) {
+              size += chunk.length;
+            });
 
-						stdout.on('end', function() {
-							file.contentSize = size;
-						});
+            stdout.on('end', function() {
+              file.contentSize = size;
+            });
 
-						// write large image
-						var writeStream = fs.createWriteStream(filePath);
-						stdout.pipe(writeStream);
-						writeStream.on('finish', function() {
-							done();
-						});
+            // write large image
+            var writeStream = fs.createWriteStream(filePath);
+            stdout.pipe(writeStream);
+            writeStream.on('finish', function() {
+              done();
+            });
 
-						(ratio ?
-							gm(stdout)
-							// crop thumbnail so it is correct ratio
-								.shave(shaveWidth, shaveHeight, true) :
-							gm(stdout))
-							.stream(function(err, stdout, stderr) {
-								gm(stdout)
-									.resize(mediumWidth, null)
-									// write medium image
-									.write(mediumFilePath, function(err) {
-										if(err) return next(err);
+            (ratio ?
+              gm(stdout)
+              // crop thumbnail so it is correct ratio
+                .shave(shaveWidth, shaveHeight, true) :
+              gm(stdout))
+              .stream(function(err, stdout, stderr) {
+                gm(stdout)
+                  .resize(mediumWidth, null)
+                  // write medium image
+                  .write(mediumFilePath, function(err) {
+                    if(err) return next(err);
 
-										done();
-									});
+                    done();
+                  });
 
-								gm(stdout)
-									// resize thumbnail
-									.resize(thumbWidth, null)
-									// write thumbnail
-									.stream(function(err, stdout, stderr) {
-										var size = 0;
-										stdout.on('data', function(chunk) {
-											size += chunk.length;
-										});
+                gm(stdout)
+                  // resize thumbnail
+                  .resize(thumbWidth, null)
+                  // write thumbnail
+                  .stream(function(err, stdout, stderr) {
+                    var size = 0;
+                    stdout.on('data', function(chunk) {
+                      size += chunk.length;
+                    });
 
-										stdout.on('end', function() {
-											file.thumbnail.contentSize = size;
-										});
+                    stdout.on('end', function() {
+                      file.thumbnail.contentSize = size;
+                    });
 
-										var writeStream = fs.createWriteStream(thumbFilePath);
+                    var writeStream = fs.createWriteStream(thumbFilePath);
 
-										stdout.pipe(writeStream);
+                    stdout.pipe(writeStream);
 
-										writeStream.on('finish', function() {
-											done();
-										});
-									});
+                    writeStream.on('finish', function() {
+                      done();
+                    });
+                  });
 
-							});
-				});
-			});
-	};
+              });
+        });
+      });
+  };
 
-	form.parse(req, function(err, fields, files) {
-		if(err) return next(err);
+  form.parse(req, function(err, fields, files) {
+    if(err) return next(err);
 
-		res.status(201).json(files);
-	});
+    res.status(201).json(files);
+  });
 };

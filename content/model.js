@@ -4,18 +4,18 @@ var mongoose = require('mongoose');
 var config = require('./config');
 
 var fieldSchema = {
-	name: String,
-	path: String,
-	content: String,
-	draft: String
+  name: String,
+  path: String,
+  content: String,
+  draft: String
 };
 
 if(config && _.isArray(config.languages) && config.languages.length > 1) {
-	fieldSchema.content = {};
+  fieldSchema.content = {};
 
-	config.languages.forEach(function(lang) {
-		fieldSchema.content[lang.iso] = String;
-	});
+  config.languages.forEach(function(lang) {
+    fieldSchema.content[lang.iso] = String;
+  });
 }
 
 var FieldSchema = new mongoose.Schema(fieldSchema);

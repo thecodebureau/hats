@@ -1,18 +1,18 @@
 /* WARNING!!! THIS IS NOT FUNCTIONAL */
 
 module.exports = require('ridge/view').extend({
-	template: 'admin/models/user',
+  template: 'admin/models/user',
 
-	events: {
-		'click': 'toggle'
-	},
+  events: {
+    'click': 'toggle'
+  },
 
-	elements: {
-		info: '.info'
-	},
+  elements: {
+    info: '.info'
+  },
 
-	toggle: function() {
-		if(this.elements.info.children().length > 0)
-			this.elements.info.toggleClass('visible');
-	}
+  toggle: function() {
+    if(this.elements.info.children().length > 0)
+      this.elements.info.toggleClass('visible');
+  }
 });

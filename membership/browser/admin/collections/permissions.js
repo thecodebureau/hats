@@ -1,5 +1,5 @@
 module.exports = require('ridge/collection').extend({
-	model: require('../models/permission'),
+  model: require('../models/permission'),
 
-	url: '/api/permissions'
+  url: '/api/permissions'
 });

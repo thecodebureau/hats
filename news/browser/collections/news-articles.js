@@ -1,5 +1,5 @@
 module.exports = require('ridge/collection').extend({
-	model: require('../models/news-article'),
+  model: require('../models/news-article'),
 
-	url: '/api/news-articles'
+  url: '/api/news-articles'
 });

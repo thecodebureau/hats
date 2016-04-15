@@ -1,5 +1,5 @@
 module.exports = {
-	middleware: {
-		imageUpload: require('./middleware')
-	}
+  middleware: {
+    imageUpload: require('./middleware')
+  }
 };

@@ -5,89 +5,89 @@ var FormView = require('ridge/views/form-styling');
 var View = require('ridge/view').extend();
 
 _.extend(View.prototype, require('ridge/mixins/observe'), {
-	events: {
-		'click .close': 'close',
-		'submit form': 'save'
-	},
+  events: {
+    'click .close': 'close',
+    'submit form': 'save'
+  },
 
-	subviews: {
-		form: [ 'form', FormView ]
-	},
+  subviews: {
+    form: [ 'form', FormView ]
+  },
 
-	elements: {
-		button: 'button',
-		form: 'form'
-	},
+  elements: {
+    button: 'button',
+    form: 'form'
+  },
 
-	initialize: function(opts) {
-		this.model = opts && opts.model || new ContactMessageModel();
+  initialize: function(opts) {
+    this.model = opts && opts.model || new ContactMessageModel();
 
-		this.bindings = _.mapValues(this.model.validation, function(value, key) {
-			var binding = {};
+    this.bindings = _.mapValues(this.model.validation, function(value, key) {
+      var binding = {};
 
-			binding['[name="' + key + '"],[data-name="' + key + '"]'] = {
-				both: 'value',
-			};
+      binding['[name="' + key + '"],[data-name="' + key + '"]'] = {
+        both: 'value',
+      };
 
-			return binding;
-		});
-	},
+      return binding;
+    });
+  },
 
-	error: function(model, xhr, options) {
-		_.result(this.message, 'remove');
+  error: function(model, xhr, options) {
+    _.result(this.message, 'remove');
 
-		var resp = xhr.responseJSON;
+    var resp = xhr.responseJSON;
 
-		this.message = new MessageView({
-			message: { 
-				type: 'error',
-				heading: resp.statusText || 'Oops!',
-				body: resp.message || 'A problem has occured'
-			}
-		}).enter(this.elements.form, { method: 'prepend' });
-	},
+    this.message = new MessageView({
+      message: { 
+        type: 'error',
+        heading: resp.statusText || 'Oops!',
+        body: resp.message || 'A problem has occured'
+      }
+    }).enter(this.elements.form, { method: 'prepend' });
+  },
 
-	save: function(e) {
-		e.preventDefault();
+  save: function(e) {
+    e.preventDefault();
 
-		if(this.model.isValid()) {
-			$(document.body).addClass('progress');
+    if(this.model.isValid()) {
+      $(document.body).addClass('progress');
 
-			this.elements.button.prop('disabled', true);
+      this.elements.button.prop('disabled', true);
 
-			this.model.save(null, {
-				error: this.error,
-				success: this.success,
-				complete: this.complete,
-				context: this,
-				validate: false
-			});
-		}
-	},
+      this.model.save(null, {
+        error: this.error,
+        success: this.success,
+        complete: this.complete,
+        context: this,
+        validate: false
+      });
+    }
+  },
 
-	complete: function() {
-		this.elements.button.prop('disabled', false);
+  complete: function() {
+    this.elements.button.prop('disabled', false);
 
-		$(document.body).removeClass('progress');
-	},
+    $(document.body).removeClass('progress');
+  },
 
-	success: function(model, resp, options) {
-		this.form.remove();
+  success: function(model, resp, options) {
+    this.form.remove();
 
-		_.result(this.message, 'remove');
+    _.result(this.message, 'remove');
 
-		this.message = new MessageView({
-			message: resp
-		}).enter(this.el);
-	},
+    this.message = new MessageView({
+      message: resp
+    }).enter(this.el);
+  },
 
-	attach: function() {
-		this.observe({ validate: true });
-	},
+  attach: function() {
+    this.observe({ validate: true });
+  },
 
-	close: function() {
-		this.leave();
-	}
+  close: function() {
+    this.leave();
+  }
 });
 
 module.exports = View;

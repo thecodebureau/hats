@@ -1,5 +1,5 @@
 module.exports = {
-	middleware: {
-		contactForm: require('./middleware')
-	}
+  middleware: {
+    contactForm: require('./middleware')
+  }
 };

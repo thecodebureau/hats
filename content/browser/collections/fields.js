@@ -1,5 +1,5 @@
 module.exports = require('ridge/collection').extend({
-	model: require('../models/field'),
+  model: require('../models/field'),
 
-	url: '/api/fields'
+  url: '/api/fields'
 });

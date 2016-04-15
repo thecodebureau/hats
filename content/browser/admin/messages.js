@@ -1,3 +1,3 @@
 module.exports = {
-	alphanumeric: 'Only alphanumeric characters and "_" allowed.'
+  alphanumeric: 'Only alphanumeric characters and "_" allowed.'
 };

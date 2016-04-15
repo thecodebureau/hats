@@ -1,15 +1,15 @@
 var path = require('path');
 
 module.exports = {
-	models: {
-		GalleryImage: require('./model')
-	},
+  models: {
+    GalleryImage: require('./model')
+  },
 
-	middleware: {
-		galleryImages: require('./middleware')
-	},
+  middleware: {
+    galleryImages: require('./middleware')
+  },
 
-	pages: require('./pages'),
+  pages: require('./pages'),
 
-	routes: require('./routes')
+  routes: require('./routes')
 };
