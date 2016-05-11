@@ -1,8 +1,5 @@
 'use strict';
 
-var hello = 'hello';
-
-console.log(hello);
 module.exports = {
   'errors': {
     reload: true,
