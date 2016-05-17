@@ -9,7 +9,9 @@ _.extend(View.prototype, require('ridge/mixins/observe'), {
 
   bindings: {
     'description': {
-      '[data-name="description"]': 'html'
+      '[data-name="description"]': {
+        both: 'html'
+      }
     }
   },
 
