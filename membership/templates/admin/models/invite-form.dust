@@ -1,10 +1,10 @@
 <form>
-	<div class="container">
+	<div class="field-container">
 		<label class="placeholder">Email</label>
 		<input type="email" placeholder="Email" name="email" value="{email}" required />
 		<label class="icon"></label>
 	</div>
-	<div class="container">
+	<div class="field-container">
 		{#allRoles}
 			<input type="checkbox" name="roles" value="{name}" {@contains array=roles value=name}checked{/contains} />{name}
 		{/allRoles}

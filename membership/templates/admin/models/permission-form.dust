@@ -1,10 +1,10 @@
 <form>
-	<div class="container">
+	<div class="field-container">
 		<label class="placeholder">Regex</label>
 		<input type="text" placeholder="Regex" name="regex" value="{regex}"/>
 		<label class="icon"></label>
 	</div>
-	<div class="container">
+	<div class="field-container">
 		{#allRoles}
 			<input type="checkbox" name="roles" value="{name}" {@contains array=roles value=name}checked{/contains} />{name}
 		{/allRoles}

@@ -8,12 +8,12 @@
 	</div>
 
 	<form action="/auth/local" method="POST">
-		<div class="container">
+		<div class="field-container">
 			<label class="placeholder">Email address</label>
 			<input type="email" placeholder="Email address" name="email" required />
 			<label class="icon"></label>
 		</div>
-		<div class="container">
+		<div class="field-container">
 			<label class="placeholder">Password</label>
 			<input type="password" placeholder="Password" name="password" required />
 			<label class="icon"></label>

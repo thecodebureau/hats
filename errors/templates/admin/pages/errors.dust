@@ -12,11 +12,11 @@
 				<option value="client">Client</option>
 			</select>
 			-->
-			<div class="container">
+			<div class="field-container">
 				<label class="placeholder">Status code</label>
 				<input type="text" placeholder="Status Code" name="status" />
 			</div>
-			<div class="container buttons">
+			<div class="field-container buttons">
 				<button type="reset">Reset</button>
 				<button>Search</button>
 			</div>
@@ -29,7 +29,7 @@
 		</div>
 
 		{>"admin/pagination"/}
-		<div class="list errors collection container"></div>
+		<div class="list errors collection field-container"></div>
 		{>"admin/pagination"/}
 
 		<div>

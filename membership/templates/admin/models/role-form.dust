@@ -1,5 +1,5 @@
 <form>
-	<div class="container">
+	<div class="field-container">
 		<label class="placeholder">Name</label>
 		<input type="text" placeholder="Name" name="name" value="{name}" />
 		<label class="icon"></label>

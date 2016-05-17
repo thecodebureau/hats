@@ -1,22 +1,22 @@
 <form>
 	<div class="row">
 		<div class="m-6">
-			<div class="container">
+			<div class="field-container">
 				<label class="placeholder">Name</label>
 				<input type='text' placeholder="Name" name="name" value="{name}" required />
 				<label class="icon"></label>
 			</div>
-			<div class="container">
+			<div class="field-container">
 				<label class="placeholder">Legal Name</label>
 				<input type='text' placeholder="Legal Name" name="legalName" value="{legalName}" required />
 				<label class="icon"></label>
 			</div>
-			<div class="container">
+			<div class="field-container">
 				<label class="placeholder">Email</label>
 				<input type='text' placeholder="Email" name="email" value="{email}" required />
 				<label class="icon"></label>
 			</div>
-			<div class="container">
+			<div class="field-container">
 				<label class="placeholder">Telephone</label>
 				<input type='text' placeholder="telephone" name="telephone" value="{telephone}" required />
 				<label class="icon"></label>
@@ -25,32 +25,32 @@
 		<div class="m-6">
 			<fieldset property="address" typeof="PostalAddress">
 				<legend>Address</legend>
-				<div class="container">
+				<div class="field-container">
 					<label class="placeholder">Area / Building</label>
 					<input type="text" placeholder="Area / Building" name="address.area" value="{address.area}" />
 					<label class="icon"></label>
 				</div>
-				<div class="container">
+				<div class="field-container">
 					<label class="placeholder">Street Address</label>
 					<input type="text" placeholder="Street Address" name="address.streetAddress" value="{address.streetAddress}" />
 					<label class="icon"></label>
 				</div>
-				<div class="container">
+				<div class="field-container">
 					<label class="placeholder">Postal Code</label>
 					<input type="text" placeholder="Postal Code" name="address.postalCode" value="{address.postalCode}" />
 					<label class="icon"></label>
 				</div>
-				<div class="container">
+				<div class="field-container">
 					<label class="placeholder">Locality</label>
 					<input type="text" placeholder="Locality" name="address.addressLocality" value="{address.addressLocality}" />
 					<label class="icon"></label>
 				</div>
-				<div class="container">
+				<div class="field-container">
 					<label class="placeholder">Region</label>
 					<input type="text" placeholder="Region" name="address.addressRegion" value="{address.addressRegion}" />
 					<label class="icon"></label>
 				</div>
-				<div class="container">
+				<div class="field-container">
 					<label class="placeholder">Country</label>
 					<input type="text" placeholder="Country" name="address.addressCountry" value="{address.addressCountry}" />
 					<label class="icon"></label>

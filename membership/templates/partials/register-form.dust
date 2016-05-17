@@ -3,12 +3,12 @@
 		{>"partials/register-form-account-type"/}
 		<fieldset>
 			<legend>User details</legend>
-			<div class="container">
+			<div class="field-container">
 				<label class="placeholder" for="givenName">Given Name</label>
 				<input type="text" name="givenName" value="Linus{newUser.givenName}" placeholder="Given Name" required />
 				<label class="icon"></label>
 			</div>
-			<div class="container">
+			<div class="field-container">
 				<label class="placeholder" for="familyName">Family Name</label>
 				<input type="text" id="familyName" name="familyName" value="Miller{newUser.familyName}" placeholder="Family Name" required />
 				<label class="icon"></label>

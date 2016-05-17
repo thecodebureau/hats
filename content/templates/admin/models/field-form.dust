@@ -1,10 +1,10 @@
 <form class="row">
-	<div class="container">
+	<div class="field-container">
 		<label class="placeholder">Name</label>
 		<input type='text' placeholder="Name" name="name" value="{name}" required />
 		<label class="icon"></label>
 	</div>
-	<div class="container">
+	<div class="field-container">
 		<label class="placeholder">Path</label>
 		<select name="path">
 			<option value="">Choose a path</option>
@@ -18,7 +18,7 @@
 		<div>
 			<label>Content {name}</label>
 		</div>
-		<div class="container">
+		<div class="field-container">
 			<div type='text' data-spytext data-name="content.{iso}">{#getContent/}</div>
 			<label class="icon"></label>
 		</div>
@@ -26,7 +26,7 @@
 		<div>
 			<label>Content {name}</label>
 		</div>
-		<div class="container">
+		<div class="field-container">
 			<div type='text' data-spytext data-name="content">{content|s}</div>
 			<label class="icon"></label>
 		</div>
