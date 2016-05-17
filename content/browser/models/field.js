@@ -1,33 +1,37 @@
+'use strict';
+
 var app = require('ridge');
-
-var validation = {
-  'name': {
-    required: true,
-    alphanumeric: true
-  },
-
-  'path': {
-    required: true
-  },
-};
 
 var content = {
   required: false
 };
 
-if(_.isArray(app.languages) && app.languages.length > 1)
-  app.languages.forEach(function(lang) {
-    validation['content.' + lang] = content;
-  });
-else
-  validation.content = content;
+var Model = require('ridge/model').extend({
+  constructor: function () {
+    if (_.isArray(app.languages) && app.languages.length > 1)
+      app.languages.forEach(function (lang) {
+        this.validation['content.' + lang] = content;
+      }, this);
+    else
+      this.validation.content = content;
 
-var Model = require('ridge/model').extend();
+    require('ridge/model').apply(this, arguments);
+  }
+});
 
 _.extend(Model.prototype, require('ridge/mixins/validate'), {
   urlRoot: '/api/fields',
 
-  validation: validation
+  validation: {
+    'name': {
+      required: true,
+      alphanumeric: true
+    },
+
+    'path': {
+      required: true
+    },
+  }
 });
 
 module.exports = Model;
