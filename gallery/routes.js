@@ -1,4 +1,4 @@
-var isAuthenticated = require('hats/membership/middleware/authorization').isAuthenticated;
+var isAuthenticated = require('express-module-membership/passport/authorization-middleware').isAuthenticated;
 
 var mw = require('./middleware');
 
