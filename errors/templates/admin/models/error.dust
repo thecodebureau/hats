@@ -14,8 +14,9 @@
 		{?method}<div class="method"><span class="label">Method:</span> <span class="value">{method}</span></div>{/method}
 		{?path}<div class="path"><span class="label">Path:</span> <span class="value">{path}</span></div>{/path}
 		{?query}<div class="query"><span class="label">Query:</span> <span class="value">{query}</span></div>{/query}
-		{?body}<div class="body"><span class="label">Body:</span> <span class="value">{body}</span></div>{/body}
+		{?body}<div class="body"><span class="label">Body:</span> <pre class="value">{body|jsp}</pre></div>{/body}
 		{?details}<div class="details"><span class="label">Details:</span><br/> <pre class="value">{details|jsp}</pre></div>{/details}
+		{?session}<div class="details"><span class="label">Session:</span><br/> <pre class="value">{session|jsp}</pre></div>{/session}
 		{?fileName}<div class="fileName">{fileName}, line {lineNumber}, column {columnNumber}</div>{/fileName}
 		{?description}<p class="description">{description}</p>{/description}
 		{?stack}<pre class="stack">{stack}</pre>{/stack}

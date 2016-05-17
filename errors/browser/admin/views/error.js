@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = require('ridge/view').extend({
   template: 'admin/models/error',
 
@@ -7,7 +9,7 @@ module.exports = require('ridge/view').extend({
 
   events: {
     'click': 'toggle',
-    'click button': function(e) {
+    'click button': function (e) {
       e.preventDefault();
       e.stopPropagation();
     },
@@ -16,17 +18,17 @@ module.exports = require('ridge/view').extend({
     'click button[data-command="delete"]': 'delete'
   },
 
-  initialize: function(options) {
+  initialize: function (options) {
     this.listenTo(this.model, 'destroy', this.remove);
   },
 
-  delete: function(e) {
+  delete: function (e) {
     this.model.destroy();
     this.remove();
   },
 
-  toggle: function() {
-    if(this.elements.info.children().length > 0)
+  toggle: function () {
+    if (this.elements.info.children().length > 0)
       this.elements.info.toggleClass('visible');
   }
 });

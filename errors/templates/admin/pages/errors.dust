@@ -29,7 +29,7 @@
 		</div>
 
 		{>"admin/pagination"/}
-		<div class="list errors collection field-container"></div>
+		<div class="list errors collection container"></div>
 		{>"admin/pagination"/}
 
 		<div>
