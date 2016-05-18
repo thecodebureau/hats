@@ -79,7 +79,7 @@ module.exports = {
       delete req.body._id;
       delete req.body.__v;
 
-      _.extend(galleryImages, req.body);
+      _.extend(galleryImage, req.body);
 
       return galleryImage.save(function(err) {
         if(err) return next(err);
