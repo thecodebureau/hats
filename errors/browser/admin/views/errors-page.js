@@ -16,7 +16,8 @@ module.exports = require('ridge/views/page').extend({
 
   subviews: {
     //paginations: [ '.pagination', require('ridge/views/pagination'), { template: 'admin/pagination', multi: true } ],
-    search: [ '.search', require('ridge/views/search') ]
+    search: [ '.search', require('ridge/views/search') ],
+    form: [ 'form', require('ridge/views/form-styling') ]
   },
 
   removeAll: function () {
