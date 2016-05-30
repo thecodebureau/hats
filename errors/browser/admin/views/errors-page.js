@@ -27,7 +27,7 @@ module.exports = require('ridge/views/page').extend({
       method: 'DELETE',
       url: '/api/errors',
       success: function () {
-        self.fetch(null, this.state.get('query'));
+        self.fetch(null, self.state.get('query'));
       }
     });
   },
