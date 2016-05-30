@@ -1,0 +1,16 @@
+{
+  "name": "hats/regions",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "The Code Bureau <info@thecodebureau.com> (https://thecodebureau.com)",
+  "contributors": [
+    "Robin Hägg <robin.hagg@thecodebureau.com>",
+    "Linus Miller <linus.miller@thecodebureau.com>"
+  ],
+  "dependencies": {
+    "spytext": "^0.5.0"
+  }
+}

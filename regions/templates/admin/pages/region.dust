@@ -1,0 +1,13 @@
+<section class="region form page">
+	<header>
+		<h1>Region</h1>
+		<div class="controls">
+			<button data-command="save" class="save base" title="Save" disabled>Save</button>
+			<button data-command="create" class="create base" title="Create" disabled>Create</button>
+			<button data-command="reset" type="button" class="reset red" title="Reset Form" disabled>Clear form</button>
+		</div>
+	</header>
+	<div class="content">
+		{>"admin/models/region-form" /}
+	</div>
+</section>

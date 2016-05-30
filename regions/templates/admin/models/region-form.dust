@@ -1,0 +1,38 @@
+<form class="row">
+	<div class="field-container">
+		<label class="placeholder">Name</label>
+		<input type='text' placeholder="Name" name="name" value="{name}" required />
+		<label class="icon"></label>
+	</div>
+	<div class="field-container">
+		<label class="placeholder">Path</label>
+		<input type="text" placeholder="path" name="path" value="" required />
+		<label class="icon"></label>
+    {!
+		<select name="path">
+			<option value="">Choose a path</option>
+			{#paths}
+			<option value="{.}" {@if test="path === ."}selected{/if}>{.}</option>
+			{/paths}
+		</select>
+		<label class="icon"></label>
+    !}
+	</div>
+	{#languages}
+		<div>
+			<label>Content {name}</label>
+		</div>
+		<div class="field-container">
+			<div type='text' data-spytext data-name="content.{iso}">{#getContent/}</div>
+			<label class="icon"></label>
+		</div>
+	{:else}
+		<div>
+			<label>Content {name}</label>
+		</div>
+		<div class="field-container">
+			<div type='text' data-spytext data-name="content">{content|s}</div>
+			<label class="icon"></label>
+		</div>
+	{/languages}
+</form>

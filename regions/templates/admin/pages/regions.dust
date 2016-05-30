@@ -1,0 +1,43 @@
+<section class="region collection page">
+	<header>
+		<h1>Regions</h1>
+		<a class="button new base" href="/admin/regions/new">New Region</a>
+	</header>
+	<div class="content">
+		<form class="search">
+			<div class="row collapse">
+				<div class="field-container never-empty m-4">
+					<label class="placeholder">Sort By</label>
+					<select name="sort">
+						<option value="" selected>Path</option>
+						<option value="-path">-Path</option>
+						<option value="name">Name</option>
+						<option value="-name">-Name</option>
+					</select>
+				</div>
+
+				<div class="field-container never-empty m-2">
+					<label class="placeholder">Path</label>
+					<select name="path">
+						<option value="">All</option>
+						{#paths}
+							<option value="{.}">{.}</option>
+						{/paths}
+					</select>
+				</div>
+			</div>
+			<div class="field-container">
+				<label class="placeholder">Name</label>
+				<input type="text" data-regex="i" placeholder="Name" name="name" />
+			</div>
+
+			<div class="buttons">
+				<button type="reset">Reset</button>
+				<button>Search</button>
+			</div>
+		</form>
+		{>"admin/pagination"/}
+		{>"admin/models/regions"/}
+		{>"admin/pagination"/}
+	</div>
+</section>
