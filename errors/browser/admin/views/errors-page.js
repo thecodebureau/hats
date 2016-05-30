@@ -81,8 +81,6 @@ module.exports = require('ridge/views/page').extend({
   },
 
   renderModel: function (model) {
-    console.log('hello');
-    console.log(this.elements.container);
     this.modelViews.push(new ErrorView({
       model: model,
       data: this.data,
